@@ -1,13 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
-import MapComponent from './MapComponent';
+import MapComponent from './components/MapComponent';
 
 function App() {
   return (
-    <div className="App">
-      <h1>NovaSpots Campus Map</h1>
+    <>
+      <h1 className='text-center'>NovaSpots Campus Map</h1>
       <MapComponent />
-    </div>
+    </>
   );
 }
 
