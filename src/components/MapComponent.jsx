@@ -10,18 +10,8 @@ const MapComponent = () => {
   useEffect(() => {
     const zoomControl = document.querySelector('.leaflet-control-zoom');
     if (zoomControl) {
-      zoomControl.style.borderRadius = '20px';
-      zoomControl.style.overflow = 'hidden';
-      zoomControl.style.bottom = '-555px';
-      zoomControl.style.right = '-1240px';
-      zoomControl.style.border = 'none';
-      zoomControl.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+      zoomControl.classList.add('hidden');
     }
-
-    const zoomControlLinks = document.querySelectorAll('.leaflet-control-zoom a');
-    zoomControlLinks.forEach(link => {
-      link.style.border = 'none';
-    });
   }, []);
 
   return (
