@@ -1,0 +1,12 @@
+.leaflet-control-zoom {
+    border-radius: 20px;
+    overflow: hidden;
+    bottom: -555px;
+    right: -1240px;
+    border: none !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.leaflet-control-zoom a {
+    border: none;
+}

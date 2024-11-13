@@ -1,0 +1,33 @@
+.app-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+}
+  
+.logo {
+    height: 60px;
+    margin-right: 10px;
+}
+
+.app-name {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    color: #0463ba;
+}
+
+.map-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -20px;
+}
+
+.map-name {
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 10px;
+}
+
+
