@@ -1,6 +1,8 @@
 import MapComponent from './components/MapComponent';
 import Header from './components/Header';
 import LayersPopUp from './components/FoodTransportFriendsPopUp';
+import Popup from './components/FoodTransportFriendsPopUp';
+import SettingsPopup from './components/SettingsPopUp';
 import LayersButton from './components/LayersButton';
 import MapInformation from './components/MapInformation';
 import React, { useState } from "react";
@@ -26,6 +28,9 @@ function App() {
           <LayersPopUp setState={setState} />
         </div>}
 
+      <div>
+        <SettingsPopup />
+      </div>
     </>
   );
 }
