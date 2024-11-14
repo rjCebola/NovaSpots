@@ -1,8 +1,11 @@
-import styled, { keyframes } from 'styled-components';
-import { slideInUp} from 'react-animations';
+import styled, { keyframes , css} from 'styled-components';
+import { slideInUp,slideOutDown} from 'react-animations';
 
 const slideUp = keyframes`${slideInUp}`;
+const slideDown = keyframes`${slideOutDown}`;
 
 export const SliderAnimation = styled.div`
-  animation: 0.5s ${slideUp};
+  ${({ showing }) => css`
+  animation: 0.5s ${showing ? slideUp : slideDown};
+  `}
 `;
