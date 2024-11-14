@@ -10,27 +10,23 @@ import React, { useState } from "react";
 function App() {
 
   const [state, setState] = useState("map");
+  const [viewProfile, setViewProfile] = useState(false);
 
   return (
     <>
 
-      <Header />
-      <div className="flex flex-col items-center mt-[-5]">
+      <Header setViewProfile={setViewProfile}/>
+      <div className='relative'>
         <MapComponent />
+        <div className='absolute top-0 z-[999] p-3 bg-white border-2 border-t-0 rounded-br-xl text-lg'>
+          <MapInformation />
+
+
+        </div>
       </div>
-
-      {state === "map" && 
-        <LayersButton setState={setState}/>
-      }
-
-      {state === "popUp" &&
-        <div className="fixed bottom-0 w-full z-[999]" >
-          <LayersPopUp setState={setState} />
-        </div>}
-
-      <div>
-        <SettingsPopup />
-      </div>
+      {state === "map" && <LayersButton setState={setState} />}
+      {state === "popUp" && <LayersPopUp setState={setState} />}
+      {viewProfile && <SettingsPopup viewProfile={viewProfile} setViewProfile={setViewProfile}/>}
     </>
   );
 }

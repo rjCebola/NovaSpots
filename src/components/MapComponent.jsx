@@ -1,10 +1,11 @@
 // MapComponent.js
 import React, { useEffect } from 'react';
 import { MapContainer, ImageOverlay } from 'react-leaflet';
+import { useMapEvents } from 'https://cdn.esm.sh/react-leaflet/hooks'
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const MapComponent = () => {
+const MapComponent = ({viewProfile , setViewProfile}) => {
   const bounds = [[0, 0], [1665, 1509]];
 
   useEffect(() => {

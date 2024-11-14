@@ -7,7 +7,7 @@ const buttonStyle = "flex flex-col items-center justify-center w-20 h-20 p-4 rou
 
 const LayersPopUp = ({setState}) => {
   return (
-    <div className="fixed bottom-0 w-full bg-white p-4 rounded-t-3xl flex h-1/6 justify-around items-center shadow-2xl shadow-black">
+    <div className="fixed bottom-0 w-full z-[999] bg-white p-4 rounded-t-3xl flex h-1/6 justify-around items-center shadow-2xl shadow-black">
       <button onClick={() => setState("map")} className={buttonStyle} >
         <FontAwesomeIcon icon={faUtensils} size="2x"/>
         <span className="mt-1 text-sm">Food</span>
