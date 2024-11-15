@@ -1,9 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUtensils, faTrain, faUserGroup } from '@fortawesome/free-solid-svg-icons';
+import { faUserGroup, faBook, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { SliderAnimation } from '../Animations';
 import React, { useState } from 'react';
-
-const buttonStyle = "flex flex-col items-center justify-center w-20 h-20 p-4 rounded-3xl shadow-sm shadow-gray-400 text-[#0463ba]";
 
 const LayersPopUp = ({ setState }) => {
   const [closing, setClosing] = useState(false);
@@ -53,20 +51,31 @@ const LayersPopUp = ({ setState }) => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="w-1/4 h-0.5 bg-gray-300 mb-4 group-active:bg-gray-600"></div>
-      <div className="flex justify-around w-full">
-        <button onClick={handleClose} className={buttonStyle}>
-          <FontAwesomeIcon icon={faUtensils} size="2x" />
-          <span className="mt-1 text-sm">Food</span>
-        </button>
-        <button onClick={handleClose} className={buttonStyle}>
-          <FontAwesomeIcon icon={faTrain} size="2x" />
-          <span className="mt-1 text-sm">Transport</span>
-        </button>
-        <button onClick={handleClose} className={buttonStyle}>
-          <FontAwesomeIcon icon={faUserGroup} size="2x" />
-          <span className="mt-1 text-sm">Friends</span>
-        </button>
+      <div className="w-1/4 h-0.5 bg-gray-300 group-active:bg-gray-600 mb-4"></div>
+      <div className="flex flex-col w-full p-3 ">
+
+        <div className="flex flex-row items-center justify-between w-full">
+          <h2 className="text-2xl text-[#0462b9] font-bold">Ed.7 1.01</h2>
+          <button onClick={handleClose} className="flex items-center justify-center w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] shadow-sm shadow-gray-400">
+              <FontAwesomeIcon icon={faCalendar} size="lg"/>
+          </button>
+        </div>
+        
+        <p className="text-gray-600 mb-8">Available until 12:00</p>
+
+        <div className="flex flex-row items-center">
+          <FontAwesomeIcon icon={faUserGroup} size="xl" className="mr-4 text-[#6ed49c]"/>
+          <div className="w-full bg-gray-200 rounded-full h-5">
+            <div className="bg-[#6ed49c] h-5 rounded-full" style={{ width: '20%' }}></div>
+          </div>
+        </div>
+
+        <div className="flex items-center mt-6 justify-end">
+          <button onClick={handleClose} className="w-3/4 h-14 p-1 rounded-3xl bg-[#0462b9] text-white shadow-sm shadow-gray-400">
+            <FontAwesomeIcon icon={faBook} size="xl" />
+            <span className="ml-2 text-sm">I'll be studying here</span>
+          </button>
+        </div>
       </div>
     </SliderAnimation>
   );
