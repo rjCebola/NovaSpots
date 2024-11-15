@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGroup, faBook, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { SliderAnimation } from '../Animations';
 import React, { useState } from 'react';
+import ClassroomSchedule from './ClassroomSchedule';
 
 const LayersPopUp = ({ setState }) => {
   const [closing, setClosing] = useState(false);
@@ -40,7 +41,7 @@ const LayersPopUp = ({ setState }) => {
   };
 
   return (
-    <SliderAnimation
+    <><SliderAnimation
       showing={!closing}
       className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black group"
       style={{
@@ -57,27 +58,31 @@ const LayersPopUp = ({ setState }) => {
         <div className="flex flex-row items-center justify-between w-full">
           <h2 className="text-2xl text-[#0462b9] font-bold">Ed.7 1.01</h2>
           <button onClick={handleClose} className="flex items-center justify-center w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] shadow-sm shadow-gray-400">
-              <FontAwesomeIcon icon={faCalendar} size="lg"/>
+            <FontAwesomeIcon icon={faCalendar} size="lg" />
           </button>
         </div>
-        
+
         <p className="text-gray-600 mb-8">Available until 12:00</p>
 
         <div className="flex flex-row items-center">
-          <FontAwesomeIcon icon={faUserGroup} size="xl" className="mr-4 text-[#6ed49c]"/>
+          <FontAwesomeIcon icon={faUserGroup} size="xl" className="mr-4 text-gray-300" />
           <div className="w-full bg-gray-200 rounded-full h-5">
             <div className="bg-[#6ed49c] h-5 rounded-full" style={{ width: '20%' }}></div>
           </div>
         </div>
 
-        <div className="flex items-center mt-6 justify-end">
+        <div className="flex items-center mt-9 justify-center">
           <button onClick={handleClose} className="w-3/4 h-14 p-1 rounded-3xl bg-[#0462b9] text-white shadow-sm shadow-gray-400">
             <FontAwesomeIcon icon={faBook} size="xl" />
-            <span className="ml-2 text-sm">I'll be studying here</span>
+            <span className="ml-3 text-sm">I'll be studying here</span>
           </button>
         </div>
       </div>
+
+      <ClassroomSchedule />
     </SliderAnimation>
+    
+    </>
   );
 };
 
