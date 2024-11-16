@@ -4,23 +4,24 @@ import { MapContainer, ImageOverlay, useMap } from 'react-leaflet';
 import { useMapEvents } from 'react-leaflet'
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import CampusMapAreasOfInterest from './CampusMapAreasOfInterest';
 
 
 function MapComponentHelper({ viewProfile, setViewProfile }) {
-   useMapEvents({
-    click: () => {
-      console.log("ola")
+   /* useMapEvents({
+    click: (e) => {
+
     },
     drag: () => {
       if (viewProfile) setViewProfile(false)
     }
-  }); 
+  });  */
   return null;
 }
 
 
 
-const MapComponent = ({ viewProfile, setViewProfile }) => {
+const MapComponent = ({ viewProfile, setViewProfile, setState, setBuilding, state }) => {
   const bounds = [[0, 0], [1665, 1509]];
 
   useEffect(() => {
@@ -30,6 +31,13 @@ const MapComponent = ({ viewProfile, setViewProfile }) => {
     }
   }, []);
 
+  var map = "";
+  if(state === "map") {
+    map = "/campus.jpg";
+  }
+  else {
+    map = "/campus.jpg" // change to the correct map
+  }
 
   return (
     <MapContainer
@@ -44,11 +52,12 @@ const MapComponent = ({ viewProfile, setViewProfile }) => {
       attributionControl={false}
     >
       <ImageOverlay
-        url="/campus.jpg"
+        url={map}
         bounds={bounds}
         style={{ width: '100%', height: '100%', objectFit: 'contain' }}
       />
       <MapComponentHelper viewProfile={viewProfile} setViewProfile={setViewProfile} />
+      <CampusMapAreasOfInterest setState={setState} setBuilding={setBuilding}/>
     </MapContainer>
   );
 };
