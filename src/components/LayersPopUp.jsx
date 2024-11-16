@@ -7,6 +7,7 @@ const buttonStyle = "flex flex-col items-center justify-center w-20 h-20 p-4 rou
 
 const LayersPopUp = ({ setState }) => {
   const [closing, setClosing] = useState(false);
+  const [dragClosing, setDragClosing] = useState(false);
   const [startY, setStartY] = useState(0);
   const [currentY, setCurrentY] = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -26,8 +27,12 @@ const LayersPopUp = ({ setState }) => {
 
   const handleTouchEnd = () => {
     setDragging(false);
-    if (startY < currentY && currentY - startY > 100) { // Adjust this threshold as needed
-      handleClose();
+    if (startY < currentY && currentY - startY > 50) {
+      setDragClosing(true);
+        setTimeout(() => {
+          setState("map"); 
+          setDragClosing(false);
+      },1200 * 10/(currentY-startY));
     }
     setStartY(0);
     setCurrentY(0);
@@ -46,7 +51,7 @@ const LayersPopUp = ({ setState }) => {
       showing={!closing}
       className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black group"
       style={{
-        transform: dragging ? `translateY(${Math.max(0, currentY - startY)}px)` : 'translateY(0)',
+        transform: dragClosing ? 'translateY(100%)' : dragging ? `translateY(${Math.max(0, currentY - startY)}px)` : 'translateY(0)',
         transition: !dragging ? 'transform 0.3s ease-out' : 'none',
       }}
       onTouchStart={handleTouchStart}
