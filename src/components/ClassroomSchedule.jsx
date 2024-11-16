@@ -3,6 +3,9 @@ import React, { useEffect } from 'react';
 const emptyTimeSlot = "px-6 py-3 border-r border-dashed border-gray-300";
 const filledTimeSlot = "px-6 py-3 bg-gray-200 border-r border-dashed border-gray-300";
 
+const daysOfWeek = ["M", "T", "W", "Th", "F"]
+
+
 function ClassroomSchedule() {
     useEffect(() => {
         const updateCurrentTimeLine = () => {
@@ -25,8 +28,8 @@ function ClassroomSchedule() {
     }, []);
 
     return (
-        <div className="container mx-auto px-4">
-            <div className="relative mt-8 rounded-lg overflow-x-auto w-full">
+        <div className="container px-4">
+            <div className="relative mt-4 rounded-lg overflow-x-auto w-full">
                 <table className="table-auto border-collapse w-full">
 
                     <div id="current-time-line" className="absolute h-full z-10" style={{ display: 'block', borderLeft: '2px dashed red', top: '0px' }}>
@@ -34,53 +37,43 @@ function ClassroomSchedule() {
                     </div>
 
                     <thead className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                        <tr>
+                        <tr key={"hours"}>
                             <th className="px-3 py-3 sticky left-0 bg-gray-100 z-20">Day</th>
-                            <th className="px-6 py-3">9am</th>
-                            <th className="px-6 py-3">10am</th>
-                            <th className="px-6 py-3">11am</th>
-                            <th className="px-6 py-3">12pm</th>
-                            <th className="px-6 py-3">1pm</th>
-                            <th className="px-6 py-3">2pm</th>
-                            <th className="px-6 py-3">3pm</th>
-                            <th className="px-6 py-3">4pm</th>
-                            <th className="px-6 py-3">5pm</th>
-                            <th className="px-6 py-3">6pm</th>
-                            <th className="px-6 py-3">7pm</th>
-                            <th className="px-6 py-3">8pm</th>
+                            <th key={9} className="px-6 py-3">9am</th>
+                            <th key={10} className="px-6 py-3">10am</th>
+                            <th key={11} className="px-6 py-3">11am</th>
+                            <th key={12} className="px-6 py-3">12pm</th>
+                            <th key={13} className="px-6 py-3">1pm</th>
+                            <th key={14} className="px-6 py-3">2pm</th>
+                            <th key={15} className="px-6 py-3">3pm</th>
+                            <th key={16} className="px-6 py-3">4pm</th>
+                            <th key={17} className="px-6 py-3">5pm</th>
+                            <th key={18} className="px-6 py-3">6pm</th>
+                            <th key={19} className="px-6 py-3">7pm</th>
+                            <th key={20} className="px-6 py-3">8pm</th>
                         </tr>
                     </thead>
                     <tbody className="text-gray-700 text-sm">
-                        <tr className="hover:bg-gray-50">
-                            <th className="px-3 py-3 font-medium text-gray-900 bg-gray-100 sticky left-0">M</th>
-                            <td className={emptyTimeSlot}></td>
-                            <td className={filledTimeSlot}></td>
-                            <td className={emptyTimeSlot}></td>
-                            <td className={emptyTimeSlot}></td>
-                            <td className={emptyTimeSlot}></td>
-                            <td className={emptyTimeSlot}></td>
-                            <td className={filledTimeSlot}></td>
-                            <td className={emptyTimeSlot}></td>
-                            <td className={emptyTimeSlot}></td>
-                            <td className={filledTimeSlot}></td>
-                            <td className={emptyTimeSlot}></td>
-                            <td className="px-6 py-3"></td>
-                        </tr>
-                        <tr className="hover:bg-gray-50">
-                            <th className="px-3 py-3 font-medium text-gray-900 bg-gray-100 sticky left-0">T</th>
-                            <td className={emptyTimeSlot}></td>
-                            <td className={emptyTimeSlot}></td>
-                            <td className={filledTimeSlot}></td>
-                            <td className={emptyTimeSlot}></td>
-                            <td className={emptyTimeSlot}></td>
-                            <td className={emptyTimeSlot}></td>
-                            <td className={emptyTimeSlot}></td>
-                            <td className={filledTimeSlot}></td>
-                            <td className={emptyTimeSlot}></td>
-                            <td className={emptyTimeSlot}></td>
-                            <td className={filledTimeSlot}></td>
-                            <td className="px-6 py-3"></td>
-                        </tr>
+                        {
+                            daysOfWeek.map(element => {
+                                return (
+                                    <tr key={element} className="hover:bg-gray-50">
+                                        <th key={element+"day"} className="px-3 py-3 font-medium text-gray-900 bg-gray-100 sticky left-0">{element}</th>
+                                        <td key={element+"9"} className={emptyTimeSlot}></td>
+                                        <td key={element+"10"} className={filledTimeSlot}></td>
+                                        <td key={element+"11"} className={emptyTimeSlot}></td>
+                                        <td key={element+"12"} className={emptyTimeSlot}></td>
+                                        <td key={element+"13"} className={emptyTimeSlot}></td>
+                                        <td key={element+"14"} className={emptyTimeSlot}></td>
+                                        <td key={element+"15"} className={filledTimeSlot}></td>
+                                        <td key={element+"16"} className={emptyTimeSlot}></td>
+                                        <td key={element+"17"} className={emptyTimeSlot}></td>
+                                        <td key={element+"18"} className={filledTimeSlot}></td>
+                                        <td key={element+"19"} className={emptyTimeSlot}></td>
+                                        <td key={element+"20"} className="px-6 py-3"></td>
+                                    </tr>)
+                            })
+                        }
                     </tbody>
                 </table>
             </div>
@@ -89,3 +82,10 @@ function ClassroomSchedule() {
 }
 
 export default ClassroomSchedule;
+
+
+
+
+function ScheduleLayout() {
+
+}

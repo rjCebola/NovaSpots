@@ -5,7 +5,8 @@ import React, { useState } from 'react';
 
 const buttonStyle = "flex flex-col items-center justify-center w-20 h-20 p-4 rounded-3xl shadow-sm shadow-gray-400 text-[#0463ba]";
 
-const LayersPopUp = ({ setState }) => {
+const LayersPopUp = ({ setLayers }) => {
+
   const [closing, setClosing] = useState(false);
   const [dragClosing, setDragClosing] = useState(false);
   const [startY, setStartY] = useState(0);
@@ -29,10 +30,10 @@ const LayersPopUp = ({ setState }) => {
     setDragging(false);
     if (startY < currentY && currentY - startY > 50) {
       setDragClosing(true);
-        setTimeout(() => {
-          setState("map"); 
-          setDragClosing(false);
-      },1200 * 10/(currentY-startY));
+      setTimeout(() => {
+        setLayers(false);
+        setDragClosing(false);
+      }, 1200 * 10 / (currentY - startY));
     }
     setStartY(0);
     setCurrentY(0);
@@ -41,7 +42,7 @@ const LayersPopUp = ({ setState }) => {
   const handleClose = () => {
     setClosing(true);
     setTimeout(() => {
-      setState("map");
+      setLayers(false);
       setClosing(false);
     }, 300);
   };
