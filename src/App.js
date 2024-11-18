@@ -26,6 +26,7 @@ function App() {
           viewProfile={viewProfile}
           setViewProfile={setViewProfile}
           setState={setState}
+          building={building}
           setBuilding={setBuilding}
           state={state} />
         <div className='absolute top-0 z-[999] p-2 bg-white border-2 border-t-0 border-l-0 rounded-br-xl text-lg'>

@@ -4,7 +4,8 @@ import { MapContainer, ImageOverlay, useMap } from 'react-leaflet';
 import { useMapEvents } from 'react-leaflet'
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import CampusMapAreasOfInterest from './CampusMapAreasOfInterest';
+import CampusMapAreasOfInterest from './AreasInterest/CampusMapAreasOfInterest';
+import AreasOfInterst from './AreasInterest/AreasOfInterest';
 
 
 function MapComponentHelper({ viewProfile, setViewProfile }) {
@@ -21,7 +22,7 @@ function MapComponentHelper({ viewProfile, setViewProfile }) {
 
 
 
-const MapComponent = ({ viewProfile, setViewProfile, setState, setBuilding, state }) => {
+const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building }) => {
   const bounds = [[0, 0], [1665, 1509]];
 
   useEffect(() => {
@@ -33,15 +34,15 @@ const MapComponent = ({ viewProfile, setViewProfile, setState, setBuilding, stat
 
   var map = "";
   if(state === "map") {
-    map = "/campus.jpg";
+    map = "/campus_edited.jpg";
   }
   else {
-    map = "/campus.jpg" // change to the correct map
+    map = "/edificio7_andar0.jpg" // falta mudar para os varios mapas e nao so este
   }
 
   return (
     <MapContainer
-      center={[754.5, 832.5]}
+      center={[900, 900]}
       zoom={-1}
       style={{ height: '100vh', width: '100%', backgroundColor: 'white' }}
       crs={L.CRS.Simple}
@@ -57,7 +58,7 @@ const MapComponent = ({ viewProfile, setViewProfile, setState, setBuilding, stat
         style={{ width: '100%', height: '100%', objectFit: 'contain' }}
       />
       <MapComponentHelper viewProfile={viewProfile} setViewProfile={setViewProfile} />
-      <CampusMapAreasOfInterest setState={setState} setBuilding={setBuilding}/>
+      <AreasOfInterst state={state} setState={setState} building={building} setBuilding={setBuilding}/>
     </MapContainer>
   );
 };
