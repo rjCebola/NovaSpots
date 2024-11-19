@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer, Polygon } from "react-leaflet";
 
 
-function CampusMapAreasOfInterest({ setState, setBuilding }) {
+function CampusMapAreasOfInterest({ setState, setBuilding, setMapPopUps }) {
 
     return (<>
         {
@@ -36,7 +36,7 @@ function CampusMapAreasOfInterest({ setState, setBuilding }) {
             eventHandlers={{
                 click: () => {
                     console.log("cantina")
-
+                    setMapPopUps("canteen");
                 },
             }}
         />

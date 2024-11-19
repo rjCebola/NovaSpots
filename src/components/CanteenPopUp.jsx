@@ -1,11 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUtensils, faTrain, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 import { SliderAnimation } from '../Animations';
 import React, { useState } from 'react';
 
-const buttonStyle = "flex flex-col items-center justify-center w-20 h-20 p-4 rounded-3xl shadow-sm shadow-gray-400 text-[#0463ba]";
-
-const LayersPopUp = ({ setMapPopUps }) => {
+function CanteenPopUp({ setMapPopUps }) {
 
   const [closing, setClosing] = useState(false);
   const [dragClosing, setDragClosing] = useState(false);
@@ -39,7 +35,7 @@ const LayersPopUp = ({ setMapPopUps }) => {
     setCurrentY(0);
   };
 
-  const handleClose = () => {
+  const handleClose = () => { // pode n ser preciso
     setClosing(true);
     setTimeout(() => {
       setMapPopUps("map");
@@ -60,22 +56,29 @@ const LayersPopUp = ({ setMapPopUps }) => {
       onTouchEnd={handleTouchEnd}
     >
       <div className="w-1/4 h-0.5 bg-gray-300 mb-4 group-active:bg-gray-600"></div>
-      <div className="flex justify-around w-full">
-        <button onClick={handleClose} className={buttonStyle}>
-          <FontAwesomeIcon icon={faUtensils} size="2x" />
-          <span className="mt-1 text-sm">Food</span>
-        </button>
-        <button onClick={handleClose} className={buttonStyle}>
-          <FontAwesomeIcon icon={faTrain} size="2x" />
-          <span className="mt-1 text-sm">Transport</span>
-        </button>
-        <button onClick={handleClose} className={buttonStyle}>
-          <FontAwesomeIcon icon={faUserGroup} size="2x" />
-          <span className="mt-1 text-sm">Friends</span>
-        </button>
+      <div className="text-center font-medium text-lg mb-4">
+        Hoje, 24 de Outubro 2024
+      </div>
+      <div className="flex flex-col space-y-2">
+        <div className="flex justify-between">
+          <span className="font-medium">Sopa:</span>
+          <span>Feijão verde</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="font-medium">Carne:</span>
+          <span>Perna de frango com arroz</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="font-medium">Peixe:</span>
+          <span>Massa de peixe</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="font-medium">Veg.:</span>
+          <span>Rissóis de tofu</span>
+        </div>
       </div>
     </SliderAnimation>
   );
 };
 
-export default LayersPopUp;
+export default CanteenPopUp;

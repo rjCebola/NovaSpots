@@ -22,7 +22,7 @@ function MapComponentHelper({ viewProfile, setViewProfile }) {
 
 
 
-const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building }) => {
+const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building, setMapPopUps }) => {
   const bounds = [[0, 0], [1665, 1509]];
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         style={{ width: '100%', height: '100%', objectFit: 'contain' }}
       />
       <MapComponentHelper viewProfile={viewProfile} setViewProfile={setViewProfile} />
-      <AreasOfInterst state={state} setState={setState} building={building} setBuilding={setBuilding}/>
+      <AreasOfInterst state={state} setState={setState} building={building} setBuilding={setBuilding} setMapPopUps={setMapPopUps} />
     </MapContainer>
   );
 };
