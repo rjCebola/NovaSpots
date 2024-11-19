@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 const buttonStyle = "flex flex-col items-center justify-center w-20 h-20 p-4 rounded-3xl shadow-sm shadow-gray-400 text-[#0463ba]";
 
-const LayersPopUp = ({ setMapPopUps }) => {
+const LayersPopUp = ({ setMapPopUps, setIsFriendsSelected }) => {
 
   const [closing, setClosing] = useState(false);
   const [dragClosing, setDragClosing] = useState(false);
@@ -47,6 +47,11 @@ const LayersPopUp = ({ setMapPopUps }) => {
     }, 300);
   };
 
+  const handleFriendsClick = () => {
+    setIsFriendsSelected(true);
+    handleClose();
+  };
+
   return (
     <SliderAnimation
       showing={!closing}
@@ -69,7 +74,7 @@ const LayersPopUp = ({ setMapPopUps }) => {
           <FontAwesomeIcon icon={faTrain} size="2x" />
           <span className="mt-1 text-sm">Transport</span>
         </button>
-        <button onClick={handleClose} className={buttonStyle}>
+        <button onClick={handleFriendsClick} className={buttonStyle}>
           <FontAwesomeIcon icon={faUserGroup} size="2x" />
           <span className="mt-1 text-sm">Friends</span>
         </button>
