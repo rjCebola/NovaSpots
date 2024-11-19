@@ -4,7 +4,7 @@ import { SliderAnimation } from '../Animations';
 import React, { useState } from 'react';
 import ClassroomSchedule from './ClassroomSchedule';
 
-const ClassroomPopUp = ({ setState }) => {
+const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
   const [closing, setClosing] = useState(false);
   const [startY, setStartY] = useState(0);
   const [currentY, setCurrentY] = useState(0);
@@ -40,7 +40,7 @@ const ClassroomPopUp = ({ setState }) => {
   const handleClose = () => {
     setClosing(true);
     setTimeout(() => {
-      setState("map");
+      setRoomPop(0);
       setClosing(false);
     }, 300);
   };
@@ -63,7 +63,7 @@ const ClassroomPopUp = ({ setState }) => {
         <div className="flex flex-col w-full p-3 pt-0 ">
 
           <div className="flex flex-row items-center justify-between w-full">
-            <h2 className="text-2xl text-[#0462b9] font-bold">Ed.7 1.01</h2>
+            <h2 className="text-2xl text-[#0462b9] font-bold">{"Ed." + building[0] + " " + building[1] + "." + roomPop}</h2>
             <button onClick={handleClose} className="flex items-center justify-center w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] shadow-sm shadow-gray-400">
               <FontAwesomeIcon icon={faCalendar} size="lg" />
             </button>
@@ -86,7 +86,7 @@ const ClassroomPopUp = ({ setState }) => {
           </div>
         </div>
 
-        <ClassroomSchedule />
+        <ClassroomSchedule roomPop={roomPop} building={building}/>
       </SliderAnimation>
 
     </>

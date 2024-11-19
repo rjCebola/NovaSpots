@@ -1,248 +1,267 @@
+import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Polygon, Circle } from "react-leaflet";
+import { getOcupancy } from "../../../ScheduleRooms";
 
-function Ed7FirstFloor({ state, setState, building, setBuilding }) {
+function Ed7FirstFloor({ state, setState, building, setBuilding, setRoomPop }) {
+
+    const currHour =(new Date()).getHours();
+    var ocupancy;
+    if(currHour < 20 && currHour > 8) {
+        ocupancy = getOcupancy(building, currHour-8);
+    }
+    else {
+        ocupancy = false;
+    }
+
     return <>
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "red" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[1] ? "red" : "green") : "green" }}
             positions={[[1450, 600],
             [1450, 685],
             [1350, 685],
             [1350, 600],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.01")
-
+                    setRoomPop(1);
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "blue" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[2] ? "red" : "green") : "green" }}
             positions={[[1450, 775],
             [1450, 685],
             [1350, 685],
             [1350, 775],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.02")
-
+                    setRoomPop(2);
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "green" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[3] ? "red" : "green") : "green" }}
             positions={[[1450, 815],
             [1450, 860],
             [1350, 860],
             [1350, 815],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.03")
-
+                    setRoomPop(3);
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "red" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[4] ? "red" : "green") : "green" }}
             positions={[[1450, 900],
             [1450, 860],
             [1350, 860],
             [1350, 900],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.04")
-
+                    setRoomPop(4);
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "blue" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[5] ? "red" : "green") : "green" }}
             positions={[[1450, 900],
             [1450, 945],
             [1350, 945],
             [1350, 900],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.05")
-
+                    setRoomPop(5);
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "green" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[6] ? "red" : "green") : "green" }}
             positions={[[1450, 990],
             [1450, 945],
             [1350, 945],
             [1350, 990],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.06")
-
+                    setRoomPop(6);
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "red" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[7] ? "red" : "green") : "green" }}
             positions={[[1450, 990],
             [1450, 1030],
             [1350, 1030],
             [1350, 990],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.07")
+                    setRoomPop(7);
 
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "blue" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[8] ? "red" : "green") : "green" }}
             positions={[[1450, 1075],
             [1450, 1030],
             [1350, 1030],
             [1350, 1075],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.08")
-
+                    setRoomPop(8);
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "red" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[15] ? "red" : "green") : "green" }}
             positions={[[1325, 600],
             [1325, 685],
             [1225, 685],
             [1225, 600],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.15")
+                    setRoomPop(15);
 
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "blue" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[14] ? "red" : "green") : "green" }}
             positions={[[1325, 775],
             [1325, 685],
             [1225, 685],
             [1225, 775],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.14")
+                    setRoomPop(14);
 
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "green" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[13] ? "red" : "green") : "green" }}
             positions={[[1325, 815],
             [1325, 860],
             [1225, 860],
             [1225, 815],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.13")
+                    setRoomPop(13);
 
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "red" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[12] ? "red" : "green") : "green" }}
             positions={[[1325, 900],
             [1325, 860],
             [1225, 860],
             [1225, 900],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.12")
+                    setRoomPop(12);
 
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "blue" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[11] ? "red" : "green") : "green" }}
             positions={[[1325, 900],
             [1325, 945],
             [1225, 945],
             [1225, 900],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.11")
+                    setRoomPop(11);
 
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "green" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[10] ? "red" : "green") : "green" }}
             positions={[[1325, 990],
             [1325, 945],
             [1225, 945],
             [1225, 990],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.10")
+                    setRoomPop(10);
 
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "red" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[9] ? "red" : "green") : "green" }}
             positions={[[1325, 990],
             [1325, 1030],
             [1225, 1030],
             [1225, 990],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.09")
+                    setRoomPop(9);
 
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "red" }}
+            pathOptions={{ color: ocupancy ? (ocupancy["A"] ? "red" : "green") : "green" }}
             positions={[[915, 480],
             [915, 540],
             [730, 540],
             [730, 480],]}
             eventHandlers={{
                 click: () => {
-                    console.log("Auditório 1A")
+                    setRoomPop("A");
 
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "blue" }}
+            pathOptions={{ color: ocupancy ? (ocupancy["B"] ? "red" : "green") : "green" }}
             positions={[[690, 480],
             [690, 540],
             [510, 540],
             [510, 480],]}
             eventHandlers={{
                 click: () => {
-                    console.log("Auditório 1B")
+                    setRoomPop("B");
 
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "green" }}
+            pathOptions={{ color: ocupancy ? (ocupancy["C"] ? "red" : "green") : "green" }}
+            positions={[[910, 840],
+            [910, 930],
+            [670, 930],
+            [670, 840],]}
+            eventHandlers={{
+                click: () => {
+                    setRoomPop("C");
+
+                },
+            }}
+        />
+        <Polygon
+            className="z-[1000]"
+            pathOptions={{ color: ocupancy ? (ocupancy["D"] ? "red" : "green") : "green" }}
             positions={[[840, 745],
             [840, 670],
             [760, 645],
@@ -251,50 +270,37 @@ function Ed7FirstFloor({ state, setState, building, setBuilding }) {
             [760, 770],]}
             eventHandlers={{
                 click: () => {
-                    console.log("Auditório 1D")
+                    setRoomPop("D");
 
                 },
             }}
         />
 
-        <Polygon
-            className="z-[1000]"
-            pathOptions={{ color: "blue" }}
-            positions={[[910, 840],
-            [910, 930],
-            [670, 930],
-            [670, 840],]}
-            eventHandlers={{
-                click: () => {
-                    console.log("Auditório 1C")
 
-                },
-            }}
-        />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "red" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[17] ? "red" : "green") : "green" }}
             positions={[[600, 850],
             [600, 925],
             [510, 925],
             [510, 850],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.17")
+                    setRoomPop(17);
 
                 },
             }}
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: "green" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[18] ? "red" : "green") : "green" }}
             positions={[[600, 850],
             [600, 780],
             [510, 780],
             [510, 850],]}
             eventHandlers={{
                 click: () => {
-                    console.log("sala 1.16")
+                    setRoomPop(16);
 
                 },
             }}

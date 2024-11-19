@@ -10,12 +10,11 @@ import CanteenPopUp from './components/CanteenPopUp';
 
 function App() {
 
-  const [viewProfile, setViewProfile] = useState(false);
   const [mapPopUps, setMapPopUps] = useState("map");
-  //const [canteenPop, setCanteenPop] = useState(false);
-  const [roomPop, setPop] = useState(0);
-
   const [state, setState] = useState("map");
+  const [viewProfile, setViewProfile] = useState(false);
+  
+  const [roomPop, setRoomPop] = useState(0);
   const [building, setBuilding] = useState([0, 0])
 
 
@@ -27,21 +26,23 @@ function App() {
         <MapComponent
           viewProfile={viewProfile}
           setViewProfile={setViewProfile}
+          state={state}
           setState={setState}
           building={building}
           setBuilding={setBuilding}
-          state={state}
-          setMapPopUps={setMapPopUps} />
+          setRoomPop={setRoomPop}
+          setMapPopUps={setMapPopUps} 
+          />
         <div className='absolute top-0 z-[999] p-2 bg-white border-2 border-t-0 border-l-0 rounded-br-xl text-lg'>
-          <MapInformation state={state} building={building} setState={setState} />
+          <MapInformation state={state} building={building} setState={setState} setRoomPop={setRoomPop} />
 
 
         </div>
       </div>
       {state === "map" && mapPopUps === "canteen" && <CanteenPopUp setMapPopUps={setMapPopUps} />}
-      {state === "map" && <LayersButton setMapPopUps={setMapPopUps} />}
+      {state === "map" && mapPopUps === "map" && <LayersButton setMapPopUps={setMapPopUps} />}
       {mapPopUps === "layers" && <LayersPopUp setMapPopUps={setMapPopUps} />}
-      {state === "building" && roomPop !== 0 && <ClassroomPopUp setState={setState} />}
+      {state === "building" && roomPop !== 0 && <ClassroomPopUp building={building} roomPop={roomPop} setRoomPop={setRoomPop} />}
 
       {viewProfile && <SettingsPopUp />}
     </>
