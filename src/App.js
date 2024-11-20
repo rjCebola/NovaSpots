@@ -16,7 +16,6 @@ function App() {
   const [state, setState] = useState("map");
   const [viewProfile, setViewProfile] = useState(false);
   const [isFriendsSelected, setIsFriendsSelected] = useState(false);
-  const [showFriendsPage, setShowFriendsPage] = useState(false);
   
   const [roomPop, setRoomPop] = useState(0);
   const [building, setBuilding] = useState([0, 0])
@@ -27,7 +26,7 @@ function App() {
 
       <Header viewProfile={viewProfile} setViewProfile={setViewProfile} isFriendsSelected={isFriendsSelected}/>
       <SearchFriends isFriendsSelected={isFriendsSelected} />
-      <div className='relative'>
+      {state !== "friends" && <div className='relative'>
         <MapComponent
           viewProfile={viewProfile}
           setViewProfile={setViewProfile}
@@ -43,14 +42,14 @@ function App() {
 
 
         </div>
-      </div>
+      </div>}
       {state === "map" && mapPopUps === "canteen" && <CanteenPopUp setMapPopUps={setMapPopUps} />}
       {state === "map" && mapPopUps === "map" && <LayersButton setMapPopUps={setMapPopUps} />}
       {mapPopUps === "layers" && <LayersPopUp setMapPopUps={setMapPopUps} setIsFriendsSelected={setIsFriendsSelected}/>}
       {state === "building" && roomPop !== 0 && <ClassroomPopUp building={building} roomPop={roomPop} setRoomPop={setRoomPop} />}
 
-      {viewProfile && <SettingsPopUp setShowFriendsPage={setShowFriendsPage}/>}
-      {showFriendsPage && <FriendsPage />}
+      {viewProfile && <SettingsPopUp setState={setState} setViewProfile={setViewProfile}/>}
+      {state === "friends" && <FriendsPage />}
     </>
   );
 }

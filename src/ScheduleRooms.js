@@ -14,17 +14,18 @@ export function getOcupancy(building, hour) {
     let currOcupancy = {}
     const date = new Date();
     const currHour = date.getHours();
-    const dayOfWeek = date.getDay();
+    const dayOfWeek = date.getDay() - 1;
 
+    console.log(hour)
     //missing all the building choice and soo on
 
-    if (currHour < 20 && currHour > 8 && dayOfWeek <= 4) {
+    if (currHour < 20 && currHour > 8 && dayOfWeek <= 4 && dayOfWeek >= 0) {
         const dayWeekString = daysOfWeek[dayOfWeek]
 
         Object.keys(ed7Rooms.firstFloor).forEach(key => {
             currOcupancy[key.toString()] = ed7Rooms.firstFloor[key.toString()][dayWeekString][hour];
         })
-
+        console.log(currOcupancy)
     }
     else {
         currOcupancy = false;
@@ -152,6 +153,13 @@ const ed7Rooms =
             "W": [true, false, true, false, false, true, true, true, true, true, true, false],
             "Th": [true, true, false, true, false, false, true, true, false, false, false, true],
             "F": [false, true, true, true, true, false, false, true, true, false, false, false]
+        },
+        17: {
+            "M": [false, true, false, true, true, true, true, false, true, false, true, true],
+            "T": [false, true, false, true, true, false, true, false, true, true, true, true],
+            "W": [true, false, true, false, true, true, true, true, true, true, true, false],
+            "Th": [true, true, false, false, false, false, true, true, false, false, false, true],
+            "F": [false, true, true, true, true, false, true, true, true, false, false, false]
         },
         A: {
             "M": [true, true, false, true, false, true, false, true, false, true, true, false],
