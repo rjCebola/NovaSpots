@@ -35,7 +35,6 @@ function CampusMapAreasOfInterest({ setState, setBuilding, setMapPopUps }) {
             [900, 900],]}
             eventHandlers={{
                 click: () => {
-                    console.log("cantina")
                     setMapPopUps("canteen");
                 },
             }}

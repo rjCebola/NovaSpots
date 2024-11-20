@@ -16,7 +16,6 @@ export function getOcupancy(building, hour) {
     const currHour = date.getHours();
     const dayOfWeek = date.getDay() - 1;
 
-    console.log(hour)
     //missing all the building choice and soo on
 
     if (currHour < 20 && currHour > 8 && dayOfWeek <= 4 && dayOfWeek >= 0) {
@@ -25,7 +24,6 @@ export function getOcupancy(building, hour) {
         Object.keys(ed7Rooms.firstFloor).forEach(key => {
             currOcupancy[key.toString()] = ed7Rooms.firstFloor[key.toString()][dayWeekString][hour];
         })
-        console.log(currOcupancy)
     }
     else {
         currOcupancy = false;

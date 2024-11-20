@@ -16,7 +16,7 @@ function App() {
   const [state, setState] = useState("map");
   const [viewProfile, setViewProfile] = useState(false);
   const [isFriendsSelected, setIsFriendsSelected] = useState(false);
-  
+
   const [roomPop, setRoomPop] = useState(0);
   const [building, setBuilding] = useState([0, 0])
 
@@ -24,8 +24,8 @@ function App() {
   return (
     <>
 
-      <Header viewProfile={viewProfile} setViewProfile={setViewProfile} isFriendsSelected={isFriendsSelected}/>
-      <SearchFriends isFriendsSelected={isFriendsSelected} />
+      <Header viewProfile={viewProfile} setViewProfile={setViewProfile} setState={setState} setIsFriendsSelected={setIsFriendsSelected} setBuilding={setBuilding} setRoomPop={setRoomPop} setMapPopUps={setMapPopUps}/>
+      {isFriendsSelected && state === "map" && <SearchFriends />}
       {state !== "friends" && <div className='relative'>
         <MapComponent
           viewProfile={viewProfile}
@@ -35,8 +35,8 @@ function App() {
           building={building}
           setBuilding={setBuilding}
           setRoomPop={setRoomPop}
-          setMapPopUps={setMapPopUps} 
-          />
+          setMapPopUps={setMapPopUps}
+        />
         <div className='absolute top-0 z-[999] p-2 bg-white border-2 border-t-0 border-l-0 rounded-br-xl text-lg'>
           <MapInformation state={state} building={building} setState={setState} setRoomPop={setRoomPop} />
 
@@ -45,10 +45,10 @@ function App() {
       </div>}
       {state === "map" && mapPopUps === "canteen" && <CanteenPopUp setMapPopUps={setMapPopUps} />}
       {state === "map" && mapPopUps === "map" && <LayersButton setMapPopUps={setMapPopUps} />}
-      {mapPopUps === "layers" && <LayersPopUp setMapPopUps={setMapPopUps} setIsFriendsSelected={setIsFriendsSelected}/>}
+      {mapPopUps === "layers" && <LayersPopUp setMapPopUps={setMapPopUps} setIsFriendsSelected={setIsFriendsSelected} />}
       {state === "building" && roomPop !== 0 && <ClassroomPopUp building={building} roomPop={roomPop} setRoomPop={setRoomPop} />}
 
-      {viewProfile && <SettingsPopUp setState={setState} setViewProfile={setViewProfile}/>}
+      {viewProfile && <SettingsPopUp setState={setState} setViewProfile={setViewProfile} />}
       {state === "friends" && <FriendsPage />}
     </>
   );
