@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 const buttonStyle = "flex flex-col items-center justify-center w-20 h-20 p-4 rounded-3xl shadow-sm shadow-gray-400 text-[#0463ba]";
 
-const LayersPopUp = ({ setMapPopUps, setIsFriendsSelected }) => {
+const LayersPopUp = ({ setMapPopUps, setIsFriendsSelected, setState, setIsFoodLayerSelected }) => {
 
   const [closing, setClosing] = useState(false);
   const [dragClosing, setDragClosing] = useState(false);
@@ -47,6 +47,11 @@ const LayersPopUp = ({ setMapPopUps, setIsFriendsSelected }) => {
     }, 300);
   };
 
+  const handleFoodClick = () => {
+    setIsFoodLayerSelected(true);
+    handleClose();
+  };
+
   const handleFriendsClick = () => {
     setIsFriendsSelected(true);
     handleClose();
@@ -66,7 +71,7 @@ const LayersPopUp = ({ setMapPopUps, setIsFriendsSelected }) => {
     >
       <div className="w-1/4 h-0.5 bg-gray-300 mb-4 group-active:bg-gray-600"></div>
       <div className="flex justify-around w-full">
-        <button onClick={handleClose} className={buttonStyle}>
+        <button onClick={handleFoodClick} className={buttonStyle}>
           <FontAwesomeIcon icon={faUtensils} size="2x" />
           <span className="mt-1 text-sm">Food</span>
         </button>
