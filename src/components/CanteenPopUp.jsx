@@ -16,8 +16,11 @@ function CanteenPopUp({ setMapPopUps }) {
   const [dinnerOpen, setDinnerOpen] = useState(false);
   const [popupOffset, setPopupOffset] = useState('100%');
   const [startY, setStartY] = useState(0);
+  const [startX, setStartX] = useState(0);
   const [currentY, setCurrentY] = useState(0);
+  const [currentX, setCurrentX] = useState(0);
   const [dragging, setDragging] = useState(false);
+  const [horizontalDragging, setHorizontalDragging] = useState(false);
   const [lChevVisible, setLChevVisible] = useState(true);
   const [rChevVisible, setRChevVisible] = useState(true);
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -88,16 +91,26 @@ function CanteenPopUp({ setMapPopUps }) {
   const currentMenu = menus[currentDate.toDateString()];
 
   const handleTouchStart = (e) => {
-    const touchStart = e.touches[0].clientY;
-    setStartY(touchStart);
-    setCurrentY(touchStart);
+    const touchStartY = e.touches[0].clientY;
+    const touchStartX = e.touches[0].clientX;
+    setStartY(touchStartY);
+    setStartX(touchStartX);
+    setCurrentY(touchStartY);
+    setCurrentX(touchStartX);
     setDragging(true);
+    setHorizontalDragging(false);
   };
 
   const handleTouchMove = (e) => {
     if (dragging) {
-      const touchMove = e.touches[0].clientY;
-      setCurrentY(touchMove);
+      const touchMoveY = e.touches[0].clientY;
+      const touchMoveX = e.touches[0].clientX;
+      setCurrentY(touchMoveY);
+      setCurrentX(touchMoveX);
+
+      if (!horizontalDragging && Math.abs(touchMoveX - startX) > Math.abs(touchMoveY - startY)) {
+        setHorizontalDragging(true);
+      }
     }
   };
 
@@ -114,6 +127,15 @@ function CanteenPopUp({ setMapPopUps }) {
     }
     if (startY < currentY && currentY - startY > 50 && currentY - startY < 250 && dinnerOpen) {
       switchDinnerState();
+    }
+
+    if (horizontalDragging) {
+      const swipeDistance = currentX - startX;
+      if (swipeDistance > 50) {
+        prevDay();
+      } else if (swipeDistance < -50) {
+        nextDay();
+      }
     }
   };
 
