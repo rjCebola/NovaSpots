@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faSearch, faPlus, faMapMarkerAlt, faMapLocation } from '@fortawesome/free-solid-svg-icons'; 
 import AddFriendPopup from './AddFriendPopUp';
+import { getFriends, getFriendsWithLocation } from "../users";
 
-const FriendsPage = ( { setState, setSelectedFriend } ) => {
+const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
 
     const [searchTerm, setSearchTerm] = useState("");
-    const [friends, setFriends] = useState([
-        { name: "John Smith", clipId: "j.smith", location: "Ed7/1.01" },
-        { name: "Jane Doe", clipId: "j.doe", location: "Library" },
-        { name: "Mary Johnson", clipId: "m.johnson", location: "Ed1/1.02" }
-    ]);
+    const [friends, setFriends] = useState(
+        getFriendsWithLocation()
+    );
 
     const filteredFriends = friends.filter(friend =>
         friend.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -40,6 +39,7 @@ const FriendsPage = ( { setState, setSelectedFriend } ) => {
         return () => {
         setSelectedFriend(friend);
         setState("map");
+        setLayerSelected("friends");
         };
       };
 

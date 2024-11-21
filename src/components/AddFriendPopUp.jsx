@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { addFriend, getAllUsers, getFriendsWithLocation } from "../users";
 
 const AddFriendPopup = ({ onClose, setFriends, friends }) => {
     const [inputValue, setInputValue] = useState('');
@@ -12,28 +13,7 @@ const AddFriendPopup = ({ onClose, setFriends, friends }) => {
             setSuggestions([]);
             return;
         }
-        const fetchedSuggestions = [
-            { name: "Alice Brown", clipId: "a.brown", location: "Gym" },
-            { name: "Amanda Blue", clipId: "a.blue", location: "Library" },
-            { name: "Bob White", clipId: "b.white", location: "Cafeteria" },
-            { name: "Bill Black", clipId: "b.black", location: "Gym" },
-            { name: "Charlie Black", clipId: "c.black", location: "Library" },
-            { name: "Catherine Green", clipId: "c.green", location: "Ed7/1.02" },
-            { name: "David Green", clipId: "d.green", location: "Ed7/1.02" },
-            { name: "Diana Red", clipId: "d.red", location: "Gym" },
-            { name: "Eve Blue", clipId: "e.blue", location: "Cafeteria" },
-            { name: "Edward Yellow", clipId: "e.yellow", location: "Library" },
-            { name: "Frank Red", clipId: "f.red", location: "Library" },
-            { name: "Fiona White", clipId: "f.white", location: "Gym" },
-            { name: "Grace Yellow", clipId: "g.yellow", location: "Gym" },
-            { name: "George Black", clipId: "g.black", location: "Cafeteria" },
-            { name: "Hank Purple", clipId: "h.purple", location: "Ed7/1.03" },
-            { name: "Helen Blue", clipId: "h.blue", location: "Library" },
-            { name: "Ivy Orange", clipId: "i.orange", location: "Cafeteria" },
-            { name: "Ian Green", clipId: "i.green", location: "Gym" },
-            { name: "Jack Pink", clipId: "j.pink", location: "Library" },
-            { name: "Jill White", clipId: "j.white", location: "Ed7/1.02" }
-        ];
+        const fetchedSuggestions = getAllUsers();
         const filteredSuggestions = fetchedSuggestions.filter(user =>
             user.name.toLowerCase().includes(value.toLowerCase()) ||
             user.clipId.toLowerCase().includes(value.toLowerCase())
@@ -49,7 +29,8 @@ const AddFriendPopup = ({ onClose, setFriends, friends }) => {
 
     const handleConfirmClick = () => {
         if (selectedUser) {
-            setFriends([...friends, selectedUser]);
+            addFriend(selectedUser.clipId);
+            setFriends(getFriendsWithLocation());
             onClose();
             setInputValue('');
             setSelectedUser(null);

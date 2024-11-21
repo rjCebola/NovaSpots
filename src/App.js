@@ -57,7 +57,7 @@ function App() {
       {state === "building" && roomPop !== 0 && <ClassroomPopUp building={building} roomPop={roomPop} setRoomPop={setRoomPop} />}
 
       {viewProfile && <SettingsPopUp setState={setState} setViewProfile={setViewProfile} />}
-      {state === "friends" && <FriendsPage setState={setState}  setSelectedFriend={setSelectedFriend} />}
+      {state === "friends" && <FriendsPage setState={setState}  setSelectedFriend={setSelectedFriend} setLayerSelected={setLayerSelected}/>}
     </PreventPullToRefresh>
     </>
   );
