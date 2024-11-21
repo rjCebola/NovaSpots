@@ -24,8 +24,6 @@ function App() {
 
   return (
     <>
-
-      <Header viewProfile={viewProfile} setViewProfile={setViewProfile} setState={setState} setIsFriendsSelected={setIsFriendsSelected} setBuilding={setBuilding} setRoomPop={setRoomPop} setMapPopUps={setMapPopUps} setIsFoodLayerSelected={setIsFoodLayerSelected}/>
       {isFriendsSelected && state === "map" && <SearchFriends />}
       {state !== "friends" && <div className='relative'>
         <MapComponent
@@ -39,12 +37,17 @@ function App() {
           setMapPopUps={setMapPopUps}
           isFoodLayerSelected={isFoodLayerSelected}
         />
-        <div className='absolute top-0 z-[999] p-2 bg-white border-2 border-t-0 border-l-0 rounded-br-xl text-lg'>
-          <MapInformation state={state} building={building} setState={setState} setRoomPop={setRoomPop} />
-
-
-        </div>
       </div>}
+      <div className='flex flex-col fixed top-0 w-full z-[999]'>
+        <Header viewProfile={viewProfile} setViewProfile={setViewProfile} setState={setState} setIsFriendsSelected={setIsFriendsSelected} setBuilding={setBuilding} setRoomPop={setRoomPop} setMapPopUps={setMapPopUps} setIsFoodLayerSelected={setIsFoodLayerSelected}/>
+        <div className='self-start'>
+          <div className='inline-block p-2 bg-white border-2 border-t-0 border-l-0 rounded-br-xl text-lg'>
+            <MapInformation state={state} building={building} setState={setState} setRoomPop={setRoomPop} />
+          </div>
+        </div>
+      </div>
+  
+      
       {state === "map" && mapPopUps === "canteen" && <CanteenPopUp setMapPopUps={setMapPopUps} />}
       {state === "map" && mapPopUps === "map" && <LayersButton setMapPopUps={setMapPopUps} />}
       {mapPopUps === "layers" && <LayersPopUp setMapPopUps={setMapPopUps} setIsFriendsSelected={setIsFriendsSelected} setIsFoodLayerSelected={setIsFoodLayerSelected}/>}
