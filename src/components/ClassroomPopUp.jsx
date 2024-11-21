@@ -1,25 +1,22 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGroup, faBook, faCalendar } from '@fortawesome/free-solid-svg-icons';
-import { SliderAnimation } from '../Animations';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ClassroomSchedule from './ClassroomSchedule';
 import { checkStringAvailability, dcrOcupancyRoom, getCurrentAvailability, getCurrPeople, incrOcupancyRoom } from '../ScheduleRooms';
 import PreventPullToRefresh from './PreventPullToRefresh';
 
-function getBarColor() {
-
-}
-
-
 const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
   const [dragClosing, setDragClosing] = useState(false);
   const [scheduleOpen, setScheduleOpen] = useState(false);
-  const [popupOffset, setPopupOffset] = useState('58%');
+  const [popupOffset, setPopupOffset] = useState('100%');
   const [startY, setStartY] = useState(0);
   const [currentY, setCurrentY] = useState(0);
   const [dragging, setDragging] = useState(false);
-
   const [studying, setStudying] = useState([0, 0, 0]);
+
+  useEffect(() => {
+    setPopupOffset('58%');
+  }, []);
 
   const handleTouchStart = (e) => {
     const touchStart = e.touches[0].clientY;
@@ -43,7 +40,7 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
     if (startY < currentY && currentY - startY > 200 && scheduleOpen) {
       handleClose();
     }
-    if(startY > currentY && currentY - startY < 50){
+    if(startY > currentY && startY - currentY > 50 && !scheduleOpen){
       switchScheduleState();
     }
     if (startY < currentY && currentY - startY > 50 && currentY - startY < 200 && scheduleOpen) {
@@ -66,7 +63,7 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
       setTimeout(() => {
         setRoomPop(0);
         setDragClosing(false);
-      }, 300);
+      }, 200);
   };
 
   function handleStartStudyButton() {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 import { SliderAnimation } from '../Animations';
+import PreventPullToRefresh from './PreventPullToRefresh';
 
 const today = new Date();
 const startLimit = new Date(today);
@@ -12,6 +13,8 @@ endLimit.setDate(today.getDate() + 7);
 
 function CanteenPopUp({ setMapPopUps }) {
   const [dragClosing, setDragClosing] = useState(false);
+  const [dinnerOpen, setDinnerOpen] = useState(false);
+  const [popupOffset, setPopupOffset] = useState('100%');
   const [startY, setStartY] = useState(0);
   const [currentY, setCurrentY] = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -50,6 +53,7 @@ function CanteenPopUp({ setMapPopUps }) {
       tempMenus[date.toDateString()] = generateRandomMenu();
     }
     setMenus(tempMenus);
+    setPopupOffset('47%');
   }, []);
 
   const nextDay = () => {
@@ -86,6 +90,7 @@ function CanteenPopUp({ setMapPopUps }) {
   const handleTouchStart = (e) => {
     const touchStart = e.touches[0].clientY;
     setStartY(touchStart);
+    setCurrentY(touchStart);
     setDragging(true);
   };
 
@@ -98,24 +103,45 @@ function CanteenPopUp({ setMapPopUps }) {
 
   const handleTouchEnd = () => {
     setDragging(false);
-    if (startY < currentY && currentY - startY > 50) {
-      setDragClosing(true);
-      setTimeout(() => {
-        setMapPopUps("map");
-        setDragClosing(false);
-      }, 1200 * 10 / (currentY - startY));
+    if (startY < currentY && currentY - startY > 50 && !dinnerOpen) {
+      handleClose();
     }
-    setStartY(0);
-    setCurrentY(0);
+    if (startY < currentY && currentY - startY > 250 && dinnerOpen) {
+      handleClose();
+    }
+    if(startY > currentY && startY - currentY > 50 && !dinnerOpen){
+      switchDinnerState();
+    }
+    if (startY < currentY && currentY - startY > 50 && currentY - startY < 250 && dinnerOpen) {
+      switchDinnerState();
+    }
   };
 
+  const handleClose = () => {
+    setDragClosing(true);
+    setTimeout(() => {
+      setMapPopUps("map");
+      setDragClosing(false);
+    }, 200);
+  };
+
+  const switchDinnerState = () => {
+    if(dinnerOpen){
+      setDinnerOpen(false);
+      setPopupOffset('47%');
+    } else {
+      setDinnerOpen(true);
+      setPopupOffset('0%');
+    }
+  }
+
   return (
-    <SliderAnimation
-      showing={true}
+    <PreventPullToRefresh>
+    <div
       className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black group"
       style={{
-        transform: dragClosing ? 'translateY(100%)' : dragging ? `translateY(${Math.max(0, currentY - startY)}px)` : 'translateY(0)',
-        transition: !dragging ? 'transform 0.3s ease-out' : 'none',
+        transform: dragClosing ? 'translateY(100%)' : dragging ? `translateY(max(calc(${currentY - startY}px + ${popupOffset}),0%))`: `translateY(${popupOffset})`,
+        transition: !dragging ? 'transform 0.2s ease-out' : 'none',
       }}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
@@ -232,7 +258,8 @@ function CanteenPopUp({ setMapPopUps }) {
           </>
         )}
       </div>
-    </SliderAnimation>
+    </div>
+    </PreventPullToRefresh>
   );
 }
 
