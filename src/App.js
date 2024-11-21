@@ -25,7 +25,6 @@ function App() {
 
   return (
     <>
-    <PreventPullToRefresh>
       {layerSelected === "friends" && state === "map" && <SearchFriends />}
       {state !== "friends" && <div className='relative'>
         <MapComponent
@@ -58,7 +57,6 @@ function App() {
 
       {viewProfile && <SettingsPopUp setState={setState} setViewProfile={setViewProfile} />}
       {state === "friends" && <FriendsPage setState={setState}  setSelectedFriend={setSelectedFriend} setLayerSelected={setLayerSelected}/>}
-    </PreventPullToRefresh>
     </>
   );
 }
