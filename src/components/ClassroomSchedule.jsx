@@ -32,7 +32,7 @@ function ClassroomSchedule({building, roomPop}) {
 
     return (
         <div className="container px-4">
-            <div className="relative mt-4 rounded-lg overflow-x-auto w-full">
+            <div className="relative rounded-lg overflow-x-auto w-full">
                 <div id="current-time-line" className="absolute h-full z-10" style={{ display: 'block', borderLeft: '2px dashed red', top: '0px' }}>
                     <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 bg-red-500 rounded-full"></div>
                 </div>

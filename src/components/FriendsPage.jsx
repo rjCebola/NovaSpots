@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faSearch, faPlus, faMapMarkerAlt, faMapLocation } from '@fortawesome/free-solid-svg-icons'; 
 import AddFriendPopup from './AddFriendPopUp';
 
-const FriendsPage = ( { setState, setIsFriendsSelected, setSelectedFriend } ) => {
+const FriendsPage = ( { setState, setSelectedFriend } ) => {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [friends, setFriends] = useState([
@@ -40,7 +40,6 @@ const FriendsPage = ( { setState, setIsFriendsSelected, setSelectedFriend } ) =>
         return () => {
         setSelectedFriend(friend);
         setState("map");
-        setIsFriendsSelected(true);
         };
       };
 

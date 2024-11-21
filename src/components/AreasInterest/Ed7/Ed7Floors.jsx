@@ -293,7 +293,7 @@ function Ed7FirstFloor({ state, setState, building, setBuilding, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[18] ? "red" : "green") : "green" }}
+            pathOptions={{ color: ocupancy ? (ocupancy[16] ? "red" : "green") : "green" }}
             positions={[[600, 850],
             [600, 780],
             [510, 780],

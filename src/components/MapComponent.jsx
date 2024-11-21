@@ -10,14 +10,17 @@ import ReactDOMServer from 'react-dom/server';
 
 
 function MapComponentHelper({ viewProfile, setViewProfile }) {
-   /* useMapEvents({
+/*    useMapEvents({
+    load: () =>{
+      console.log("loading");
+    },
     click: (e) => {
-
+      console.log("click");
     },
     drag: () => {
       if (viewProfile) setViewProfile(false)
     }
-  });  */
+  });   */
   return null;
 }
 
@@ -33,7 +36,7 @@ const friendPinLocations = [
   { x: 930, y: 830, name: "Mary Johnson" },
 ];
 
-const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building, setMapPopUps, setRoomPop, isFoodLayerSelected, isFriendsSelected, selectedFriend }) => {
+const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building, setMapPopUps, setRoomPop, layerSelected, selectedFriend }) => {
   const bounds = [[0, 0], [1665, 1509]];
 
   useEffect(() => {
@@ -64,7 +67,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
     if (selectedFriend) {
       return pin.name === selectedFriend.name;
     }
-    if (isFriendsSelected) {
+    if (selectedFriend !== null) {
       return true;
     }
     return false;
@@ -80,7 +83,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
       minZoom={-2}
       maxZoom={2}
       bounds={bounds}
-      attributionControl={false}
+      attributionControl={false} 
     >
       <ImageOverlay
         url={map}
@@ -88,7 +91,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         style={{ width: '100%', height: '100%', objectFit: 'contain' }}
       />
 
-    {state === "map" && isFoodLayerSelected && foodPinLocations.map((pin, index) => (
+    {state === "map" && layerSelected === "food" && foodPinLocations.map((pin, index) => (
         <Marker
           key={index}
           position={[pin.x, pin.y]}
@@ -112,7 +115,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         </Marker>
       ))}
 
-    {state === "map" && isFriendsSelected && filteredPins.map((pin, index) => (
+    {state === "map" && selectedFriend !== null && filteredPins.map((pin, index) => (
         <Marker
           key={index}
           position={[pin.x, pin.y]}

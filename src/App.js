@@ -15,9 +15,8 @@ function App() {
   const [mapPopUps, setMapPopUps] = useState("map");
   const [state, setState] = useState("map");
   const [viewProfile, setViewProfile] = useState(false);
-  const [isFriendsSelected, setIsFriendsSelected] = useState(false);
-  const [isFoodLayerSelected, setIsFoodLayerSelected] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
+  const [layerSelected, setLayerSelected] = useState("");
 
   const [roomPop, setRoomPop] = useState(0);
   const [building, setBuilding] = useState([0, 0])
@@ -25,7 +24,8 @@ function App() {
 
   return (
     <>
-      {isFriendsSelected && state === "map" && <SearchFriends />}
+      <Header viewProfile={viewProfile} setViewProfile={setViewProfile} setState={setState} setLayerSelected={setLayerSelected} setBuilding={setBuilding} setRoomPop={setRoomPop} setMapPopUps={setMapPopUps}/>
+      {layerSelected === "friends" && state === "map" && <SearchFriends />}
       {state !== "friends" && <div className='relative'>
         <MapComponent
           viewProfile={viewProfile}
@@ -36,13 +36,12 @@ function App() {
           setBuilding={setBuilding}
           setRoomPop={setRoomPop}
           setMapPopUps={setMapPopUps}
-          isFoodLayerSelected={isFoodLayerSelected}
-          isFriendsSelected={isFriendsSelected}
           selectedFriend={selectedFriend}
+          layerSelected={layerSelected}
         />
       </div>}
       <div className='flex flex-col fixed top-0 w-full z-[999]'>
-        <Header viewProfile={viewProfile} setViewProfile={setViewProfile} setState={setState} setIsFriendsSelected={setIsFriendsSelected} setBuilding={setBuilding} setRoomPop={setRoomPop} setMapPopUps={setMapPopUps} setIsFoodLayerSelected={setIsFoodLayerSelected}/>
+        <Header viewProfile={viewProfile} setViewProfile={setViewProfile} setState={setState} setLayerSelected={setLayerSelected} setBuilding={setBuilding} setRoomPop={setRoomPop} setMapPopUps={setMapPopUps}/>
         <div className='self-start'>
           <div className='inline-block p-2 bg-white border-2 border-t-0 border-l-0 rounded-br-xl text-lg'>
             <MapInformation state={state} building={building} setState={setState} setRoomPop={setRoomPop} />
@@ -53,11 +52,11 @@ function App() {
       
       {state === "map" && mapPopUps === "canteen" && <CanteenPopUp setMapPopUps={setMapPopUps} />}
       {state === "map" && mapPopUps === "map" && <LayersButton setMapPopUps={setMapPopUps} />}
-      {mapPopUps === "layers" && <LayersPopUp setMapPopUps={setMapPopUps} setIsFriendsSelected={setIsFriendsSelected} setIsFoodLayerSelected={setIsFoodLayerSelected} isFriendsSelected={isFriendsSelected} isFoodLayerSelected={isFoodLayerSelected}/>}
+      {mapPopUps === "layers" && <LayersPopUp setMapPopUps={setMapPopUps} setLayerSelected={setLayerSelected} layerSelected={layerSelected}/>}
       {state === "building" && roomPop !== 0 && <ClassroomPopUp building={building} roomPop={roomPop} setRoomPop={setRoomPop} />}
 
       {viewProfile && <SettingsPopUp setState={setState} setViewProfile={setViewProfile} />}
-      {state === "friends" && <FriendsPage setState={setState} setIsFriendsSelected={setIsFriendsSelected} setSelectedFriend={setSelectedFriend} />}
+      {state === "friends" && <FriendsPage setState={setState}  setSelectedFriend={setSelectedFriend} />}
     </>
   );
 }

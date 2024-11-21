@@ -8,21 +8,20 @@ function handleProfileClick(viewProfile, setViewProfile) {
 }
 
 
-function handleLogoClick(setState, setIsFriendsSelected, setBuilding, setRoomPop, setMapPopUps, setIsFoodLayerSelected) {
+function handleLogoClick(setState, setLayerSelected, setBuilding, setRoomPop, setMapPopUps) {
     setState("map");
-    setIsFriendsSelected(false);
+    setLayerSelected("");
     setBuilding([0,0]);
     setRoomPop(0);
     setMapPopUps("map");
-    setIsFoodLayerSelected(false);
 }
 
-function Header({ viewProfile, setViewProfile, setState, setIsFriendsSelected, setBuilding, setRoomPop, setMapPopUps, setIsFoodLayerSelected }) {
+function Header({ viewProfile, setViewProfile, setState, setBuilding, setRoomPop, setMapPopUps, setLayerSelected }) {
 
     return (
         <div className="w-full flex items-center z-[999] justify-between p-2 bg-white border-b-2">
             <div className="flex items-center">
-                <img onClick={() => handleLogoClick(setState, setIsFriendsSelected, setBuilding, setRoomPop, setMapPopUps, setIsFoodLayerSelected)} src="/NovaSpots_logo.jpg" alt="NovaSpots Logo" className="h-12 mr-2" />
+                <img onClick={() => handleLogoClick(setState,setLayerSelected, setBuilding, setRoomPop, setMapPopUps,)} src="/NovaSpots_logo.jpg" alt="NovaSpots Logo" className="h-12 mr-2" />
                 <h1 className="text-2xl font-bold font-poppins" style={{ color: '#0463ba' }}>NovaSpots</h1>
             </div>
             <FontAwesomeIcon icon={faUserCircle} className="text-[#0462b9] h-10 pr-2" onClick={() => handleProfileClick(viewProfile, setViewProfile)} />

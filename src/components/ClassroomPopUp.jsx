@@ -3,6 +3,12 @@ import { faUserGroup, faBook, faCalendar } from '@fortawesome/free-solid-svg-ico
 import { SliderAnimation } from '../Animations';
 import React, { useState } from 'react';
 import ClassroomSchedule from './ClassroomSchedule';
+import { checkStringAvailability, dcrOcupancyRoom, getCurrentAvailability, getCurrPeople, incrOcupancyRoom } from '../ScheduleRooms';
+
+function getBarColor() {
+
+}
+
 
 const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
   const [closing, setClosing] = useState(false);
@@ -10,6 +16,7 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
   const [currentY, setCurrentY] = useState(0);
   const [dragging, setDragging] = useState(false);
 
+  const [studying, setStudying] = useState([0, 0, 0]);
 
   function onTabDrag() {
 
@@ -45,6 +52,22 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
     }, 300);
   };
 
+  function handleStartStudyButton() {
+    incrOcupancyRoom(building, roomPop);
+    setStudying([building[0], building[1], roomPop])
+  }
+
+  function handleEndStudyButton() {
+    dcrOcupancyRoom(building, roomPop);
+    setStudying([0, 0, 0])
+  }
+
+  const availability = checkStringAvailability(building, roomPop);
+  const currAvail = getCurrentAvailability(building, roomPop);
+  const people = getCurrPeople(building, roomPop) <= 10 ? getCurrPeople(building, roomPop) : 10;
+  const color = currAvail ? "bg-[#f87171]" : (people < 10 ? "bg-[#6ed49c]" : "bg-[#f87171]")
+
+
   return (
     <>
       <SliderAnimation
@@ -69,24 +92,38 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
             </button>
           </div>
 
-          <p className="text-gray-600 pb-4">Available until 12:00</p>
+          <p className="text-gray-600 pb-4">{availability}</p>
 
           <div className="flex flex-row items-center">
             <FontAwesomeIcon icon={faUserGroup} size="xl" className="mr-4 text-gray-300" />
             <div className="w-full bg-gray-200 rounded-full h-5">
-              <div className="bg-[#6ed49c] h-5 rounded-full" style={{ width: '20%' }}></div>
+              <div className={"bg-[#6ed49c] h-5 rounded-full " + color} style={{ width: (currAvail ? "100%" : people + '0%') }}></div>
             </div>
           </div>
 
           <div className="flex items-center mt-4 justify-center">
-            <button onClick={handleClose} className="w-3/4 h-14 p-1 rounded-3xl bg-[#0462b9] text-white shadow-sm shadow-gray-400">
-              <FontAwesomeIcon icon={faBook} size="xl" />
-              <span className="ml-3 text-sm">I'll be studying here</span>
-            </button>
+
+            {currAvail
+              ? <button disabled={true} className="w-3/4 h-14 p-1 rounded-3xl bg-[#f87171] text-gray-800 shadow-sm shadow-gray-400">
+                  <FontAwesomeIcon icon={faBook} size="xl" />
+                  <span className="ml-3 text-sm">Lecture in progress</span>
+                </button>
+
+              : ((studying[0] === building[0] && studying[1] === building[1] && studying[2] === roomPop)
+
+                ? <button onClick={handleEndStudyButton} className="w-3/4 h-14 p-1 rounded-3xl text-[#0462b9] shadow-sm shadow-[#0462b9]">
+                    <FontAwesomeIcon icon={faBook} size="xl" />
+                    <span className="ml-3 text-sm">Going on a break</span>
+                  </button>
+
+                : <button onClick={handleStartStudyButton} className="w-3/4 h-14 p-1 rounded-3xl bg-[#0462b9] text-white shadow-sm shadow-gray-400">
+                    <FontAwesomeIcon icon={faBook} size="xl" />
+                    <span className="ml-3 text-sm">I'll be studying here</span>
+                  </button>)}
           </div>
         </div>
 
-        <ClassroomSchedule roomPop={roomPop} building={building}/>
+        <ClassroomSchedule roomPop={roomPop} building={building} />
       </SliderAnimation>
 
     </>
