@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 const buttonStyle = "flex flex-col items-center justify-center w-20 h-20 p-4 rounded-3xl shadow-sm shadow-gray-400 text-[#0463ba]";
 
-const LayersPopUp = ({ setMapPopUps, setIsFriendsSelected, setState, setIsFoodLayerSelected }) => {
+const LayersPopUp = ({ setMapPopUps, setIsFriendsSelected, isFriendsSelected, setState, setIsFoodLayerSelected, isFoodLayerSelected }) => {
 
   const [closing, setClosing] = useState(false);
   const [dragClosing, setDragClosing] = useState(false);
@@ -48,12 +48,12 @@ const LayersPopUp = ({ setMapPopUps, setIsFriendsSelected, setState, setIsFoodLa
   };
 
   const handleFoodClick = () => {
-    setIsFoodLayerSelected(true);
+    setIsFoodLayerSelected(!isFoodLayerSelected);
     handleClose();
   };
 
   const handleFriendsClick = () => {
-    setIsFriendsSelected(true);
+    setIsFriendsSelected(!isFriendsSelected);
     handleClose();
   };
 
@@ -71,7 +71,7 @@ const LayersPopUp = ({ setMapPopUps, setIsFriendsSelected, setState, setIsFoodLa
     >
       <div className="w-1/4 h-0.5 bg-gray-300 mb-4 group-active:bg-gray-600"></div>
       <div className="flex justify-around w-full">
-        <button onClick={handleFoodClick} className={buttonStyle}>
+        <button onClick={handleFoodClick} className={`${buttonStyle} ${isFoodLayerSelected ? 'border-2 border-[#0463ba]' : ''}`}>
           <FontAwesomeIcon icon={faUtensils} size="2x" />
           <span className="mt-1 text-sm">Food</span>
         </button>
@@ -79,7 +79,7 @@ const LayersPopUp = ({ setMapPopUps, setIsFriendsSelected, setState, setIsFoodLa
           <FontAwesomeIcon icon={faTrain} size="2x" />
           <span className="mt-1 text-sm">Transport</span>
         </button>
-        <button onClick={handleFriendsClick} className={buttonStyle}>
+        <button onClick={handleFriendsClick} className={`${buttonStyle} ${isFriendsSelected ? 'border-2 border-[#0463ba]' : ''}`}>
           <FontAwesomeIcon icon={faUserGroup} size="2x" />
           <span className="mt-1 text-sm">Friends</span>
         </button>

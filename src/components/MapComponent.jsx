@@ -92,11 +92,9 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         <Marker
           key={index}
           position={[pin.x, pin.y]}
-          icon={L.icon({
-            iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
+          icon={L.divIcon({
+            className: 'custom-div-icon',
+            html: `<div style="background-color:transparent;width:25px;height:20px;"></div>`,
           })}
           eventHandlers={{
             click: () => {
@@ -133,13 +131,18 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
           <Tooltip
             direction="top"
             permanent
-            className="bg-white border border-gray-300 rounded shadow-md text-sm p-1"
+            className="bg-blue"
+            offset={[0, 0]} // Adjusts tooltip position
+            interactive
           >
-            {pin.name}
+            <div>
+              <strong style={{ fontFamily: 'Poppins, sans-serif' }}>{pin.name}</strong>
+              <br />
+              <span style={{ fontSize: '12px', color: 'gray', fontFamily: 'Poppins, sans-serif' }}>Check the menu</span>
+            </div>
           </Tooltip>
         </Marker>
       ))}
-
 
       <MapComponentHelper viewProfile={viewProfile} setViewProfile={setViewProfile} />
       <AreasOfInterst state={state} setState={setState} building={building} setBuilding={setBuilding} setMapPopUps={setMapPopUps} setRoomPop={setRoomPop}/>
