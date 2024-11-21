@@ -24,7 +24,6 @@ function App() {
 
   return (
     <>
-      <Header viewProfile={viewProfile} setViewProfile={setViewProfile} setState={setState} setLayerSelected={setLayerSelected} setBuilding={setBuilding} setRoomPop={setRoomPop} setMapPopUps={setMapPopUps}/>
       {layerSelected === "friends" && state === "map" && <SearchFriends />}
       {state !== "friends" && <div className='relative'>
         <MapComponent
@@ -43,8 +42,8 @@ function App() {
       <div className='flex flex-col fixed top-0 w-full z-[999]'>
         <Header viewProfile={viewProfile} setViewProfile={setViewProfile} setState={setState} setLayerSelected={setLayerSelected} setBuilding={setBuilding} setRoomPop={setRoomPop} setMapPopUps={setMapPopUps}/>
         <div className='self-start'>
-          <div className='inline-block p-2 bg-white border-2 border-t-0 border-l-0 rounded-br-xl text-lg'>
-            <MapInformation state={state} building={building} setState={setState} setRoomPop={setRoomPop} />
+          <div className='p-2 bg-white border-2 border-t-0 border-l-0 rounded-br-xl text-lg'>
+            <MapInformation state={state} building={building} setState={setState} setRoomPop={setRoomPop} />  
           </div>
         </div>
       </div>

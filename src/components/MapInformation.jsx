@@ -24,10 +24,10 @@ function MapInformation({ state, building, setState, setRoomPop }) {
             {info[0] !== "" && <p onClick={() => handleCampusClick(setState,setRoomPop)}> {info[0]}</p>}
             {info[0] !== "" && info[1] !== "" && <p> {"/"} </p>}
 
-            {info[1] !== "" && <p  >{"Edifício " + info[1]}</p>}
+            {info[1] !== "" && <p  >{"Building " + info[1]}</p>}
             {info[1] !== "" && info[2] !== "" && <p> {"/"} </p>}
 
-            {info[2] !== "" && <p  >{info[2] + "º Floor"}</p>}
+            {info[2] !== "" && <p  >{"Floor " + info[2]}</p>}
         </div>
 
     )

@@ -11,7 +11,9 @@ function getBarColor() {
 
 
 const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
-  const [closing, setClosing] = useState(false);
+  const [dragClosing, setDragClosing] = useState(false);
+  const [scheduleOpen, setScheduleOpen] = useState(false);
+  const [popupOffset, setPopupOffset] = useState('58%');
   const [startY, setStartY] = useState(0);
   const [currentY, setCurrentY] = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -25,6 +27,7 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
   const handleTouchStart = (e) => {
     const touchStart = e.touches[0].clientY;
     setStartY(touchStart);
+    setCurrentY(touchStart);
     setDragging(true);
   };
 
@@ -37,19 +40,28 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
 
   const handleTouchEnd = () => {
     setDragging(false);
-    if (startY + 100 < currentY) {
+    if (startY < currentY && currentY - startY > 50 && !scheduleOpen) {
       handleClose();
     }
-    setStartY(0);
-    setCurrentY(0);
+    if (startY < currentY && currentY - startY > 300 && scheduleOpen) {
+      handleClose();
+    }
+    if(startY > currentY && currentY - startY < 50){
+      setScheduleOpen(true);
+      setPopupOffset('0%');
+    }
+    if (startY < currentY && currentY - startY > 50 && currentY - startY < 300 && scheduleOpen) {
+      setScheduleOpen(false);
+      setPopupOffset('58%');
+    }
   };
 
   const handleClose = () => {
-    setClosing(true);
-    setTimeout(() => {
-      setRoomPop(0);
-      setClosing(false);
-    }, 300);
+    setDragClosing(true);
+      setTimeout(() => {
+        setRoomPop(0);
+        setDragClosing(false);
+      }, 300);
   };
 
   function handleStartStudyButton() {
@@ -70,11 +82,10 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
 
   return (
     <>
-      <SliderAnimation
-        showing={!closing}
+      <div
         className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black group"
         style={{
-          transform: dragging ? `translateY(${Math.max(0, currentY - startY)}px)` : 'translateY(0)',
+          transform: dragClosing ? 'translateY(100%)' : dragging ? `translateY(max(calc(${currentY - startY}px + ${popupOffset}),0%))`: `translateY(${popupOffset})` ,
           transition: !dragging ? 'transform 0.3s ease-out' : 'none',
         }}
         onDrag={onTabDrag}
@@ -124,7 +135,7 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
         </div>
 
         <ClassroomSchedule roomPop={roomPop} building={building} />
-      </SliderAnimation>
+      </div>
 
     </>
   );
