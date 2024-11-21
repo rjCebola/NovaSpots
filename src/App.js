@@ -9,6 +9,7 @@ import ClassroomPopUp from './components/ClassroomPopUp';
 import CanteenPopUp from './components/CanteenPopUp';
 import SearchFriends from './components/SearchFriends';
 import FriendsPage from './components/FriendsPage';
+import PreventPullToRefresh from './components/PreventPullToRefresh';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <>
+    <PreventPullToRefresh>
       {layerSelected === "friends" && state === "map" && <SearchFriends />}
       {state !== "friends" && <div className='relative'>
         <MapComponent
@@ -56,6 +58,7 @@ function App() {
 
       {viewProfile && <SettingsPopUp setState={setState} setViewProfile={setViewProfile} />}
       {state === "friends" && <FriendsPage setState={setState}  setSelectedFriend={setSelectedFriend} />}
+    </PreventPullToRefresh>
     </>
   );
 }
