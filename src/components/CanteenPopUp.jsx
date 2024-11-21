@@ -1,18 +1,14 @@
-import { SliderAnimation } from '../Animations';
 import React, { useState, useEffect } from 'react';
-
-// Import FontAwesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons';
+import { SliderAnimation } from '../Animations';
 
 const today = new Date();
-
-// Limit navigation to one week
 const startLimit = new Date(today);
-startLimit.setDate(today.getDate() - 7); // 7 days before today
+startLimit.setDate(today.getDate() - 7);
 
 const endLimit = new Date(today);
-endLimit.setDate(today.getDate() + 7); // 7 days after today
+endLimit.setDate(today.getDate() + 7);
 
 function CanteenPopUp({ setMapPopUps }) {
   const [dragClosing, setDragClosing] = useState(false);
@@ -24,21 +20,28 @@ function CanteenPopUp({ setMapPopUps }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [menus, setMenus] = useState({});
 
-  // Generate random menu
   const generateRandomMenu = () => {
     const soups = ["Tomato Soup", "Green Bean Soup", "Chicken Broth"];
     const meats = ["Grilled Chicken", "Beef Stew", "Pork Chops"];
     const fishes = ["Fish Pasta", "Grilled Salmon", "Fried Cod"];
     const veggies = ["Tofu Rolls", "Vegetable Stir Fry", "Grilled Veggies"];
+
     return {
-      Soup: soups[Math.floor(Math.random() * soups.length)],
-      Meat: meats[Math.floor(Math.random() * meats.length)],
-      Fish: fishes[Math.floor(Math.random() * fishes.length)],
-      Veg: veggies[Math.floor(Math.random() * veggies.length)],
+      lunch: {
+        Soup: soups[Math.floor(Math.random() * soups.length)],
+        Meat: meats[Math.floor(Math.random() * meats.length)],
+        Fish: fishes[Math.floor(Math.random() * fishes.length)],
+        Veg: veggies[Math.floor(Math.random() * veggies.length)],
+      },
+      dinner: {
+        Soup: soups[Math.floor(Math.random() * soups.length)],
+        Meat: meats[Math.floor(Math.random() * meats.length)],
+        Fish: fishes[Math.floor(Math.random() * fishes.length)],
+        Veg: veggies[Math.floor(Math.random() * veggies.length)],
+      },
     };
   };
 
-  // Initialize menus for the week
   useEffect(() => {
     const tempMenus = {};
     for (let i = -7; i <= 7; i++) {
@@ -49,39 +52,36 @@ function CanteenPopUp({ setMapPopUps }) {
     setMenus(tempMenus);
   }, []);
 
-  // Function to navigate to the next day
   const nextDay = () => {
     const newDate = new Date(currentDate);
     newDate.setDate(currentDate.getDate() + 1);
     if (newDate <= endLimit) {
       setCurrentDate(newDate);
       setLChevVisible(true);
-    } 
+    }
     if (newDate.getDate() === endLimit.getDate() - 1) {
       setRChevVisible(false);
     }
   };
 
-  // Function to navigate to the previous day
   const prevDay = () => {
     const newDate = new Date(currentDate);
     newDate.setDate(currentDate.getDate() - 1);
     if (newDate >= startLimit) {
       setCurrentDate(newDate);
       setRChevVisible(true);
-    } 
+    }
     if (newDate.getDate() === startLimit.getDate() + 1) {
       setLChevVisible(false);
     }
   };
 
-  // Format the current date
   const formattedDate =
     currentDate.toDateString() === today.toDateString()
       ? `Today, ${today.getDate()} ${today.toLocaleDateString('en-GB', { month: 'long' })} ${today.getFullYear()}`
       : `${currentDate.toLocaleDateString('en-GB', { weekday: 'long' })}, ${currentDate.getDate()} ${currentDate.toLocaleDateString('en-GB', { month: 'long' })} ${currentDate.getFullYear()}`;
 
-  const currentMenu = menus[currentDate.toDateString()]; // Get the menu for the current date
+  const currentMenu = menus[currentDate.toDateString()];
 
   const handleTouchStart = (e) => {
     const touchStart = e.touches[0].clientY;
@@ -124,7 +124,7 @@ function CanteenPopUp({ setMapPopUps }) {
       <div className="w-1/4 h-0.5 bg-gray-300 mb-8 group-active:bg-gray-600"></div>
 
       <div className="absolute top-4 left-0 right-0 flex justify-between items-start px-4 pb-1">
-        {lChevVisible ? ( 
+      {lChevVisible ? ( 
           <div className="flex flex-col items-center w-10">
             <button
               onClick={prevDay}
@@ -147,10 +147,8 @@ function CanteenPopUp({ setMapPopUps }) {
         ) : (
           <div className="w-10"></div>
         )}
-        
-        <div className="text-center font-medium text-lg flex-1 flex items-start justify-center">
-          {formattedDate}
-        </div>
+
+        <div className="text-center font-medium text-lg flex-1">{formattedDate}</div>
 
         {rChevVisible ? (
           <div className="flex flex-col items-center w-10">
@@ -177,38 +175,65 @@ function CanteenPopUp({ setMapPopUps }) {
         )}
       </div>
 
-      <div className="text-center font-medium text-md m-6 text-gray-400">
-        Lunch
-      </div>
-
+      <div className="text-center font-medium text-md m-6 text-gray-400">Lunch</div>
       <div className="flex flex-col space-y-6 w-full">
-         {currentMenu && (
+        {currentMenu && currentMenu.lunch && (
           <>
             <div className="flex items-center w-full">
               <div className="flex w-1/6 justify-end pr-4 font-medium">Soup</div>
               <div className="border-l-2 border-gray-300 h-8 mx-2"></div>
-              <div className="flex pl-4">{currentMenu.Soup}</div>
+              <div className="flex pl-4">{currentMenu.lunch.Soup}</div>
             </div>
             <div className="flex items-center w-full">
               <div className="flex w-1/6 justify-end pr-4 font-medium">Meat</div>
               <div className="border-l-2 border-gray-300 h-8 mx-2"></div>
-              <div className="flex pl-4">{currentMenu.Meat}</div>
+              <div className="flex pl-4">{currentMenu.lunch.Meat}</div>
             </div>
             <div className="flex items-center w-full">
               <div className="flex w-1/6 justify-end pr-4 font-medium">Fish</div>
               <div className="border-l-2 border-gray-300 h-8 mx-2"></div>
-              <div className="flex pl-4">{currentMenu.Fish}</div>
+              <div className="flex pl-4">{currentMenu.lunch.Fish}</div>
             </div>
             <div className="flex items-center w-full">
               <div className="flex w-1/6 justify-end pr-4 font-medium">Veg.</div>
               <div className="border-l-2 border-gray-300 h-8 mx-2"></div>
-              <div className="flex pl-4">{currentMenu.Veg}</div>
+              <div className="flex pl-4">{currentMenu.lunch.Veg}</div>
+            </div>
+          </>
+        )}
+      </div>
+
+      <div className="w-[90%] h-0.5 bg-gray-300 mt-8"></div>
+
+      <div className="text-center font-medium text-md m-6 text-gray-400">Dinner</div>
+      <div className="flex flex-col space-y-6 w-full">
+        {currentMenu && currentMenu.dinner && (
+          <>
+            <div className="flex items-center w-full">
+              <div className="flex w-1/6 justify-end pr-4 font-medium">Soup</div>
+              <div className="border-l-2 border-gray-300 h-8 mx-2"></div>
+              <div className="flex pl-4">{currentMenu.dinner.Soup}</div>
+            </div>
+            <div className="flex items-center w-full">
+              <div className="flex w-1/6 justify-end pr-4 font-medium">Meat</div>
+              <div className="border-l-2 border-gray-300 h-8 mx-2"></div>
+              <div className="flex pl-4">{currentMenu.dinner.Meat}</div>
+            </div>
+            <div className="flex items-center w-full">
+              <div className="flex w-1/6 justify-end pr-4 font-medium">Fish</div>
+              <div className="border-l-2 border-gray-300 h-8 mx-2"></div>
+              <div className="flex pl-4">{currentMenu.dinner.Fish}</div>
+            </div>
+            <div className="flex items-center w-full">
+              <div className="flex w-1/6 justify-end pr-4 font-medium">Veg.</div>
+              <div className="border-l-2 border-gray-300 h-8 mx-2"></div>
+              <div className="flex pl-4">{currentMenu.dinner.Veg}</div>
             </div>
           </>
         )}
       </div>
     </SliderAnimation>
   );
-};
+}
 
 export default CanteenPopUp;
