@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faSearch, faPlus, faMapMarkerAlt, faMapLocation } from '@fortawesome/free-solid-svg-icons'; 
 import AddFriendPopup from './AddFriendPopUp';
 
-const FriendsPage = () => {
+const FriendsPage = ( { setState, setIsFriendsSelected } ) => {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [friends, setFriends] = useState([
         { name: "John Smith", clipId: "j.smith", location: "Ed7/1.01" },
         { name: "Jane Doe", clipId: "j.doe", location: "Library" },
-        { name: "Mary Johnson", clipId: "m.johnson", location: "Cafeteria" }
+        { name: "Mary Johnson", clipId: "m.johnson", location: "Ed1/1.02" }
     ]);
 
     const filteredFriends = friends.filter(friend =>
@@ -35,6 +35,11 @@ const FriendsPage = () => {
     const handleClosePopup = () => {
         setIsPopupVisible(false);
     };
+
+    const handleFriendClick = () => {
+        setState("map");
+        setIsFriendsSelected(true);
+      };
 
     return (
         <div className="bg-white p-4 rounded flex flex-col items-center">
@@ -62,7 +67,7 @@ const FriendsPage = () => {
                         <p className="text-lg font-bold">{friend.name}</p>
                         <p className="text-sm text-gray-500">Studying at {friend.location}</p>
                     </div>
-                    <button className="ml-auto p-2 text-[#0462b9]">
+                    <button onClick={handleFriendClick} className="ml-auto p-2 text-[#0462b9]">
                         <FontAwesomeIcon icon={faMapLocation} style={{ fontSize: '1.75rem' }} />
                     </button>
                 </div>

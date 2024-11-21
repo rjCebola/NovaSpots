@@ -27,7 +27,13 @@ const foodPinLocations = [
   { x: 730, y: 815, name: "My Spot" },
 ];
 
-const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building, setMapPopUps, setRoomPop, isFoodLayerSelected }) => {
+const friendPinLocations = [
+  { x: 750, y: 870, name: "John Smith" },
+  { x: 1340, y: 830, name: "Jane Doe" },
+  { x: 930, y: 830, name: "Mary Johnson" },
+];
+
+const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building, setMapPopUps, setRoomPop, isFoodLayerSelected, isFriendsSelected }) => {
   const bounds = [[0, 0], [1665, 1509]];
 
   useEffect(() => {
@@ -45,9 +51,13 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
     map = "/edificio7_andar0.jpg" // falta mudar para os varios mapas e nao so este
   }
 
-  const handlePinClick = (pin) => {
-    console.log("Pin clicked:", pin.name);
+  const handleFoodPinClick = (pin) => {
     setMapPopUps("canteen");
+  };
+
+  const handleFriendPinClick = (pin) => {
+    //setMapPopUps("canteen");
+    console.log(pin.name);
   };
 
   return (
@@ -80,7 +90,33 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
           })}
           eventHandlers={{
             click: () => {
-              handlePinClick(pin);
+              handleFoodPinClick(pin);
+            },
+          }}
+        >
+          <Tooltip
+            direction="top"
+            permanent
+            className="bg-white border border-gray-300 rounded shadow-md text-sm p-1"
+          >
+            {pin.name}
+          </Tooltip>
+        </Marker>
+      ))}
+
+    {state === "map" && isFriendsSelected && friendPinLocations.map((pin, index) => (
+        <Marker
+          key={index}
+          position={[pin.x, pin.y]}
+          icon={L.icon({
+            iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+          })}
+          eventHandlers={{
+            click: () => {
+              handleFriendPinClick(pin);
             },
           }}
         >

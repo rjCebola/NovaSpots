@@ -36,6 +36,7 @@ function App() {
           setRoomPop={setRoomPop}
           setMapPopUps={setMapPopUps}
           isFoodLayerSelected={isFoodLayerSelected}
+          isFriendsSelected={isFriendsSelected}
         />
       </div>}
       <div className='flex flex-col fixed top-0 w-full z-[999]'>
@@ -54,7 +55,7 @@ function App() {
       {state === "building" && roomPop !== 0 && <ClassroomPopUp building={building} roomPop={roomPop} setRoomPop={setRoomPop} />}
 
       {viewProfile && <SettingsPopUp setState={setState} setViewProfile={setViewProfile} />}
-      {state === "friends" && <FriendsPage />}
+      {state === "friends" && <FriendsPage setState={setState} setIsFriendsSelected={setIsFriendsSelected} />}
     </>
   );
 }
