@@ -67,7 +67,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
     if (selectedFriend) {
       return pin.name === selectedFriend.name;
     }
-    if (selectedFriend !== null) {
+    if (layerSelected === "friends") {
       return true;
     }
     return false;
@@ -115,7 +115,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         </Marker>
       ))}
 
-    {state === "map" && selectedFriend !== null && filteredPins.map((pin, index) => (
+    {state === "map" && layerSelected === "friends" && filteredPins.map((pin, index) => (
         <Marker
           key={index}
           position={[pin.x, pin.y]}
