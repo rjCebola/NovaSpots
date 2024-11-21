@@ -4,6 +4,7 @@ import { SliderAnimation } from '../Animations';
 import React, { useState } from 'react';
 import ClassroomSchedule from './ClassroomSchedule';
 import { checkStringAvailability, dcrOcupancyRoom, getCurrentAvailability, getCurrPeople, incrOcupancyRoom } from '../ScheduleRooms';
+import PreventPullToRefresh from './PreventPullToRefresh';
 
 function getBarColor() {
 
@@ -19,10 +20,6 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
   const [dragging, setDragging] = useState(false);
 
   const [studying, setStudying] = useState([0, 0, 0]);
-
-  function onTabDrag() {
-
-  }
 
   const handleTouchStart = (e) => {
     const touchStart = e.touches[0].clientY;
@@ -90,13 +87,14 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
 
   return (
     <>
+    <PreventPullToRefresh>
       <div
         className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black group"
         style={{
           transform: dragClosing ? 'translateY(100%)' : dragging ? `translateY(max(calc(${currentY - startY}px + ${popupOffset}),0%))`: `translateY(${popupOffset})` ,
           transition: !dragging ? 'transform 0.2s ease-out' : 'none',
         }}
-        onDrag={onTabDrag}
+        
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -144,7 +142,7 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
 
         <ClassroomSchedule roomPop={roomPop} building={building} />
       </div>
-
+    </PreventPullToRefresh>
     </>
   );
 };
