@@ -43,18 +43,26 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
     if (startY < currentY && currentY - startY > 50 && !scheduleOpen) {
       handleClose();
     }
-    if (startY < currentY && currentY - startY > 300 && scheduleOpen) {
+    if (startY < currentY && currentY - startY > 200 && scheduleOpen) {
       handleClose();
     }
     if(startY > currentY && currentY - startY < 50){
+      switchScheduleState();
+    }
+    if (startY < currentY && currentY - startY > 50 && currentY - startY < 200 && scheduleOpen) {
+      switchScheduleState();
+    }
+  };
+
+  const switchScheduleState = () => {
+    if(scheduleOpen){
+      setScheduleOpen(false);
+      setPopupOffset('58%');
+    } else {
       setScheduleOpen(true);
       setPopupOffset('0%');
     }
-    if (startY < currentY && currentY - startY > 50 && currentY - startY < 300 && scheduleOpen) {
-      setScheduleOpen(false);
-      setPopupOffset('58%');
-    }
-  };
+  }
 
   const handleClose = () => {
     setDragClosing(true);
@@ -86,7 +94,7 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
         className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black group"
         style={{
           transform: dragClosing ? 'translateY(100%)' : dragging ? `translateY(max(calc(${currentY - startY}px + ${popupOffset}),0%))`: `translateY(${popupOffset})` ,
-          transition: !dragging ? 'transform 0.3s ease-out' : 'none',
+          transition: !dragging ? 'transform 0.2s ease-out' : 'none',
         }}
         onDrag={onTabDrag}
         onTouchStart={handleTouchStart}
@@ -98,7 +106,7 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building }) => {
 
           <div className="flex flex-row items-center justify-between w-full">
             <h2 className="text-2xl text-[#0462b9] font-bold">{"Ed." + building[0] + " " + building[1] + "." + roomPop}</h2>
-            <button onClick={handleClose} className="flex items-center justify-center w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] shadow-sm shadow-gray-400">
+            <button onClick={switchScheduleState} className="flex items-center justify-center w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] shadow-sm shadow-gray-400">
               <FontAwesomeIcon icon={faCalendar} size="lg" />
             </button>
           </div>
