@@ -19,7 +19,7 @@ function handleLogoClick(setState, setLayerSelected, setBuilding, setRoomPop, se
 function Header({ viewProfile, setViewProfile, setState, setBuilding, setRoomPop, setMapPopUps, setLayerSelected }) {
 
     return (
-        <div className="w-full flex items-center z-[999] justify-between p-2 bg-white border-b-2">
+        <div className="w-full flex items-center z-[999] justify-between p-2 bg-white shadow-md">
             <div className="flex items-center">
                 <img onClick={() => handleLogoClick(setState,setLayerSelected, setBuilding, setRoomPop, setMapPopUps,)} src="/NovaSpots_logo.jpg" alt="NovaSpots Logo" className="h-12 mr-2" />
                 <h1 className="text-2xl font-bold font-poppins" style={{ color: '#0463ba' }}>NovaSpots</h1>

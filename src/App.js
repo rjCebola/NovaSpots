@@ -40,19 +40,21 @@ function App() {
           layerSelected={layerSelected}
         />
       </div>}
-      <div className='flex flex-col fixed top-0 w-full z-[999]'>
+      <div className='flex flex-col absolute top-0 w-full z-[500]'>
         <Header viewProfile={viewProfile} setViewProfile={setViewProfile} setState={setState} setLayerSelected={setLayerSelected} setBuilding={setBuilding} setRoomPop={setRoomPop} setMapPopUps={setMapPopUps}/>
-        <div className='self-start'>
-          <div className='p-2 bg-white border-2 border-t-0 border-l-0 rounded-br-xl text-lg'>
-            <MapInformation state={state} building={building} setState={setState} setRoomPop={setRoomPop} />  
+        {state !== "friends" && 
+          <div className='self-start'>
+            <div className='p-2 bg-white rounded-br-xl text-lg z-[999] shadow-md relative mt-[-1px]'>
+              <MapInformation state={state} building={building} setState={setState} setRoomPop={setRoomPop} />
+            </div>
           </div>
-        </div>
+        }
       </div>
   
       
       {state === "map" && mapPopUps === "canteen" && <CanteenPopUp setMapPopUps={setMapPopUps} />}
       {state === "map" && mapPopUps === "map" && <LayersButton setMapPopUps={setMapPopUps} />}
-      {mapPopUps === "layers" && <LayersPopUp setMapPopUps={setMapPopUps} setLayerSelected={setLayerSelected} layerSelected={layerSelected}/>}
+      {state === "map" && mapPopUps === "layers" && <LayersPopUp setMapPopUps={setMapPopUps} setLayerSelected={setLayerSelected} layerSelected={layerSelected}/>}
       {state === "building" && roomPop !== 0 && <ClassroomPopUp building={building} roomPop={roomPop} setRoomPop={setRoomPop} />}
 
       {viewProfile && <SettingsPopUp setState={setState} setViewProfile={setViewProfile} />}
