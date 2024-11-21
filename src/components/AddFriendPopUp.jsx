@@ -13,7 +13,8 @@ const AddFriendPopup = ({ onClose, setFriends, friends }) => {
             setSuggestions([]);
             return;
         }
-        const fetchedSuggestions = getAllUsers();
+        const currentFriends = friends.map(friend => friend.clipId);
+        const fetchedSuggestions = getAllUsers().filter(user => !currentFriends.includes(user.clipId));
         const filteredSuggestions = fetchedSuggestions.filter(user =>
             user.name.toLowerCase().includes(value.toLowerCase()) ||
             user.clipId.toLowerCase().includes(value.toLowerCase())

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faSearch, faPlus, faMapMarkerAlt, faMapLocation } from '@fortawesome/free-solid-svg-icons'; 
+import { faUserCircle, faSearch, faPlus, faMapMarkerAlt, faMapLocation, faMap } from '@fortawesome/free-solid-svg-icons'; 
 import AddFriendPopup from './AddFriendPopUp';
 import { getFriends, getFriendsWithLocation } from "../users";
 
@@ -45,7 +45,8 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
 
     return (
         <div className="bg-white p-4 rounded flex flex-col items-center">
-            <h2 className="text-2xl font-bold mb-3 rounded-2xl p-2 bg-[#d6ebff] text-[#0462b9] w-60 text-center">Friends</h2>
+            
+            <h2 className="text-2xl font-bold mt-20 mb-7 rounded-2xl p-2 bg-[#d6ebff] text-[#0462b9] w-60 text-center">Friends</h2>
 
             <div className="flex items-center mb-4 w-full max-w-md">
                 {showSearch && (
@@ -67,11 +68,13 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
                     </div>
                     <div>
                         <p className="text-lg font-bold">{friend.name}</p>
-                        <p className="text-sm text-gray-500">Studying at {friend.location}</p>
+                        {friend.location && <p className="text-sm text-gray-500">Studying at {friend.location}</p>}
                     </div>
-                    <button onClick={handleFriendClick(friend)} className="ml-auto p-2 text-[#0462b9]">
-                        <FontAwesomeIcon icon={faMapLocation} style={{ fontSize: '1.75rem' }} />
-                    </button>
+                    {friend.location && (
+                        <button onClick={handleFriendClick(friend)} className="ml-auto p-2 text-[#0462b9]">
+                            <FontAwesomeIcon icon={faMapLocation} style={{ fontSize: '1.75rem' }} />
+                        </button>
+                    )}
                 </div>
             ))}
 
@@ -80,6 +83,10 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
             </button>
 
             {isPopupVisible && <AddFriendPopup onClose={handleClosePopup} setFriends={setFriends} friends={friends} />}
+
+            <button className="flex fixed justify-center items-center bottom-5 left-5 w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] text-3xl shadow-lg z-[999]" onClick={() => setState("map")}>
+                <FontAwesomeIcon icon={faMap} />
+            </button>
         </div>
     )
 }
