@@ -22,10 +22,9 @@ function App() {
   const [roomPop, setRoomPop] = useState(0);
   const [building, setBuilding] = useState([0, 0])
 
-
   return (
     <>
-      {layerSelected === "friends" && state === "map" && <SearchFriends />}
+      {layerSelected === "friends" && state === "map" && <SearchFriends selectedFriend={selectedFriend} setSelectedFriend={setSelectedFriend} />}
       {state !== "friends" && <div className='relative'>
         <MapComponent
           viewProfile={viewProfile}
@@ -56,7 +55,7 @@ function App() {
       {state === "building" && roomPop !== 0 && <ClassroomPopUp building={building} roomPop={roomPop} setRoomPop={setRoomPop} />}
 
       {viewProfile && <SettingsPopUp setState={setState} setViewProfile={setViewProfile} />}
-      {state === "friends" && <FriendsPage setState={setState}  setSelectedFriend={setSelectedFriend} setLayerSelected={setLayerSelected}/>}
+      {state === "friends" && <FriendsPage setState={setState} setSelectedFriend={setSelectedFriend} setLayerSelected={setLayerSelected}/>}
     </>
   );
 }

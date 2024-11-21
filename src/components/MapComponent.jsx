@@ -44,6 +44,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
     if (zoomControl) {
       zoomControl.classList.add('hidden');
     }
+    setFriends(getFriendsWithLocation());
   }, []);
 
   var map = "";
@@ -64,8 +65,6 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
   };
 
   const filteredFriends = friends.filter(pin => {
-    return () => {
-      setFriends(getFriendsWithLocation());
       if (selectedFriend) {
         return pin.name === selectedFriend.name;
       }
@@ -73,7 +72,6 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         return true;
       }
       return false;
-    };
   });
 
   return (
