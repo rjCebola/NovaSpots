@@ -7,7 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import CampusMapAreasOfInterest from './AreasInterest/CampusMapAreasOfInterest';
 import AreasOfInterst from './AreasInterest/AreasOfInterest';
 import ReactDOMServer from 'react-dom/server';
-import { getFriendsWithLocation } from "../users";
+import { getFriendsWithLocation, getFriendByName } from "../users";
 
 
 function MapComponentHelper({ viewProfile, setViewProfile }) {
@@ -32,7 +32,7 @@ const foodPinLocations = [
 ];
 
 
-const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building, setMapPopUps, setRoomPop, layerSelected, selectedFriend }) => {
+const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building, setMapPopUps, setRoomPop, selectedFriend, setSelectedFriend, layerSelected }) => {
   const bounds = [[0, 0], [1665, 1509]];
 
   const [friends, setFriends] = useState(
@@ -55,13 +55,14 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
     map = "/edificio7_andar0.jpg" // falta mudar para os varios mapas e nao so este
   }
 
-  const handleFoodPinClick = (pin) => {
+  const handleFoodPinClick = (pin) => { // n deve precisar de pin
     setMapPopUps("canteen");
   };
 
   const handleFriendPinClick = (pin) => {
-    //setMapPopUps("canteen");
-    console.log(pin.name);
+    setSelectedFriend(getFriendByName(pin.name));
+    setState("building");
+    setBuilding([7, 1]); // o q fzr nos popup de friends q n estao no 7 ?
   };
 
   const filteredFriends = friends.filter(pin => {
@@ -127,6 +128,30 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         <Marker
           key={index}
           position={[pin.campus_x, pin.campus_y]}
+          icon={L.divIcon({
+            className: 'custom-div-icon',
+            html: `<div style="background-color:transparent;width:25px;height:20px;"></div>`,
+          })}
+          eventHandlers={{
+            click: () => {
+              handleFriendPinClick(pin);
+            },
+          }}
+        >
+          <Tooltip
+            direction="top"
+            permanent
+            className="bg-white border border-gray-300 rounded shadow-md text-sm p-1"
+          >
+            {pin.name}
+          </Tooltip>
+        </Marker>
+      ))}
+
+    {state === "building" && layerSelected === "friends" && filteredFriends.map((pin, index) => (
+        <Marker
+          key={index}
+          position={[pin.building_x, pin.building_y]}
           icon={L.divIcon({
             className: 'custom-div-icon',
             html: `<div style="background-color:transparent;width:25px;height:20px;"></div>`,

@@ -36,6 +36,7 @@ function App() {
           setRoomPop={setRoomPop}
           setMapPopUps={setMapPopUps}
           selectedFriend={selectedFriend}
+          setSelectedFriend={setSelectedFriend}
           layerSelected={layerSelected}
         />
       </div>}
