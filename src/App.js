@@ -17,6 +17,7 @@ function App() {
   const [viewProfile, setViewProfile] = useState(false);
   const [isFriendsSelected, setIsFriendsSelected] = useState(false);
   const [isFoodLayerSelected, setIsFoodLayerSelected] = useState(false);
+  const [selectedFriend, setSelectedFriend] = useState(null);
 
   const [roomPop, setRoomPop] = useState(0);
   const [building, setBuilding] = useState([0, 0])
@@ -37,6 +38,7 @@ function App() {
           setMapPopUps={setMapPopUps}
           isFoodLayerSelected={isFoodLayerSelected}
           isFriendsSelected={isFriendsSelected}
+          selectedFriend={selectedFriend}
         />
       </div>}
       <div className='flex flex-col fixed top-0 w-full z-[999]'>
@@ -55,7 +57,7 @@ function App() {
       {state === "building" && roomPop !== 0 && <ClassroomPopUp building={building} roomPop={roomPop} setRoomPop={setRoomPop} />}
 
       {viewProfile && <SettingsPopUp setState={setState} setViewProfile={setViewProfile} />}
-      {state === "friends" && <FriendsPage setState={setState} setIsFriendsSelected={setIsFriendsSelected} />}
+      {state === "friends" && <FriendsPage setState={setState} setIsFriendsSelected={setIsFriendsSelected} setSelectedFriend={setSelectedFriend} />}
     </>
   );
 }

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faSearch, faPlus, faMapMarkerAlt, faMapLocation } from '@fortawesome/free-solid-svg-icons'; 
 import AddFriendPopup from './AddFriendPopUp';
 
-const FriendsPage = ( { setState, setIsFriendsSelected } ) => {
+const FriendsPage = ( { setState, setIsFriendsSelected, setSelectedFriend } ) => {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [friends, setFriends] = useState([
@@ -36,9 +36,12 @@ const FriendsPage = ( { setState, setIsFriendsSelected } ) => {
         setIsPopupVisible(false);
     };
 
-    const handleFriendClick = () => {
+    const handleFriendClick = (friend) => {
+        return () => {
+        setSelectedFriend(friend);
         setState("map");
         setIsFriendsSelected(true);
+        };
       };
 
     return (
@@ -67,7 +70,7 @@ const FriendsPage = ( { setState, setIsFriendsSelected } ) => {
                         <p className="text-lg font-bold">{friend.name}</p>
                         <p className="text-sm text-gray-500">Studying at {friend.location}</p>
                     </div>
-                    <button onClick={handleFriendClick} className="ml-auto p-2 text-[#0462b9]">
+                    <button onClick={handleFriendClick(friend)} className="ml-auto p-2 text-[#0462b9]">
                         <FontAwesomeIcon icon={faMapLocation} style={{ fontSize: '1.75rem' }} />
                     </button>
                 </div>

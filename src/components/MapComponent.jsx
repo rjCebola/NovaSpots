@@ -33,7 +33,7 @@ const friendPinLocations = [
   { x: 930, y: 830, name: "Mary Johnson" },
 ];
 
-const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building, setMapPopUps, setRoomPop, isFoodLayerSelected, isFriendsSelected }) => {
+const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building, setMapPopUps, setRoomPop, isFoodLayerSelected, isFriendsSelected, selectedFriend }) => {
   const bounds = [[0, 0], [1665, 1509]];
 
   useEffect(() => {
@@ -59,6 +59,16 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
     //setMapPopUps("canteen");
     console.log(pin.name);
   };
+
+  const filteredPins = friendPinLocations.filter(pin => {
+    if (selectedFriend) {
+      return pin.name === selectedFriend.name;
+    }
+    if (isFriendsSelected) {
+      return true;
+    }
+    return false;
+  });
 
   return (
     <MapContainer
@@ -104,7 +114,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         </Marker>
       ))}
 
-    {state === "map" && isFriendsSelected && friendPinLocations.map((pin, index) => (
+    {state === "map" && isFriendsSelected && filteredPins.map((pin, index) => (
         <Marker
           key={index}
           position={[pin.x, pin.y]}
