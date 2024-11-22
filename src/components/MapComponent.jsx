@@ -10,14 +10,20 @@ import ReactDOMServer from 'react-dom/server';
 import { getFriendsWithLocation, getFriendByName } from "../users";
 
 
-const MapComponentHelper = ({ selectedFriend }) => {
+const MapComponentHelper = ({ selectedFriend, state }) => {
   const map = useMap();
 
   useEffect(() => {
     if (selectedFriend) {
-      map.setView([selectedFriend.campus_x, selectedFriend.campus_y], 0);
+      if (state === "map") {
+        map.setView([selectedFriend.campus_x, selectedFriend.campus_y], 0);
+      } 
+      if (state === "building") {
+        map.setView([selectedFriend.building_x, selectedFriend.building_y], 0);
+      }
+      
     }
-  }, [selectedFriend]);
+  }, [selectedFriend, state]);
 
   useEffect(() => {
     if (!selectedFriend) {
@@ -175,7 +181,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         </Marker>
       ))}
 
-      <MapComponentHelper selectedFriend={selectedFriend} />
+      <MapComponentHelper selectedFriend={selectedFriend} state={state}/>
       <AreasOfInterst state={state} setState={setState} building={building} setBuilding={setBuilding} setMapPopUps={setMapPopUps} setRoomPop={setRoomPop}/>
     </MapContainer>
   );
