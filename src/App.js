@@ -9,7 +9,6 @@ import ClassroomPopUp from './components/ClassroomPopUp';
 import CanteenPopUp from './components/CanteenPopUp';
 import SearchFriends from './components/SearchFriends';
 import FriendsPage from './components/FriendsPage';
-import PreventPullToRefresh from './components/PreventPullToRefresh';
 import ChangeFloorsButton from './components/ChangeFloorsButtons';
 import TransportsPopUp from './components/TransportPopUp';
 

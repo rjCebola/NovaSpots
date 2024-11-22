@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Polygon, Circle } from "react-leaflet";
+
+import { Polygon } from "react-leaflet";
 import { getOcupancy } from "../../../ScheduleRooms";
 
 function Ed7FirstFloor({ building, setRoomPop }) {

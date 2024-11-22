@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faSearch, faPlus, faMapMarkerAlt, faMapLocation, faMap } from '@fortawesome/free-solid-svg-icons'; 
+import { faUserCircle, faSearch, faPlus, faMapLocation, faMap } from '@fortawesome/free-solid-svg-icons'; 
 import AddFriendPopup from './AddFriendPopUp';
-import { getFriends, getFriendsWithLocation } from "../users";
-import PreventPullToRefresh from "./PreventPullToRefresh";
+import { getFriendsWithLocation } from "../users";
+
 
 const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
 

@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Polygon } from "react-leaflet";
+import { Polygon } from "react-leaflet";
 
 
 function CampusMapAreasOfInterest({ setState, setBuilding, setMapPopUps, setFoodCourt }) {

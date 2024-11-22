@@ -9,6 +9,7 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building, studying, setStudying }
   const [dragClosing, setDragClosing] = useState(false);
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const [popupOffset, setPopupOffset] = useState('100%');
+  const [calendarScale, setCalendarScale] = useState('scale(1)');
   const [startY, setStartY] = useState(0);
   const [currentY, setCurrentY] = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -81,6 +82,19 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building, studying, setStudying }
   const people = getCurrPeople(building, roomPop) <= 10 ? getCurrPeople(building, roomPop) : 10;
   const color = currAvail ? "bg-[#f87171]" : (people < 10 ? "bg-[#6ed49c]" : "bg-[#f87171]")
 
+  const handleButtonClick = () => {
+    handleShrinkStart();
+    setTimeout(() => {
+      handleShrinkEnd();
+    }, 75);
+  }
+    const handleShrinkStart = () => {
+        setCalendarScale('scale(0.85)');
+    }
+
+    const handleShrinkEnd = () => {
+        setCalendarScale('scale(1)');
+    }
 
   return (
     <>
@@ -101,7 +115,9 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building, studying, setStudying }
 
             <div className="flex flex-row items-center justify-between w-full">
               <h2 className="text-2xl text-[#0462b9] font-bold">{"Ed." + building[0] + " " + building[1] + "." + roomPop}</h2>
-              <button onClick={switchScheduleState} className="flex items-center justify-center w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] shadow-sm shadow-gray-400">
+              <button className="flex items-center justify-center w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] shadow-sm shadow-gray-400"
+                onClick={ () => {handleButtonClick(); setTimeout(() => {switchScheduleState()},75)}} 
+                style={{transform : calendarScale, transition:'0.075s'}}>
                 <FontAwesomeIcon icon={faCalendar} size="lg" />
               </button>
             </div>
