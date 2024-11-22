@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { getSchedule } from '../ScheduleRooms';
 
 const emptyTimeSlot = "px-6 py-3 border-r border-dashed border-gray-300";
@@ -8,6 +8,29 @@ const daysOfWeek = ["M", "T", "W", "Th", "F"]
 
 
 function ClassroomSchedule({building, roomPop}) {
+
+    const tableRef = useRef(null);
+    const [currX, setX] = useState(0);
+
+    function handleTouchStart(e) {
+        const currX = e.touches[0].clientX;
+        setX(currX);
+    }
+
+    function handleTouchMove(e) {
+        if(tableRef.current) {
+            const touchMoveX = e.touches[0].clientX;
+            const diff = currX - touchMoveX;
+            tableRef.current.scrollLeft += diff;
+            setX(touchMoveX);
+        }
+    }
+    
+    function handleTouchEnd() {
+        setX(0); 
+      };
+
+
     useEffect(() => {
         const updateCurrentTimeLine = () => {
             const now = new Date();
@@ -19,11 +42,12 @@ function ClassroomSchedule({building, roomPop}) {
             const firstColumnWidth = table.querySelector('th').offsetWidth;
             const timeLine = document.getElementById('current-time-line');
             const position = firstColumnWidth + (totalMinutes / (12 * 60)) * (tableWidth - firstColumnWidth); // Adjust for 12-hour period
-            timeLine.style.left = `${position}px`;
+            timeLine.style.left = `${position + 12}px`;
+            timeLine.style.zIndex = 0;
         };
 
         updateCurrentTimeLine();
-        const interval = setInterval(updateCurrentTimeLine, 60000);
+        const interval = setInterval(updateCurrentTimeLine, 30000);
 
         return () => clearInterval(interval);
     }, []);
@@ -32,7 +56,13 @@ function ClassroomSchedule({building, roomPop}) {
 
     return (
         <div className="container px-4">
-            <div className="relative rounded-lg overflow-x-auto w-full">
+            <div 
+            className="relative rounded-lg overflow-x-auto w-full"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            ref={tableRef}
+            >
                 <div id="current-time-line" className="absolute h-full z-10" style={{ display: 'block', borderLeft: '2px dashed red', top: '0px' }}>
                     <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 bg-red-500 rounded-full"></div>
                 </div>
