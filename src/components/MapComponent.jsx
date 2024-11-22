@@ -17,8 +17,12 @@ const MapComponentHelper = ({ selectedFriend, state, layerSelected }) => {
 
   useEffect(() => {
     if (state === "map") {
+      console.log("map");
       if (selectedFriend) {
         map.setView([selectedFriend.campus_x, selectedFriend.campus_y], 0);
+      } else if (layerSelected === "transport") {
+        console.log("transport");
+        map.setView([900, 900], -2);
       } else {
         map.setView([900, 900], -1); // Default map view
       }
@@ -29,13 +33,8 @@ const MapComponentHelper = ({ selectedFriend, state, layerSelected }) => {
         map.setView([1055, 760], -1.5); // Default building view
       }
     }
-  }, [selectedFriend, state, map]);
+  }, [selectedFriend, layerSelected, state, map]);
 
-  useEffect(() => {
-    if (layerSelected == "transport") {
-      map.setView([900, 900], -2);
-    }
-  }, [layerSelected, map]);
 }
 
 const foodPinLocations = [
@@ -200,58 +199,62 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
       ))}
 
     {state === "map" && layerSelected === "friends" && filteredFriends.map((pin, index) => (
-        <Marker
-          key={index}
-          position={[pin.campus_x, pin.campus_y]}
-          icon={L.divIcon({
-            className: 'custom-div-icon',
-            html: `<div style="background-color:transport;width:25px;height:20px;"></div>`,
-          })}
-          eventHandlers={{
-            click: () => {
-              handleFriendPinClick(pin);
-            },
-          }}
-        >
-          <Tooltip
-            direction="top"
-            permanent
-            className="bg-white border border-gray-300 rounded shadow-md text-sm p-1"
+        pin.campus_x && (
+          <Marker
+            key={index}
+            position={[pin.campus_x, pin.campus_y]}
+            icon={L.divIcon({
+              className: 'custom-div-icon',
+              html: `<div style="background-color:transport;width:25px;height:20px;"></div>`,
+            })}
+            eventHandlers={{
+              click: () => {
+                handleFriendPinClick(pin);
+              },
+            }}
           >
-            <div className="flex items-center justify-center space-x-1">
-              <FontAwesomeIcon icon={faUserCircle} className="h-5" />
-              <span>{pin.name}</span>
-            </div>
-          </Tooltip>
-        </Marker>
+            <Tooltip
+              direction="top"
+              permanent
+              className="bg-white border border-gray-300 rounded shadow-md text-sm p-1"
+            >
+              <div className="flex items-center justify-center space-x-1">
+                <FontAwesomeIcon icon={faUserCircle} className="h-5" />
+                <span>{pin.name}</span>
+              </div>
+            </Tooltip>
+          </Marker>
+        )
       ))}
 
       {state === "building" && layerSelected === "friends" && building[1] === 1 && filteredBuildingFriends.map((pin, index) => (
-        <Marker
-          key={index}
-          position={[pin.building_x, pin.building_y]}
-          icon={L.divIcon({
-            className: 'custom-div-icon',
-            html: `<div style="background-color:transparent;width:0px;height:0px;pointer-events:none;"></div>`,
-          })}
-          interactive={false}
-        >
-          <Tooltip
-            direction="top"
-            permanent
-            className="bg-white border border-gray-300 rounded shadow-md text-sm p-1"
+        pin.campus_x && (
+          <Marker
+            key={index}
+            position={[pin.building_x, pin.building_y]}
+            icon={L.divIcon({
+              className: 'custom-div-icon',
+              html: `<div style="background-color:transparent;width:0px;height:0px;pointer-events:none;"></div>`,
+            })}
             interactive={false}
-            style={{ pointerEvents: 'none' }}
           >
-            <div className="flex items-center justify-center space-x-1">
-              <FontAwesomeIcon icon={faUserCircle} className="h-5" />
-              <span>{pin.name}</span>
-            </div>
-          </Tooltip>
-        </Marker>
+            <Tooltip
+              direction="top"
+              permanent
+              className="bg-white border border-gray-300 rounded shadow-md text-sm p-1"
+              interactive={false}
+              style={{ pointerEvents: 'none' }}
+            >
+              <div className="flex items-center justify-center space-x-1">
+                <FontAwesomeIcon icon={faUserCircle} className="h-5" />
+                <span>{pin.name}</span>
+              </div>
+            </Tooltip>
+          </Marker>
+        )
       ))}
 
-      <MapComponentHelper selectedFriend={selectedFriend} state={state}/>
+      <MapComponentHelper selectedFriend={selectedFriend} state={state} layerSelected={layerSelected}/>
       <AreasOfInterst state={state} setState={setState} building={building} setBuilding={setBuilding} setMapPopUps={setMapPopUps} setRoomPop={setRoomPop} setFoodCourt={setFoodCourt}/>
     </MapContainer>
   );
