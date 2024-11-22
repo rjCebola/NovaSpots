@@ -35,6 +35,12 @@ function ClassroomSchedule({building, roomPop}) {
         const updateCurrentTimeLine = () => {
             const now = new Date();
             const hours = now.getHours();
+            if (hours < 8 || hours >= 19) {
+                document.getElementById('current-time-line').style.display = 'none';
+                return;
+            } else {
+                document.getElementById('current-time-line').style.display = 'block';
+            }
             const minutes = now.getMinutes();
             const totalMinutes = (hours - 8) * 60 + minutes;
             const table = document.querySelector('table');
