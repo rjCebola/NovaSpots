@@ -54,9 +54,13 @@ const AddFriendPopup = ({ onClose, setFriends, friends }) => {
         if (selectedUser) {
             addFriend(selectedUser.clipId);
             setFriends(getFriendsWithLocation());
-            onClose();
             setInputValue('');
             setSelectedUser(null);
+            setDragClosing(true);
+            setTimeout(() => {
+                setDragClosing(false);
+                onClose();
+            },200)
         }
     };
 
