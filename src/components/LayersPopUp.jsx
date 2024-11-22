@@ -5,7 +5,7 @@ import PreventPullToRefresh from './PreventPullToRefresh';
 
 const buttonStyle = "flex flex-col items-center justify-center w-20 h-20 p-4 rounded-3xl shadow-sm shadow-gray-400 text-[#0463ba]";
 
-const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected }) => {
+const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected, setSelectedFriend }) => {
 
   const [closing, setClosing] = useState(false);
   const [dragClosing, setDragClosing] = useState(false);
@@ -45,6 +45,7 @@ const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected }) => {
   };
 
   const handleClose = () => {
+    setSelectedFriend(null);
     setTimeout(() => {
       setMapPopUps("map");
     }, 300);

@@ -59,7 +59,7 @@ function App() {
       
       {state === "map" && mapPopUps === "canteen" && <CanteenPopUp setMapPopUps={setMapPopUps} />}
       {state === "map" && mapPopUps === "map" && <LayersButton setMapPopUps={setMapPopUps} />}
-      {state === "map" && mapPopUps === "layers" && <LayersPopUp setMapPopUps={setMapPopUps} setLayerSelected={setLayerSelected} layerSelected={layerSelected}/>}
+      {state === "map" && mapPopUps === "layers" && <LayersPopUp setMapPopUps={setMapPopUps} setLayerSelected={setLayerSelected} layerSelected={layerSelected} setSelectedFriend={setSelectedFriend}/>}
       {state === "building" && roomPop !== 0 && <ClassroomPopUp building={building} roomPop={roomPop} setRoomPop={setRoomPop} studying={studying} setStudying={setStudying}/>}
 
       {state === "building" && roomPop === 0 && <ChangeFloorsButton building={building} setBuilding={setBuilding} />}
