@@ -2,6 +2,18 @@ import { useState, useEffect } from "react";
 
 
 function SettingsPopUp({ setState, setViewProfile }) {
+  const [shrink, setShrink] = useState('scale(1)')
+  const [background, setBackground] = useState('')
+
+    const handleShrinkStart = () => {
+        setShrink('scale(0.95)');
+        setBackground('bg-slate-100');
+    }
+
+    const handleShrinkEnd = () => {
+        setShrink('scale(1)');
+        setBackground('');
+    }
 
   const [scale,setScale] = useState('scale(0)');
   useEffect(() => {
@@ -22,7 +34,12 @@ function SettingsPopUp({ setState, setViewProfile }) {
       }}
     >
       <button className="block w-full text-lg text-left px-3 py-2">Profile</button>
-      <button className="block w-full text-lg text-left px-3 py-2" onClick={() => { setState("friends"); setViewProfile(false) }}>Friends</button>
+      <button className={`block w-full text-lg text-left px-3 py-2 rounded-lg ${background}` }
+        style={{transform : shrink, transition:'0.1s'}}
+        onTouchStart={handleShrinkStart}
+        onTouchEnd={handleShrinkEnd}
+        onClick={() => { setState("friends"); setViewProfile(false) }} 
+        >Friends</button>
       <button className="block w-full text-lg text-left px-3 py-2">Settings</button>
       <hr className="border-gray-300" />
       <button className="block w-full text-left px-3 py-2 text-red-500">Log out</button>

@@ -43,6 +43,25 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
         };
       };
 
+    const [scaleMapButton, setScaleMapButton] = useState('scale(1)')
+    const [scalePlusButton, setScalePlusButton] = useState('scale(1)')
+
+    const handleShrinkStart = (button) => {
+        if(button === "mapButton"){
+            setScaleMapButton('scale(0.9)');
+        }else{
+            setScalePlusButton('scale(0.9)');
+        }
+        
+    }
+    const handleShrinkEnd = (button) => {
+        if(button === "mapButton"){
+            setScaleMapButton('scale(1)');
+        }else{
+            setScalePlusButton('scale(1)');
+        }
+    }
+
     return (
         <div className="bg-white p-4 rounded flex flex-col items-center">
             
@@ -78,13 +97,21 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
                 </div>
             ))}
 
-            <button className="flex fixed justify-center items-center bottom-5 right-5 w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] text-3xl shadow-lg z-[999]" onClick={handleButtonClick}>
+            <button className="flex fixed justify-center items-center bottom-5 right-5 w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] text-3xl shadow-lg z-[999]" 
+                onClick={handleButtonClick}
+                style={{transform : scaleMapButton, transition:'0.1s'}}
+                onTouchStart={() => handleShrinkStart("mapButton")}
+                onTouchEnd={() => handleShrinkEnd("mapButton")}>
                 <FontAwesomeIcon icon={faPlus} />
             </button>
 
             {isPopupVisible && <AddFriendPopup onClose={handleClosePopup} setFriends={setFriends} friends={friends} />}
 
-            <button className="flex fixed justify-center items-center bottom-5 left-5 w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] text-3xl shadow-lg z-[999]" onClick={() => setState("map")}>
+            <button className="flex fixed justify-center items-center bottom-5 left-5 w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] text-3xl shadow-lg z-[999]" 
+                onClick={() => setState("map")}
+                style={{transform : scalePlusButton, transition:'0.1s'}}
+                onTouchStart={() => handleShrinkStart("plusButton")}
+                onTouchEnd={() => handleShrinkEnd("plusButton")}>
                 <FontAwesomeIcon icon={faMap} />
             </button>
         </div>
