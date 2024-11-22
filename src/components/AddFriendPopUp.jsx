@@ -34,6 +34,18 @@ const AddFriendPopup = ({ onClose, setFriends, friends }) => {
         setSuggestions([]);
     };
 
+    const handleKeyDown = (e) => {
+        if ((e.key === 'Enter' || e.key === 'Go' || e.keyCode === 13)) {
+            handleConfirmInput();
+        }
+    };
+
+    const handleConfirmInput = () => {
+        if (suggestions.length === 1) {
+            handleSuggestionClick(suggestions[0]);
+        }
+    };
+
     const handleAddFriendClick = () => {
         if (selectedUser) {
             addFriend(selectedUser.clipId);
@@ -96,6 +108,7 @@ const AddFriendPopup = ({ onClose, setFriends, friends }) => {
                         type="text"
                         value={inputValue}
                         onChange={handleInputChange}
+                        onKeyDown={handleKeyDown}
                         placeholder="Enter CLIP Id or name"
                         className="border p-2 rounded-2xl w-full outline-none focus:ring focus:ring-[#0462b9]"
                     />
