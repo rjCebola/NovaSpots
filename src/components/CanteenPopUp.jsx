@@ -15,6 +15,10 @@ function CanteenPopUp({ setMapPopUps, currFoodCourt }) {
   const [dragClosing, setDragClosing] = useState(false);
   const [dinnerOpen, setDinnerOpen] = useState(false);
   const [popupOffset, setPopupOffset] = useState('100%');
+  const [leftArrowScale, setLeftArrowScale] = useState('scale(1)');
+  const [rightArrowScale, setRightArrowScale] = useState('scale(1)');
+  const [todayArrowScale, setTodayArrowScale] = useState('scale(1)');
+  const [arrowGrey, setArrowGrey] = useState(['text-gray-400','text-gray-400','text-gray-400'])//left right today
   const [startY, setStartY] = useState(0);
   const [currentY, setCurrentY] = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -116,6 +120,31 @@ function CanteenPopUp({ setMapPopUps, currFoodCourt }) {
     }
   }
 
+  const handleShrinkStart = (button) => {
+    switch(button){
+      case 'left-arrow': 
+        setLeftArrowScale('scale(0.8)');
+        setArrowGrey(['text-gray-800','text-gray-400','text-gray-400']);
+        break;
+      case 'right-arrow': 
+        setRightArrowScale('scale(0.8)');
+        setArrowGrey(['text-gray-400','text-gray-800','text-gray-400']);
+        break;
+      default: 
+        setTodayArrowScale('scale(0.8)');
+        setArrowGrey(['text-gray-400','text-gray-400','text-gray-800']);
+    }
+  }
+
+  const handleShrinkEnd = (button) => {
+      switch(button){
+          case 'left-arrow': setLeftArrowScale('scale(1)');break;
+          case 'right-arrow': setRightArrowScale('scale(1)');break;
+          default: setTodayArrowScale('scale(1)');
+      }
+      setArrowGrey(['text-gray-400','text-gray-400','text-gray-400']);
+  }
+
   return (
     <PreventPullToRefresh>
     <div
@@ -128,25 +157,31 @@ function CanteenPopUp({ setMapPopUps, currFoodCourt }) {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="w-1/4 h-0.5 bg-gray-300 mb-8 group-active:bg-gray-600"></div>
+      <div className="w-1/4 h-0.5 bg-gray-300 mb-8 "></div>
 
       <div className="absolute top-4 left-0 right-0 flex justify-between items-start px-4 pb-1">
       {lChevVisible ? ( 
           <div className="flex flex-col items-center w-10">
             <button
               onClick={prevDay}
-              className="text-gray-400 p-2"
+              className={`${arrowGrey[0]} p-2`}
             >
-              <FontAwesomeIcon icon={faChevronLeft} size="lg" />
+              <FontAwesomeIcon icon={faChevronLeft} size="lg" 
+                style={{transform: leftArrowScale, transition: '0.1s' }}
+                onTouchStart={() => handleShrinkStart('left-arrow')}
+                onTouchEnd={() => handleShrinkEnd('left-arrow')}/>
             </button>
             {currentDate > today && currentDate.toDateString() !== today.toDateString() && (
-              <div className="p-3 flex items-center space-x-2">
+              <div className="p-3 flex items-center space-x-2"
+                  style={{transform: todayArrowScale, transition: '0.1s' }}
+                  onTouchStart={() => handleShrinkStart('today-arrow')}
+                  onTouchEnd={() => handleShrinkEnd('today-arrow')}>
                 <button
                   onClick={() => {setCurrentDate(new Date()); setRChevVisible(true)}}
-                  className="text-gray-400 flex items-center"
+                  className={`${arrowGrey[2]} flex items-center`}
                 >
                   <FontAwesomeIcon icon={faAnglesLeft} size="sm" />
-                  <span className="ml-1 text-sm text-gray-400">Today</span>
+                  <span className="ml-1 text-sm">Today</span>
                 </button>
               </div>
             )}
@@ -161,17 +196,23 @@ function CanteenPopUp({ setMapPopUps, currFoodCourt }) {
           <div className="flex flex-col items-center w-10">
             <button
               onClick={nextDay}
-              className="text-gray-400 p-2"
+              className={`${arrowGrey[1]} p-2`}
             >
-              <FontAwesomeIcon icon={faChevronRight} size="lg" />
+              <FontAwesomeIcon icon={faChevronRight} size="lg" 
+              style={{transform: rightArrowScale, transition: '0.1s' }}
+              onTouchStart={() => handleShrinkStart('right-arrow')}
+              onTouchEnd={() => handleShrinkEnd('right-arrow')}/>
             </button>
             {currentDate < today && currentDate.toDateString() !== today.toDateString() && (
-              <div className="p-3 flex flex-col space-x-2">
+              <div className="p-3 flex flex-col space-x-2"
+                  style={{transform: todayArrowScale, transition: '0.1s' }}
+                  onTouchStart={() => handleShrinkStart('today-arrow')}
+                  onTouchEnd={() => handleShrinkEnd('today-arrow')}>
                 <button
                   onClick={() => {setCurrentDate(new Date()); setLChevVisible(true)}}
-                  className="text-gray-400 flex items-center"
+                  className={`${arrowGrey[2]} p-2 flex items-center`}
                 >
-                  <span className="mr-1 text-sm text-gray-400">Today</span>
+                  <span className="mr-1 text-sm">Today</span>
                   <FontAwesomeIcon icon={faAnglesRight} size="sm" />
                 </button>
               </div>

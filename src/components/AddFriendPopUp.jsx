@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { addFriend, getAllUsers, getFriendsWithLocation } from "../users";
-import { SliderAnimation } from '../Animations';
+import PreventPullToRefresh from './PreventPullToRefresh';
 
 const AddFriendPopup = ({ onClose, setFriends, friends }) => {
     const [inputValue, setInputValue] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
-    const [closing, setClosing] = useState(false);
+    const [popupOffset, setPopupOffset] = useState('100%');
     const [dragClosing, setDragClosing] = useState(false);
     const [startY, setStartY] = useState(0);
     const [currentY, setCurrentY] = useState(0);
     const [dragging, setDragging] = useState(false);
+
+    useEffect(() =>{
+        setPopupOffset('0%');
+    }, []);
 
     const handleInputChange = (e) => {
         const value = e.target.value;
@@ -59,6 +63,7 @@ const AddFriendPopup = ({ onClose, setFriends, friends }) => {
     const handleTouchStart = (e) => {
         const touchStart = e.touches[0].clientY;
         setStartY(touchStart);
+        setCurrentY(touchStart);
         setDragging(true);
       };
 
@@ -76,66 +81,55 @@ const AddFriendPopup = ({ onClose, setFriends, friends }) => {
           setTimeout(() => {
             onClose();
             setDragClosing(false);
-          }, 1200 * 10 / (currentY - startY));
+          }, 200);
         }
-        setStartY(0);
-        setCurrentY(0);
       };
     
-      const handleClose = () => {
-        setClosing(true);
-        setTimeout(() => {
-            onClose();
-            setClosing(false);
-        }, 300);
-      };
-
     return (
-        <SliderAnimation
-            showing={!closing}
-            className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black group"
+        <PreventPullToRefresh>
+        <div
+            className="fixed left-0 bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black group"
             style={{
-                transform: dragClosing ? 'translateY(100%)' : dragging ? `translateY(${Math.max(0, currentY - startY)}px)` : 'translateY(0)',
-                transition: !dragging ? 'transform 0.3s ease-out' : 'none',
+                transform: dragClosing ? 'translateY(100%)' : dragging ? `translateY(${Math.max(0, currentY - startY)}px)` : `translateY(${popupOffset})`,
+                transition: !dragging ? 'transform 0.2s ease-out' : 'none',
             }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            >
-                    <div className="w-1/4 h-0.5 bg-gray-300 mb-4 group-active:bg-gray-600"></div>
-                   
-                    <input
-                        type="text"
-                        value={inputValue}
-                        onChange={handleInputChange}
-                        onKeyDown={handleKeyDown}
-                        placeholder="Enter CLIP Id or name"
-                        className="border p-2 rounded-2xl w-full outline-none focus:ring focus:ring-[#0462b9]"
-                    />
-                    {suggestions.length > 0 && (
-                        <ul className=" mt-2 rounded w-full max-h-40 overflow-y-auto">
-                            {suggestions.map((user) => (
-                                <li
-                                    key={user.clipId}
-                                    onClick={() => handleSuggestionClick(user)}
-                                    className="p-2 cursor-pointer hover:bg-gray-200"
-                                >
-                                    {user.name}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-
-                    <div className="flex justify-end w-full">
-                        <button
-                            onClick={handleAddFriendClick}
-                            className="mt-4 p-3 rounded-2xl bg-[#0462b9] text-white"
+        >
+            <div className="w-1/4 h-0.5 bg-gray-300 mb-4"></div>
+            <input
+                type="text"
+                value={inputValue}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
+                placeholder="Enter CLIP Id or name"
+                className="border p-2 rounded-2xl w-full outline-none focus:ring focus:ring-[#0462b9]"
+            />
+            {suggestions.length > 0 && (
+                <ul className=" mt-2 rounded w-full max-h-40 overflow-y-auto">
+                    {suggestions.map((user) => (
+                        <li
+                            key={user.clipId}
+                            onClick={() => handleSuggestionClick(user)}
+                            className="p-2 cursor-pointer hover:bg-gray-200"
                         >
-                            Add to friends
-                        </button>
-                    </div>
-            
-        </SliderAnimation>
+                            {user.name}
+                        </li>
+                    ))}
+                </ul>
+            )}
+
+            <div className="flex justify-end w-full">
+                <button
+                    onClick={handleAddFriendClick}
+                    className="mt-4 p-3 rounded-2xl bg-[#0462b9] text-white"
+                >
+                    Add to friends
+                </button>
+            </div>
+        </div>
+        </PreventPullToRefresh>
     );
 };
 

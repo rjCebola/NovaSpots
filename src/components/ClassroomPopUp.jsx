@@ -96,7 +96,7 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building, studying, setStudying }
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          <div className="w-1/4 h-0.5 bg-gray-300 group-active:bg-gray-600"></div>
+          <div className="w-1/4 h-0.5 bg-gray-300"></div>
           <div className="flex flex-col w-full p-3 pt-0 ">
 
             <div className="flex flex-row items-center justify-between w-full">

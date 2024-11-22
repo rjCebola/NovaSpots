@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faSearch, faPlus, faMapMarkerAlt, faMapLocation, faMap } from '@fortawesome/free-solid-svg-icons'; 
 import AddFriendPopup from './AddFriendPopUp';
 import { getFriends, getFriendsWithLocation } from "../users";
+import PreventPullToRefresh from "./PreventPullToRefresh";
 
 const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
 
@@ -107,11 +108,11 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
                 onTouchEnd={() => handleShrinkEnd("plusButton")}>
                 <FontAwesomeIcon icon={faMap} />
             </button>
-
-            {addFriendsPopupVisible && <AddFriendPopup onClose={handleClosePopup} setFriends={setFriends} friends={friends} />}
-                       
+            
+            {addFriendsPopupVisible && <AddFriendPopup onClose={handleClosePopup} setFriends={setFriends} friends={friends} />} 
+            
         </div>
-    )
-}
+    );
+};
 
 export default FriendsPage;

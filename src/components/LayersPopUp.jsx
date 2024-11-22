@@ -38,7 +38,7 @@ const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected, setSelecte
       setTimeout(() => {
         setMapPopUps("map");
         setDragClosing(false);
-      }, 300);
+      }, 200);
     }
     setStartY(0);
     setCurrentY(0);
@@ -50,7 +50,7 @@ const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected, setSelecte
     setTimeout(() => {
       setMapPopUps("map");
       setDragClosing(false);
-    }, 300);
+    }, 200);
 
   };
 
@@ -84,13 +84,13 @@ const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected, setSelecte
       className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black group"
       style={{
         transform: dragClosing ? 'translateY(100%)' : dragging ? `translateY(${Math.max(0, currentY - startY)}px)` : `translateY(${popupOffset})`,
-        transition: !dragging ? 'transform 0.3s ease-out' : 'none',
+        transition: !dragging ? 'transform 0.2s ease-out' : 'none',
       }}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="w-1/4 h-0.5 bg-gray-300 mb-4 group-active:bg-gray-600"></div>
+      <div className="w-1/4 h-0.5 bg-gray-300 mb-4"></div>
       <div className="flex justify-around w-full">
         <button onClick={handleFoodClick} className={`${buttonStyle} ${layerSelected === "food" ? 'border-2 border-[#0463ba]' : ''}`}>
           <FontAwesomeIcon icon={faUtensils} size="2x" />
