@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUtensils, faTrain, faUserGroup } from '@fortawesome/free-solid-svg-icons';
-import { SliderAnimation } from '../Animations';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import PreventPullToRefresh from './PreventPullToRefresh';
 
 const buttonStyle = "flex flex-col items-center justify-center w-20 h-20 p-4 rounded-3xl shadow-sm shadow-gray-400 text-[#0463ba]";
 
@@ -9,9 +9,14 @@ const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected }) => {
 
   const [closing, setClosing] = useState(false);
   const [dragClosing, setDragClosing] = useState(false);
+  const [popupOffset, setPopupOffset] = useState('100%');
   const [startY, setStartY] = useState(0);
   const [currentY, setCurrentY] = useState(0);
   const [dragging, setDragging] = useState(false);
+
+  useEffect(() => {
+    setPopupOffset("0%");
+  }, []);
 
   const handleTouchStart = (e) => {
     const touchStart = e.touches[0].clientY;
@@ -33,17 +38,15 @@ const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected }) => {
       setTimeout(() => {
         setMapPopUps("map");
         setDragClosing(false);
-      }, 1200 * 10 / (currentY - startY));
+      }, 300);
     }
     setStartY(0);
     setCurrentY(0);
   };
 
   const handleClose = () => {
-    setClosing(true);
     setTimeout(() => {
       setMapPopUps("map");
-      setClosing(false);
     }, 300);
   };
 
@@ -64,11 +67,11 @@ const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected }) => {
   };
 
   return (
-    <SliderAnimation
-      showing={!closing}
+    <PreventPullToRefresh>
+    <div
       className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black group"
       style={{
-        transform: dragClosing ? 'translateY(100%)' : dragging ? `translateY(${Math.max(0, currentY - startY)}px)` : 'translateY(0)',
+        transform: dragClosing ? 'translateY(100%)' : dragging ? `translateY(${Math.max(0, currentY - startY)}px)` : `translateY(${popupOffset})`,
         transition: !dragging ? 'transform 0.3s ease-out' : 'none',
       }}
       onTouchStart={handleTouchStart}
@@ -90,7 +93,8 @@ const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected }) => {
           <span className="mt-1 text-sm">Friends</span>
         </button>
       </div>
-    </SliderAnimation>
+    </div>
+    </PreventPullToRefresh>
   );
 };
 
