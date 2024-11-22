@@ -170,22 +170,21 @@ function CanteenPopUp({ setMapPopUps, currFoodCourt }) {
       {lChevVisible ? ( 
           <div className="flex flex-col items-center w-10">
             <button
-              onClick={prevDay}
               className={`${arrowGrey[0]} p-2`}
+              style={{transform: leftArrowScale, transition: '0.075s' }}
+              onClick={() => {handleButtonClick('left-arrow');prevDay()}}
             >
-              <FontAwesomeIcon icon={faChevronLeft} size="lg" 
-                style={{transform: leftArrowScale, transition: '0.1s' }}
-                onClick={() => handleButtonClick('left-arrow')}/>
+              <FontAwesomeIcon icon={faChevronLeft} size="lg"/>
             </button>
             {currentDate > today && currentDate.toDateString() !== today.toDateString() && (
               <div className="p-3 flex items-center space-x-2"
-                  style={{transform: todayArrowScale, transition: '0.1s' }}
+                  style={{transform: todayArrowScale, transition: '0.075s' }}
                   onClick={() => handleButtonClick('today-arrow')}>
                 <button
                   onClick={() => setTimeout(() => {
                     setCurrentDate(new Date()); setRChevVisible(true)
                   }, 75)}
-                  className={`${arrowGrey[2]} flex items-center`}
+                  className={`${arrowGrey[2]} p-2 flex items-center`}
                 >
                   <FontAwesomeIcon icon={faAnglesLeft} size="sm" />
                   <span className="ml-1 text-sm">Today</span>
@@ -202,16 +201,15 @@ function CanteenPopUp({ setMapPopUps, currFoodCourt }) {
         {rChevVisible ? (
           <div className="flex flex-col items-center w-10">
             <button
-              onClick={nextDay}
               className={`${arrowGrey[1]} p-2`}
+              style={{transform: rightArrowScale, transition: '0.075s' }}
+              onClick={() => {handleButtonClick('right-arrow');nextDay()}}
             >
-              <FontAwesomeIcon icon={faChevronRight} size="lg" 
-              style={{transform: rightArrowScale, transition: '0.1s' }}
-              onClick={() => handleButtonClick('right-arrow')}/>
+              <FontAwesomeIcon icon={faChevronRight} size="lg"/>
             </button>
             {currentDate < today && currentDate.toDateString() !== today.toDateString() && (
               <div className="p-3 flex flex-col space-x-2"
-                  style={{transform: todayArrowScale, transition: '0.1s' }}
+                  style={{transform: todayArrowScale, transition: '0.075s' }}
                   onClick={() => handleButtonClick('today-arrow')}>
                 <button
                   onClick={() => setTimeout(() => {

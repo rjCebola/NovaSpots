@@ -39,6 +39,12 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
         };
       };
 
+    const handleButtonClick = (button) => {
+        handleShrinkStart(button);
+        setTimeout(() => {
+            handleShrinkEnd(button);
+        }, 75);
+    }
     const handleShrinkStart = (button) => {
         if(button === "mapButton"){
             setScaleMapButton('scale(0.9)');
@@ -93,24 +99,20 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
             ))}
 
             <button className="flex fixed justify-center items-center bottom-5 right-5 w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] text-3xl shadow-lg z-[999]" 
-                onClick={handlePlusButtonClick}
-                style={{transform : scaleMapButton, transition:'0.1s'}}
-                onTouchStart={() => handleShrinkStart("mapButton")}
-                onTouchEnd={() => handleShrinkEnd("mapButton")}>
+                onClick={() => {handleButtonClick("mapButton");handlePlusButtonClick()}}
+                style={{transform : scaleMapButton, transition:'0.1s'}}>
                 <FontAwesomeIcon icon={faPlus} />
             </button>
 
 
             <button className="flex fixed justify-center items-center bottom-5 left-5 w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] text-3xl shadow-lg z-[999]" 
-                onClick={() => setState("map")}
-                style={{transform : scalePlusButton, transition:'0.1s'}}
-                onTouchStart={() => handleShrinkStart("plusButton")}
-                onTouchEnd={() => handleShrinkEnd("plusButton")}>
+                onClick={() => {handleButtonClick("plusButton");setTimeout(() => {setState("map")}, 125)}}
+                style={{transform : scalePlusButton, transition:'0.1s'}}>
                 <FontAwesomeIcon icon={faMap} />
             </button>
             
             {addFriendsPopupVisible && <AddFriendPopup onClose={handleClosePopup} setFriends={setFriends} friends={friends} />} 
-            
+
         </div>
     );
 };

@@ -5,6 +5,12 @@ function SettingsPopUp({ setState, setViewProfile }) {
   const [shrink, setShrink] = useState('scale(1)')
   const [background, setBackground] = useState('')
 
+  const handleButtonClick = () => {
+    handleShrinkStart();
+    setTimeout(() => {
+      handleShrinkEnd();
+    }, 25);
+  }
     const handleShrinkStart = () => {
         setShrink('scale(0.95)');
         setBackground('bg-slate-100');
@@ -33,16 +39,16 @@ function SettingsPopUp({ setState, setViewProfile }) {
         transition: 'transform 0.1s ease-out' 
       }}
     >
-      <button className="block w-full text-lg text-left px-3 py-2">Profile</button>
-      <button className={`block w-full text-lg text-left px-3 py-2 rounded-lg ${background}` }
-        style={{transform : shrink, transition:'0.1s'}}
+      <button className="block w-full text-lg text-left px-3 py-2 select-none">Profile</button>
+      <button className={`block w-full text-lg text-left px-3 py-2 rounded-lg ${background} select-none` }
+        style={{transform : shrink, transition:'0.025s'}}
         onTouchStart={handleShrinkStart}
         onTouchEnd={handleShrinkEnd}
-        onClick={() => { setState("friends"); setViewProfile(false) }} 
+        onClick={() => { handleButtonClick(); setTimeout(() => {setState("friends"); setViewProfile(false)}, 50) }} 
         >Friends</button>
-      <button className="block w-full text-lg text-left px-3 py-2">Settings</button>
+      <button className="block w-full text-lg text-left px-3 py-2 select-none">Settings</button>
       <hr className="border-gray-300" />
-      <button className="block w-full text-left px-3 py-2 text-red-500">Log out</button>
+      <button className="block w-full text-left px-3 py-2 text-red-500 select-none">Log out</button>
     </div>
   );
 }
