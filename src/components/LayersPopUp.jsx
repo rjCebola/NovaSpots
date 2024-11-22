@@ -46,9 +46,12 @@ const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected, setSelecte
 
   const handleClose = () => {
     setSelectedFriend(null);
+    setDragClosing(true);
     setTimeout(() => {
       setMapPopUps("map");
+      setDragClosing(false);
     }, 300);
+
   };
 
   const handleFoodClick = () => {
