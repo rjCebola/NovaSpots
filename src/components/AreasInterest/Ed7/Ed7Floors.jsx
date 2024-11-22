@@ -16,7 +16,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
     return <>
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[1] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[1] ? "red" : "green") : "green" }}
             positions={[[1450, 600],
             [1450, 685],
             [1350, 685],
@@ -29,7 +29,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[2] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[2] ? "red" : "green") : "green" }}
             positions={[[1450, 775],
             [1450, 685],
             [1350, 685],
@@ -42,7 +42,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[3] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[3] ? "red" : "green") : "green" }}
             positions={[[1450, 815],
             [1450, 860],
             [1350, 860],
@@ -55,7 +55,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[4] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[4] ? "red" : "green") : "green" }}
             positions={[[1450, 900],
             [1450, 860],
             [1350, 860],
@@ -68,7 +68,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[5] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[5] ? "red" : "green") : "green" }}
             positions={[[1450, 900],
             [1450, 945],
             [1350, 945],
@@ -81,7 +81,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[6] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[6] ? "red" : "green") : "green" }}
             positions={[[1450, 990],
             [1450, 945],
             [1350, 945],
@@ -94,7 +94,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[7] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[7] ? "red" : "green") : "green" }}
             positions={[[1450, 990],
             [1450, 1030],
             [1350, 1030],
@@ -108,7 +108,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[8] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[8] ? "red" : "green") : "green" }}
             positions={[[1450, 1075],
             [1450, 1030],
             [1350, 1030],
@@ -121,7 +121,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[15] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[15] ? "red" : "green") : "green" }}
             positions={[[1325, 600],
             [1325, 685],
             [1225, 685],
@@ -135,7 +135,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[14] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[14] ? "red" : "green") : "green" }}
             positions={[[1325, 775],
             [1325, 685],
             [1225, 685],
@@ -149,7 +149,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[13] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[13] ? "red" : "green") : "green" }}
             positions={[[1325, 815],
             [1325, 860],
             [1225, 860],
@@ -163,7 +163,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[12] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[12] ? "red" : "green") : "green" }}
             positions={[[1325, 900],
             [1325, 860],
             [1225, 860],
@@ -177,7 +177,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[11] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[11] ? "red" : "green") : "green" }}
             positions={[[1325, 900],
             [1325, 945],
             [1225, 945],
@@ -191,7 +191,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[10] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[10] ? "red" : "green") : "green" }}
             positions={[[1325, 990],
             [1325, 945],
             [1225, 945],
@@ -205,7 +205,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[9] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[9] ? "red" : "green") : "green" }}
             positions={[[1325, 990],
             [1325, 1030],
             [1225, 1030],
@@ -219,7 +219,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy["A"] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy["A"] ? "red" : "green") : "green" }}
             positions={[[915, 480],
             [915, 540],
             [730, 540],
@@ -233,7 +233,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy["B"] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy["B"] ? "red" : "green") : "green" }}
             positions={[[690, 480],
             [690, 540],
             [510, 540],
@@ -247,7 +247,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy["C"] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy["C"] ? "red" : "green") : "green" }}
             positions={[[910, 840],
             [910, 930],
             [670, 930],
@@ -261,7 +261,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy["D"] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy["D"] ? "red" : "green") : "green" }}
             positions={[[840, 745],
             [840, 670],
             [760, 645],
@@ -279,7 +279,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
 
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[17] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[17] ? "red" : "green") : "green" }}
             positions={[[600, 850],
             [600, 925],
             [510, 925],
@@ -293,7 +293,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[16] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[16] ? "red" : "green") : "green" }}
             positions={[[600, 850],
             [600, 780],
             [510, 780],
@@ -324,7 +324,7 @@ function Ed7SecondFloor({ building, setRoomPop }) {
     return <>
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[1] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[1] ? "red" : "green") : "green" }}
             positions={[[515, 640],
             [515, 713],
             [605, 713],
@@ -337,7 +337,7 @@ function Ed7SecondFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[2] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[2] ? "red" : "green") : "green" }}
             positions={[[515, 748],
             [515, 713],
             [605, 713],
@@ -350,7 +350,7 @@ function Ed7SecondFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[3] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[3] ? "red" : "green") : "green" }}
             positions={[[515, 748],
             [515, 785],
             [605, 785],
@@ -363,7 +363,7 @@ function Ed7SecondFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[4] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[4] ? "red" : "green") : "green" }}
             positions={[[515, 856],
             [515, 785],
             [605, 785],
@@ -376,7 +376,7 @@ function Ed7SecondFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[5] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[5] ? "red" : "green") : "green" }}
             positions={[[515, 856],
             [515, 928],
             [605, 928],
@@ -389,7 +389,7 @@ function Ed7SecondFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy["A"] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy["A"] ? "red" : "green") : "green" }}
             positions={[[745, 482],
             [745, 546],
             [922, 546],
@@ -402,7 +402,7 @@ function Ed7SecondFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy["B"] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy["B"] ? "red" : "green") : "green" }}
             positions={[[515, 482],
             [515, 546],
             [690, 546],
@@ -433,7 +433,7 @@ function Ed7ThirdFloor({ building, setRoomPop }) {
     return <>
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[1] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[1] ? "red" : "green") : "green" }}
             positions={[[507, 640],
             [507, 713],
             [595, 713],
@@ -446,7 +446,7 @@ function Ed7ThirdFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[2] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[2] ? "red" : "green") : "green" }}
             positions={[[507, 749],
             [507, 713],
             [595, 713],
@@ -459,7 +459,7 @@ function Ed7ThirdFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[3] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[3] ? "red" : "green") : "green" }}
             positions={[[507, 749],
             [507, 785],
             [595, 785],
@@ -472,7 +472,7 @@ function Ed7ThirdFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[4] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[4] ? "red" : "green") : "green" }}
             positions={[[507, 856],
             [507, 785],
             [595, 785],
@@ -485,7 +485,7 @@ function Ed7ThirdFloor({ building, setRoomPop }) {
         />
         <Polygon
             className="z-[1000]"
-            pathOptions={{ color: ocupancy ? (ocupancy[5] ? "red" : "green") : "green" }}
+            pathOptions={{ fillOpacity: 0.3, stroke: false, color: ocupancy ? (ocupancy[5] ? "red" : "green") : "green" }}
             positions={[[507, 856],
             [507, 928],
             [595, 928],

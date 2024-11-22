@@ -103,7 +103,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
     <MapContainer
       center={[900, 900]}
       zoom={-1}
-      style={{ height: '100vh', width: '100%', backgroundColor: 'white' }}
+      style={{ height: '100vh', width: '100%', backgroundColor: 'white'}}
       crs={L.CRS.Simple}
       maxBounds={[[-300, -300], [1965, 1809]]}
       minZoom={-2}
