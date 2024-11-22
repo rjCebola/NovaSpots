@@ -107,7 +107,11 @@ const AddFriendPopup = ({ onClose, setFriends, friends }) => {
                 className="border p-2 rounded-2xl w-full outline-none focus:ring focus:ring-[#0462b9]"
             />
             {suggestions.length > 0 && (
-                <ul className=" mt-2 rounded w-full max-h-40 overflow-y-auto">
+                <ul
+                    className="mt-2 rounded w-full max-h-40 overflow-y-auto"
+                    onTouchStart={(e) => e.stopPropagation()} 
+                    onTouchMove={(e) => e.stopPropagation()} 
+                >
                     {suggestions.map((user) => (
                         <li
                             key={user.clipId}
