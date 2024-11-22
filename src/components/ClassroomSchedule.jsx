@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { getSchedule } from '../ScheduleRooms';
 
-const emptyTimeSlot = "px-6 py-3 border-r border-dashed border-gray-300";
-const filledTimeSlot = "px-6 py-3 bg-gray-200 border-r border-dashed border-gray-300";
+const emptyTimeSlot = "px-6 py-3 border-r border-dashed border-gray-400";
+const filledTimeSlot = "px-6 py-3 bg-gray-300 border-r border-dashed border-gray-400";
 
 const daysOfWeek = ["M", "T", "W", "Th", "F"]
 
@@ -67,9 +67,9 @@ function ClassroomSchedule({building, roomPop}) {
                     <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 bg-red-500 rounded-full"></div>
                 </div>
                 <table className="table-auto border-collapse w-full">
-                    <thead className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                    <thead className="bg-[#d6ebff] text-gray-600 uppercase text-sm leading-normal">
                         <tr key={"hours"}>
-                            <th className="px-3 py-3 sticky left-0 bg-gray-100 z-20">Day</th>
+                            <th className="px-3 py-3 sticky left-0 bg-[#d6ebff] z-20">Day</th>
                             <th key={9} className="px-6 py-3">8am</th>
                             <th key={10} className="px-6 py-3">9am</th>
                             <th key={11} className="px-6 py-3">10am</th>
@@ -89,7 +89,7 @@ function ClassroomSchedule({building, roomPop}) {
                             daysOfWeek.map(element => {
                                 return (
                                     <tr key={element} className="hover:bg-gray-50">
-                                        <th key={element + "day"} className="px-3 py-3 font-medium text-gray-900 bg-gray-100 sticky left-0">{element}</th>
+                                        <th key={element + "day"} className="px-3 py-3 font-medium text-gray-900 bg-[#d6ebff] sticky left-0">{element}</th>
                                         <td key={element + "8"} className={schedule[element][0] ? filledTimeSlot : emptyTimeSlot}></td>
                                         <td key={element + "9"} className={schedule[element][1] ? filledTimeSlot : emptyTimeSlot}></td>
                                         <td key={element + "10"} className={schedule[element][2] ? filledTimeSlot : emptyTimeSlot}></td>
