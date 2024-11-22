@@ -11,6 +11,7 @@ import SearchFriends from './components/SearchFriends';
 import FriendsPage from './components/FriendsPage';
 import PreventPullToRefresh from './components/PreventPullToRefresh';
 import ChangeFloorsButton from './components/ChangeFloorsButtons';
+import TransportsPopUp from './components/TransportPopUp';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
   const [state, setState] = useState("map");
   const [viewProfile, setViewProfile] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
+  const [selectedTransport, setSelectedTransport] = useState(null);
   const [layerSelected, setLayerSelected] = useState("");
 
   const [roomPop, setRoomPop] = useState(0);
@@ -43,6 +45,7 @@ function App() {
           selectedFriend={selectedFriend}
           setSelectedFriend={setSelectedFriend}
           layerSelected={layerSelected}
+          setSelectedTransport={setSelectedTransport}
         />
       </div>}
       <div className='flex flex-col absolute top-0 w-full z-[500]'>
@@ -67,7 +70,7 @@ function App() {
 
       {viewProfile && <SettingsPopUp setState={setState} setViewProfile={setViewProfile} />}
       {state === "friends" && <FriendsPage setState={setState} setSelectedFriend={setSelectedFriend} setLayerSelected={setLayerSelected}/>}
-
+      {state === "map" && mapPopUps === "transport" && <TransportsPopUp setMapPopUps={setMapPopUps} selectedTransport={selectedTransport}/>}
     </>
   );
 }

@@ -1,5 +1,6 @@
 // MapComponent.js
 import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MapContainer, ImageOverlay, useMap, Marker, Tooltip } from 'react-leaflet';
 import { useMapEvents } from 'react-leaflet'
 import L from 'leaflet';
@@ -8,9 +9,10 @@ import CampusMapAreasOfInterest from './AreasInterest/CampusMapAreasOfInterest';
 import AreasOfInterst from './AreasInterest/AreasOfInterest';
 import ReactDOMServer from 'react-dom/server';
 import { getFriendsWithLocation, getFriendByName } from "../users";
+import { faBus, faTrainTram, faTram, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 
-const MapComponentHelper = ({ selectedFriend, state }) => {
+const MapComponentHelper = ({ selectedFriend, state, layerSelected }) => {
   const map = useMap();
 
   useEffect(() => {
@@ -28,6 +30,12 @@ const MapComponentHelper = ({ selectedFriend, state }) => {
       }
     }
   }, [selectedFriend, state, map]);
+
+  useEffect(() => {
+    if (layerSelected == "transport") {
+      map.setView([900, 900], -2);
+    }
+  }, [layerSelected, map]);
 }
 
 const foodPinLocations = [
@@ -36,8 +44,12 @@ const foodPinLocations = [
   { x: 730, y: 815, name: "My Spot" },
 ];
 
+const transportPinLocations = [
+  { x: 1570, y: 460, name: "Tram" },
+  { x: 610, y: 1440, name: "Bus" }
+]
 
-const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building, setMapPopUps, setRoomPop, selectedFriend, setSelectedFriend, layerSelected }) => {
+const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building, setMapPopUps, setRoomPop, selectedFriend, setSelectedFriend, layerSelected, setSelectedTransport }) => {
   const bounds = [[0, 0], [1665, 1509]];
 
   const [friends, setFriends] = useState(
@@ -74,6 +86,11 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
 
   const handleFriendPinClick = (pin) => {
     setSelectedFriend(getFriendByName(pin.name));
+  };
+
+  const handleTransportPinClick = (pin) => {
+    setMapPopUps("transport");
+    setSelectedTransport(pin.name);
   };
 
   const filteredFriends = friends.filter(pin => {
@@ -146,13 +163,48 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         </Marker>
       ))}
 
-      {state === "map" && layerSelected === "friends" && filteredFriends.map((pin, index) => (
+    {state === "map" && layerSelected === "transport" && transportPinLocations.map((pin, index) => (
+        <Marker
+          key={index}
+          position={[pin.x, pin.y]}
+          icon={L.divIcon({
+            className: 'custom-div-icon',
+            html: `<div style="background-color:transparent;width:25px;height:20px;"></div>`,
+          })}
+          eventHandlers={{
+            click: () => {
+              handleTransportPinClick(pin);
+            },
+          }}
+        >
+          <Tooltip
+            direction="top"
+            permanent
+            className="bg-blue"
+            offset={[0, 0]} // Adjusts tooltip position
+            interactive
+          >
+            <div className="flex items-center justify-center space-x-1">
+            {pin.name === "Tram" ? (
+              <FontAwesomeIcon icon={faTrainTram} className="h-5 text-[#0462b9]" />
+            ) : (
+              <FontAwesomeIcon icon={faBus} className="h-4 text-[#0462b9]" />
+            )}
+              <span>{pin.name}</span>
+            </div>
+          
+          </Tooltip>
+          
+        </Marker>
+      ))}
+
+    {state === "map" && layerSelected === "friends" && filteredFriends.map((pin, index) => (
         <Marker
           key={index}
           position={[pin.campus_x, pin.campus_y]}
           icon={L.divIcon({
             className: 'custom-div-icon',
-            html: `<div style="background-color:transparent;width:25px;height:20px;"></div>`,
+            html: `<div style="background-color:transport;width:25px;height:20px;"></div>`,
           })}
           eventHandlers={{
             click: () => {
@@ -165,7 +217,10 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
             permanent
             className="bg-white border border-gray-300 rounded shadow-md text-sm p-1"
           >
-            {pin.name}
+            <div className="flex items-center justify-center space-x-1">
+              <FontAwesomeIcon icon={faUserCircle} className="h-5" />
+              <span>{pin.name}</span>
+            </div>
           </Tooltip>
         </Marker>
       ))}
@@ -187,12 +242,15 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
             interactive={false}
             style={{ pointerEvents: 'none' }}
           >
-            {pin.name}
+            <div className="flex items-center justify-center space-x-1">
+              <FontAwesomeIcon icon={faUserCircle} className="h-5" />
+              <span>{pin.name}</span>
+            </div>
           </Tooltip>
         </Marker>
       ))}
 
-      <MapComponentHelper selectedFriend={selectedFriend} state={state}/>
+      <MapComponentHelper selectedFriend={selectedFriend} state={state} layerSelected={layerSelected}/>
       <AreasOfInterst state={state} setState={setState} building={building} setBuilding={setBuilding} setMapPopUps={setMapPopUps} setRoomPop={setRoomPop}/>
     </MapContainer>
   );

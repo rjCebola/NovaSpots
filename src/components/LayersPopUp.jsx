@@ -70,6 +70,14 @@ const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected, setSelecte
     handleClose();
   };
 
+  const handleTransportClick = () => {
+    if(layerSelected === "transport") {
+      setLayerSelected("");
+    }
+    else setLayerSelected("transport");
+    handleClose();
+  };
+
   return (
     <PreventPullToRefresh>
     <div
@@ -88,7 +96,7 @@ const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected, setSelecte
           <FontAwesomeIcon icon={faUtensils} size="2x" />
           <span className="mt-1 text-sm">Food</span>
         </button>
-        <button onClick={handleClose} className={buttonStyle}>
+        <button onClick={handleTransportClick} className={`${buttonStyle} ${layerSelected === "transport" ? 'border-2 border-[#0463ba]' : ''}`}>
           <FontAwesomeIcon icon={faTrain} size="2x" />
           <span className="mt-1 text-sm">Transport</span>
         </button>
