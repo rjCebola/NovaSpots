@@ -25,8 +25,13 @@ export function getOcupancy(building, hour) {
     if (currHour < 20 && currHour > 8 && dayOfWeek <= 4 && dayOfWeek >= 0) {
         const dayWeekString = daysOfWeek[dayOfWeek]
 
-        Object.keys(ed7Rooms.firstFloor).forEach(key => {
-            currOcupancy[key.toString()] = ed7Rooms.firstFloor[key.toString()][dayWeekString][hour];
+        let floor = "";
+        if (building[1] === 1) floor = "firstFloor"
+        if (building[1] === 2) floor = "secondFloor"
+        if (building[1] === 3) floor = "thirdFloor"
+
+        Object.keys(ed7Rooms[floor]).forEach(key => {
+            currOcupancy[key.toString()] = ed7Rooms[floor][key.toString()][dayWeekString][hour];
         })
     }
     else {
@@ -113,7 +118,7 @@ export function getCurrentAvailability(building, room) {
     let currOcupancy = false;
     const scheduleDay = roomSchedule[dayWeekString]
     if (currHour > 8 && currHour < 20) {
-        currOcupancy = scheduleDay[currHour-8];
+        currOcupancy = scheduleDay[currHour - 8];
     }
     return currOcupancy
 }
@@ -291,7 +296,105 @@ const ed7Rooms =
             "F": [true, false, true, true, false, true, true, true, false, true, false, false]
         }
     },
-    secondFloor: 0,
-    thirdFloor: 0
+    secondFloor: {
+        1: {
+            ocupancy: 4,
+            "M": [true, false, true, true, true, true, false, false, false, true, true, false],
+            "T": [true, false, true, true, true, false, false, false, false, true, false, true],
+            "W": [false, true, true, false, true, true, false, false, true, false, false, true],
+            "Th": [true, false, true, false, false, false, true, false, true, true, true, false],
+            "F": [false, true, false, true, true, false, false, true, false, true, false, true]
+        },
+        2: {
+            ocupancy: 3,
+            "M": [true, false, true, true, true, false, false, false, false, true, false, true],
+            "T": [false, true, true, false, true, false, false, false, true, false, true, true],
+            "W": [true, false, true, false, false, false, false, false, true, true, true, true],
+            "Th": [false, false, false, true, false, true, false, true, false, true, true, true],
+            "F": [true, true, true, false, false, true, false, true, false, true, false, false]
+        },
+        3: {
+            ocupancy: 2,
+            "M": [true, true, true, false, true, true, false, false, false, true, false, false],
+            "T": [true, true, false, false, false, false, false, false, true, true, true, true],
+            "W": [false, false, true, false, false, true, true, false, true, false, true, false],
+            "Th": [false, true, true, true, false, false, true, false, false, true, true, true],
+            "F": [false, true, true, false, true, false, false, false, false, true, false, true]
+        },
+        4: {
+            ocupancy: 10,
+            "M": [true, false, true, false, true, false, true, true, true, true, false, false],
+            "T": [true, true, true, false, true, false, false, false, true, false, false, true],
+            "W": [true, true, false, true, false, false, true, true, false, false, true, false],
+            "Th": [false, false, true, true, true, false, false, false, false, true, true, true],
+            "F": [false, false, false, true, true, true, false, true, true, false, false, false]
+        },
+        5: {
+            ocupancy: 5,
+            "M": [false, true, true, false, true, true, true, true, false, false, true, false],
+            "T": [true, true, false, false, true, false, true, false, true, false, true, true],
+            "W": [false, true, true, false, false, true, true, false, true, true, false, false],
+            "Th": [false, false, true, true, true, true, false, false, true, true, true, true],
+            "F": [false, false, true, false, true, false, true, true, true, true, false, true]
+        },
+        A: {
+            ocupancy: 3,
+            "M": [true, true, false, true, false, true, false, true, false, true, true, false],
+            "T": [false, true, true, false, true, false, true, true, false, false, true, true],
+            "W": [true, false, false, false, true, false, true, false, true, true, true, true],
+            "Th": [false, true, false, true, false, true, false, true, true, true, true, true],
+            "F": [true, false, true, true, false, false, true, false, true, true, true, false]
+        },
+        B: {
+            ocupancy: 2,
+            "M": [true, true, false, false, true, false, true, true, false, true, true, true],
+            "T": [true, false, false, true, false, true, true, false, true, true, false, true],
+            "W": [false, true, false, true, true, true, true, false, true, false, true, true],
+            "Th": [false, true, true, true, true, true, true, false, true, false, true, true],
+            "F": [true, true, false, false, false, true, false, true, true, true, true, false]
+        }
+    },
+    thirdFloor: {
+        1: {
+            ocupancy: 4,
+            "M": [true, false, true, true, true, true, false, false, false, true, true, false],
+            "T": [true, false, true, true, true, false, false, false, false, true, false, true],
+            "W": [false, true, true, false, true, true, false, false, true, false, false, true],
+            "Th": [true, false, true, false, false, false, true, false, true, true, true, false],
+            "F": [false, true, false, true, true, false, false, true, false, true, false, true]
+        },
+        2: {
+            ocupancy: 3,
+            "M": [true, false, true, true, true, false, false, false, false, true, false, true],
+            "T": [false, true, true, false, true, false, false, false, true, false, true, true],
+            "W": [true, false, true, false, false, false, false, false, true, true, true, true],
+            "Th": [false, false, false, true, false, true, false, true, false, true, true, true],
+            "F": [true, true, true, false, false, true, false, true, false, true, false, false]
+        },
+        3: {
+            ocupancy: 2,
+            "M": [true, true, true, false, true, true, false, false, false, true, false, false],
+            "T": [true, true, false, false, false, false, false, false, true, true, true, true],
+            "W": [false, false, true, false, false, true, true, false, true, false, true, false],
+            "Th": [false, true, true, true, false, false, true, false, false, true, true, true],
+            "F": [false, true, true, false, true, false, false, false, false, true, false, true]
+        },
+        4: {
+            ocupancy: 10,
+            "M": [true, false, true, false, true, false, true, true, true, true, false, false],
+            "T": [true, true, true, false, true, false, false, false, true, false, false, true],
+            "W": [true, true, false, true, false, false, true, true, false, false, true, false],
+            "Th": [false, false, true, true, true, false, false, false, false, true, true, true],
+            "F": [false, false, false, true, true, true, false, true, true, false, false, false]
+        },
+        5: {
+            ocupancy: 5,
+            "M": [false, true, true, false, true, true, true, true, false, false, true, false],
+            "T": [true, true, false, false, true, false, true, false, true, false, true, true],
+            "W": [false, true, true, false, false, true, true, false, true, true, false, false],
+            "Th": [false, false, true, true, true, true, false, false, true, true, true, true],
+            "F": [false, false, true, false, true, false, true, true, true, true, false, true]
+        },
+    }
 
 }

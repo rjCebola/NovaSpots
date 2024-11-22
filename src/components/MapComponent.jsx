@@ -57,11 +57,19 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
   }, []);
 
   var map = "";
-  if(state === "map") {
+  if (state === "map") {
     map = "/campus_edited.jpg";
   }
   else {
-    map = "/edificio7_andar0.jpg" // falta mudar para os varios mapas e nao so este
+    if (building[0] === 7) {
+      if (building[1] === 1) {
+        map = "/edificio7_andar0.jpg"
+      }
+      else if (building[1] === 2) {
+        map = "/edificio7_andar2.jpg"
+      }
+      else map = "/edificio7_andar3.jpg"
+    }
   }
 
   const handleFoodPinClick = (pin) => { // n deve precisar de pin
@@ -75,13 +83,13 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
   };
 
   const filteredFriends = friends.filter(pin => {
-      if (selectedFriend) {
-        return pin.name === selectedFriend.name;
-      }
-      if (layerSelected === "friends") {
-        return true;
-      }
-      return false;
+    if (selectedFriend) {
+      return pin.name === selectedFriend.name;
+    }
+    if (layerSelected === "friends") {
+      return true;
+    }
+    return false;
   });
 
   return (
@@ -94,7 +102,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
       minZoom={-2}
       maxZoom={2}
       bounds={bounds}
-      attributionControl={false} 
+      attributionControl={false}
     >
       <ImageOverlay
         url={map}
@@ -102,7 +110,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         style={{ width: '100%', height: '100%', objectFit: 'contain' }}
       />
 
-    {state === "map" && layerSelected === "food" && foodPinLocations.map((pin, index) => (
+      {state === "map" && layerSelected === "food" && foodPinLocations.map((pin, index) => (
         <Marker
           key={index}
           position={[pin.x, pin.y]}
@@ -129,11 +137,11 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
               <span style={{ fontSize: '12px', color: 'gray', fontFamily: 'Poppins, sans-serif' }}>Check the menu</span>
             </div>
           </Tooltip>
-          
+
         </Marker>
       ))}
 
-    {state === "map" && layerSelected === "friends" && filteredFriends.map((pin, index) => (
+      {state === "map" && layerSelected === "friends" && filteredFriends.map((pin, index) => (
         <Marker
           key={index}
           position={[pin.campus_x, pin.campus_y]}
@@ -157,7 +165,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         </Marker>
       ))}
 
-    {state === "building" && layerSelected === "friends" && filteredFriends.map((pin, index) => (
+      {state === "building" && layerSelected === "friends" && filteredFriends.map((pin, index) => (
         <Marker
           key={index}
           position={[pin.building_x, pin.building_y]}

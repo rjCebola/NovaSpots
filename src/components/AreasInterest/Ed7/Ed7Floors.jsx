@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Polygon, Circle } from "react-leaflet";
 import { getOcupancy } from "../../../ScheduleRooms";
 
-function Ed7FirstFloor({ state, setState, building, setBuilding, setRoomPop }) {
+function Ed7FirstFloor({ building, setRoomPop }) {
 
-    const currHour =(new Date()).getHours();
+    const currHour = (new Date()).getHours();
     var ocupancy;
-    if(currHour < 20 && currHour > 8) {
-        ocupancy = getOcupancy(building, currHour-8);
+    if (currHour < 20 && currHour > 8) {
+        ocupancy = getOcupancy(building, currHour - 8);
     }
     else {
         ocupancy = false;
@@ -310,18 +310,192 @@ function Ed7FirstFloor({ state, setState, building, setBuilding, setRoomPop }) {
 
 
 
-function Ed7SecondFloor({ state, setState, building, setBuilding }) {
-    return <>
+function Ed7SecondFloor({ building, setRoomPop }) {
 
+    const currHour = (new Date()).getHours();
+    var ocupancy;
+    if (currHour < 20 && currHour > 8) {
+        ocupancy = getOcupancy(building, currHour - 8);
+    }
+    else {
+        ocupancy = false;
+    }
+
+    return <>
+        <Polygon
+            className="z-[1000]"
+            pathOptions={{ color: ocupancy ? (ocupancy[1] ? "red" : "green") : "green" }}
+            positions={[[515, 640],
+            [515, 713],
+            [605, 713],
+            [605, 640],]}
+            eventHandlers={{
+                click: () => {
+                    setRoomPop(1);
+                },
+            }}
+        />
+        <Polygon
+            className="z-[1000]"
+            pathOptions={{ color: ocupancy ? (ocupancy[2] ? "red" : "green") : "green" }}
+            positions={[[515, 748],
+            [515, 713],
+            [605, 713],
+            [605, 748],]}
+            eventHandlers={{
+                click: () => {
+                    setRoomPop(2);
+                },
+            }}
+        />
+        <Polygon
+            className="z-[1000]"
+            pathOptions={{ color: ocupancy ? (ocupancy[3] ? "red" : "green") : "green" }}
+            positions={[[515, 748],
+            [515, 785],
+            [605, 785],
+            [605, 748],]}
+            eventHandlers={{
+                click: () => {
+                    setRoomPop(3);
+                },
+            }}
+        />
+        <Polygon
+            className="z-[1000]"
+            pathOptions={{ color: ocupancy ? (ocupancy[4] ? "red" : "green") : "green" }}
+            positions={[[515, 856],
+            [515, 785],
+            [605, 785],
+            [605, 856],]}
+            eventHandlers={{
+                click: () => {
+                    setRoomPop(4);
+                },
+            }}
+        />
+        <Polygon
+            className="z-[1000]"
+            pathOptions={{ color: ocupancy ? (ocupancy[5] ? "red" : "green") : "green" }}
+            positions={[[515, 856],
+            [515, 928],
+            [605, 928],
+            [605, 856],]}
+            eventHandlers={{
+                click: () => {
+                    setRoomPop(5);
+                },
+            }}
+        />
+        <Polygon
+            className="z-[1000]"
+            pathOptions={{ color: ocupancy ? (ocupancy["A"] ? "red" : "green") : "green" }}
+            positions={[[745, 482],
+            [745, 546],
+            [922, 546],
+            [922, 482],]}
+            eventHandlers={{
+                click: () => {
+                    setRoomPop("A");
+                },
+            }}
+        />
+        <Polygon
+            className="z-[1000]"
+            pathOptions={{ color: ocupancy ? (ocupancy["B"] ? "red" : "green") : "green" }}
+            positions={[[515, 482],
+            [515, 546],
+            [690, 546],
+            [690, 482],]}
+            eventHandlers={{
+                click: () => {
+                    setRoomPop("B");
+                },
+            }}
+        />
     </>
 }
 
 
 
 
-function Ed7ThirdFloor({ state, setState, building, setBuilding }) {
-    return <>
+function Ed7ThirdFloor({ building, setRoomPop }) {
 
+    const currHour = (new Date()).getHours();
+    var ocupancy;
+    if (currHour < 20 && currHour > 8) {
+        ocupancy = getOcupancy(building, currHour - 8);
+    }
+    else {
+        ocupancy = false;
+    }
+
+    return <>
+        <Polygon
+            className="z-[1000]"
+            pathOptions={{ color: ocupancy ? (ocupancy[1] ? "red" : "green") : "green" }}
+            positions={[[507, 640],
+            [507, 713],
+            [595, 713],
+            [595, 640],]}
+            eventHandlers={{
+                click: () => {
+                    setRoomPop(1);
+                },
+            }}
+        />
+        <Polygon
+            className="z-[1000]"
+            pathOptions={{ color: ocupancy ? (ocupancy[2] ? "red" : "green") : "green" }}
+            positions={[[507, 749],
+            [507, 713],
+            [595, 713],
+            [595, 749],]}
+            eventHandlers={{
+                click: () => {
+                    setRoomPop(2);
+                },
+            }}
+        />
+        <Polygon
+            className="z-[1000]"
+            pathOptions={{ color: ocupancy ? (ocupancy[3] ? "red" : "green") : "green" }}
+            positions={[[507, 749],
+            [507, 785],
+            [595, 785],
+            [595, 749],]}
+            eventHandlers={{
+                click: () => {
+                    setRoomPop(3);
+                },
+            }}
+        />
+        <Polygon
+            className="z-[1000]"
+            pathOptions={{ color: ocupancy ? (ocupancy[4] ? "red" : "green") : "green" }}
+            positions={[[507, 856],
+            [507, 785],
+            [595, 785],
+            [595, 856],]}
+            eventHandlers={{
+                click: () => {
+                    setRoomPop(4);
+                },
+            }}
+        />
+        <Polygon
+            className="z-[1000]"
+            pathOptions={{ color: ocupancy ? (ocupancy[5] ? "red" : "green") : "green" }}
+            positions={[[507, 856],
+            [507, 928],
+            [595, 928],
+            [595, 856],]}
+            eventHandlers={{
+                click: () => {
+                    setRoomPop(5);
+                },
+            }}
+        />
     </>
 }
 

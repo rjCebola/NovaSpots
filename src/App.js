@@ -10,6 +10,7 @@ import CanteenPopUp from './components/CanteenPopUp';
 import SearchFriends from './components/SearchFriends';
 import FriendsPage from './components/FriendsPage';
 import PreventPullToRefresh from './components/PreventPullToRefresh';
+import ChangeFloorsButton from './components/ChangeFloorsButtons';
 
 function App() {
 
@@ -20,6 +21,10 @@ function App() {
   const [layerSelected, setLayerSelected] = useState("");
 
   const [roomPop, setRoomPop] = useState(0);
+
+  const [studying, setStudying] = useState([0, 0, 0]);
+
+
   const [building, setBuilding] = useState([0, 0])
 
   return (
@@ -55,10 +60,14 @@ function App() {
       {state === "map" && mapPopUps === "canteen" && <CanteenPopUp setMapPopUps={setMapPopUps} />}
       {state === "map" && mapPopUps === "map" && <LayersButton setMapPopUps={setMapPopUps} />}
       {state === "map" && mapPopUps === "layers" && <LayersPopUp setMapPopUps={setMapPopUps} setLayerSelected={setLayerSelected} layerSelected={layerSelected}/>}
-      {state === "building" && roomPop !== 0 && <ClassroomPopUp building={building} roomPop={roomPop} setRoomPop={setRoomPop} />}
+      {state === "building" && roomPop !== 0 && <ClassroomPopUp building={building} roomPop={roomPop} setRoomPop={setRoomPop} studying={studying} setStudying={setStudying}/>}
+
+      {state === "building" && roomPop === 0 && <ChangeFloorsButton building={building} setBuilding={setBuilding} />}
+
 
       {viewProfile && <SettingsPopUp setState={setState} setViewProfile={setViewProfile} />}
       {state === "friends" && <FriendsPage setState={setState} setSelectedFriend={setSelectedFriend} setLayerSelected={setLayerSelected}/>}
+
     </>
   );
 }
