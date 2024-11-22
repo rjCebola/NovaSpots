@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/NovaSpots/static/css/main.07a95227.css",
-    "main.js": "/NovaSpots/static/js/main.79848d21.js",
-    "static/js/453.8cb43e80.chunk.js": "/NovaSpots/static/js/453.8cb43e80.chunk.js",
-    "index.html": "/NovaSpots/index.html",
-    "main.07a95227.css.map": "/NovaSpots/static/css/main.07a95227.css.map",
-    "main.79848d21.js.map": "/NovaSpots/static/js/main.79848d21.js.map",
-    "453.8cb43e80.chunk.js.map": "/NovaSpots/static/js/453.8cb43e80.chunk.js.map"
+    "main.css": "/novaspots/static/css/main.c2e5a6cd.css",
+    "main.js": "/novaspots/static/js/main.8c71c6dd.js",
+    "static/js/453.8cb43e80.chunk.js": "/novaspots/static/js/453.8cb43e80.chunk.js",
+    "index.html": "/novaspots/index.html",
+    "main.c2e5a6cd.css.map": "/novaspots/static/css/main.c2e5a6cd.css.map",
+    "main.8c71c6dd.js.map": "/novaspots/static/js/main.8c71c6dd.js.map",
+    "453.8cb43e80.chunk.js.map": "/novaspots/static/js/453.8cb43e80.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.07a95227.css",
-    "static/js/main.79848d21.js"
+    "static/css/main.c2e5a6cd.css",
+    "static/js/main.8c71c6dd.js"
   ]
 }
