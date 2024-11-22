@@ -40,7 +40,7 @@ function SearchFriends( { selectedFriend, setSelectedFriend } ) {
     };
 
     const handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
+        if ((e.key === 'Enter' || e.key === 'Go' || e.keyCode === 13)) {
             handleConfirmInput();
         }
     };
