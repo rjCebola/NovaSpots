@@ -14,25 +14,21 @@ const MapComponentHelper = ({ selectedFriend, state }) => {
   const map = useMap();
 
   useEffect(() => {
-    if (selectedFriend) {
-      if (state === "map") {
+    if (state === "map") {
+      if (selectedFriend) {
         map.setView([selectedFriend.campus_x, selectedFriend.campus_y], 0);
-      } 
-      if (state === "building") {
-        map.setView([selectedFriend.building_x, selectedFriend.building_y], 0);
+      } else {
+        map.setView([900, 900], -1); // Default map view
       }
-      
+    } else if (state === "building") {
+      if (selectedFriend && selectedFriend.building_x !== 0 && selectedFriend.building_y !== 0) {
+        map.setView([selectedFriend.building_x, selectedFriend.building_y], 0);
+      } else {
+        map.setView([1055, 760], -1.5); // Default building view
+      }
     }
-  }, [selectedFriend, state]);
-
-  useEffect(() => {
-    if (!selectedFriend) {
-      map.setView([900, 900], -1);
-    }
-  }, [selectedFriend]);
-
-  return null;
-};
+  }, [selectedFriend, state, map]);
+}
 
 const foodPinLocations = [
   { x: 1000, y: 990, name: "Canteen" },
@@ -78,17 +74,28 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
 
   const handleFriendPinClick = (pin) => {
     setSelectedFriend(getFriendByName(pin.name));
-    setState("building");
-    setBuilding([7, 1]); // o q fzr nos popup de friends q n estao no 7 ?
+    //setState("building");
+    //setBuilding([7, 1]); // o q fzr nos popup de friends q n estao no 7 ?
   };
 
   const filteredFriends = friends.filter(pin => {
     if (selectedFriend) {
       return pin.name === selectedFriend.name;
     }
-    if (layerSelected === "friends") {
+
+    return true;
+  });
+
+  const filteredBuildingFriends = friends.filter(pin => {
+    var friend = getFriendByName(pin.name);
+    if (friend.building_x !== 0 && friend.building_y !== 0) {
+      if (selectedFriend) {
+        return pin.name === selectedFriend.name;
+      }
+
       return true;
     }
+
     return false;
   });
 
@@ -98,7 +105,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
       zoom={-1}
       style={{ height: '100vh', width: '100%', backgroundColor: 'white' }}
       crs={L.CRS.Simple}
-      maxBounds={bounds}
+      maxBounds={[[-300, -300], [1965, 1809]]}
       minZoom={-2}
       maxZoom={2}
       bounds={bounds}
@@ -165,7 +172,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         </Marker>
       ))}
 
-      {state === "building" && layerSelected === "friends" && filteredFriends.map((pin, index) => (
+      {state === "building" && layerSelected === "friends" && filteredBuildingFriends.map((pin, index) => (
         <Marker
           key={index}
           position={[pin.building_x, pin.building_y]}
