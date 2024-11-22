@@ -76,18 +76,18 @@ function ClassroomSchedule({building, roomPop}) {
                     <thead className="bg-[#d6ebff] text-gray-600 uppercase text-sm leading-normal">
                         <tr key={"hours"}>
                             <th className="px-3 py-3 sticky left-0 bg-[#d6ebff] z-20">Day</th>
-                            <th key={9} className="px-6 py-3">8am</th>
-                            <th key={10} className="px-6 py-3">9am</th>
-                            <th key={11} className="px-6 py-3">10am</th>
-                            <th key={12} className="px-6 py-3">11am</th>
-                            <th key={13} className="px-6 py-3">12pm</th>
-                            <th key={14} className="px-6 py-3">1pm</th>
-                            <th key={15} className="px-6 py-3">2pm</th>
-                            <th key={16} className="px-6 py-3">3pm</th>
-                            <th key={17} className="px-6 py-3">4pm</th>
-                            <th key={18} className="px-6 py-3">5pm</th>
-                            <th key={19} className="px-6 py-3">6pm</th>
-                            <th key={20} className="px-6 py-3">7pm</th>
+                            <th key={9} className="px-6 py-3">8:00</th>
+                            <th key={10} className="px-6 py-3">9:00</th>
+                            <th key={11} className="px-6 py-3">10:00</th>
+                            <th key={12} className="px-6 py-3">11:00</th>
+                            <th key={13} className="px-6 py-3">12:00</th>
+                            <th key={14} className="px-6 py-3">13:00</th>
+                            <th key={15} className="px-6 py-3">14:00</th>
+                            <th key={16} className="px-6 py-3">15:00</th>
+                            <th key={17} className="px-6 py-3">16:00</th>
+                            <th key={18} className="px-6 py-3">17:00</th>
+                            <th key={19} className="px-6 py-3">18:00</th>
+                            <th key={20} className="px-6 py-3">19:00</th>
                         </tr>
                     </thead>
                     <tbody className="text-gray-700 text-sm">
