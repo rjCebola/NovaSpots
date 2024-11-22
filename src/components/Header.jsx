@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle, faSearch, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 
 
 function handleProfileClick(viewProfile, setViewProfile) {
@@ -24,8 +24,12 @@ function Header({ viewProfile, setViewProfile, setState, setBuilding, setRoomPop
                 <img onClick={() => handleLogoClick(setState,setLayerSelected, setBuilding, setRoomPop, setMapPopUps,)} src="/NovaSpots_logo.jpg" alt="NovaSpots Logo" className="h-12 mr-2" />
                 <h1 className="text-2xl font-bold font-poppins" style={{ color: '#0463ba' }}>NovaSpots</h1>
             </div>
-            <FontAwesomeIcon icon={faUserCircle} className="text-[#0462b9] h-10 pr-2" onClick={() => handleProfileClick(viewProfile, setViewProfile)} />
-        </div>)
+            <div className="flex items-center">
+                <FontAwesomeIcon icon={faUserFriends} className="text-[#0462b9] h-5 mr-5" onClick={() => setState("friends")} />
+                <FontAwesomeIcon icon={faUserCircle} className="text-[#0462b9] h-10 pr-2" onClick={() => handleProfileClick(viewProfile, setViewProfile)} />
+            </div>
+        </div>
+    )
 }
 
 export default Header;

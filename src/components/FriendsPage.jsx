@@ -7,6 +7,9 @@ import { getFriends, getFriendsWithLocation } from "../users";
 const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
 
     const [searchTerm, setSearchTerm] = useState("");
+    const [addFriendsPopupVisible, setAddFriendsPopupVisible] = useState(false);
+    const [scaleMapButton, setScaleMapButton] = useState('scale(1)')
+    const [scalePlusButton, setScalePlusButton] = useState('scale(1)')
     const [friends, setFriends] = useState(
         getFriendsWithLocation()
     );
@@ -19,20 +22,12 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
         setSearchTerm(event.target.value);
     };
 
-    const [showSearch, setShowSearch] = useState(false);
-
-    const handleSearchIconClick = () => {
-        setShowSearch(!showSearch);
-    };
-
-    const [isPopupVisible, setIsPopupVisible] = useState(false);
-
-    const handleButtonClick = () => {
-        setIsPopupVisible(true);
+    const handlePlusButtonClick = () => {
+        setAddFriendsPopupVisible(true);
     };
 
     const handleClosePopup = () => {
-        setIsPopupVisible(false);
+        setAddFriendsPopupVisible(false);
     };
 
     const handleFriendClick = (friend) => {
@@ -42,9 +37,6 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
         setLayerSelected("friends");
         };
       };
-
-    const [scaleMapButton, setScaleMapButton] = useState('scale(1)')
-    const [scalePlusButton, setScalePlusButton] = useState('scale(1)')
 
     const handleShrinkStart = (button) => {
         if(button === "mapButton"){
@@ -67,17 +59,19 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
             
             <h2 className="text-2xl font-bold mt-20 mb-7 rounded-2xl p-2 bg-[#d6ebff] text-[#0462b9] w-60 text-center">Friends</h2>
 
-            <div className="flex items-center mb-4 w-full max-w-md">
-                {showSearch && (
-                    <input
-                        type="text"
-                        placeholder="Search friend..."
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                        className="w-full p-2 border border-gray-300 rounded-2xl mr-3 outline-none focus:ring focus:ring-[#0462b9]"
-                    />
-                )}
-                <FontAwesomeIcon icon={faSearch} size="2x" onClick={handleSearchIconClick} className="cursor-pointer h-8 mr-2 ml-auto text-[#0462b9]" />
+            <div className="flex items-center mb-4 w-full max-w-md relative">
+                <FontAwesomeIcon
+                    icon={faSearch}
+                    size="lg"
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                />
+                <input
+                    type="text"
+                    placeholder="Search friend..."
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    className="w-full pl-10 p-2 border border-gray-300 rounded-2xl outline-none focus:ring focus:ring-[#0462b9]"
+                />
             </div>
 
             {filteredFriends.map((friend, index) => (
@@ -98,14 +92,13 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
             ))}
 
             <button className="flex fixed justify-center items-center bottom-5 right-5 w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] text-3xl shadow-lg z-[999]" 
-                onClick={handleButtonClick}
+                onClick={handlePlusButtonClick}
                 style={{transform : scaleMapButton, transition:'0.1s'}}
                 onTouchStart={() => handleShrinkStart("mapButton")}
                 onTouchEnd={() => handleShrinkEnd("mapButton")}>
                 <FontAwesomeIcon icon={faPlus} />
             </button>
 
-            {isPopupVisible && <AddFriendPopup onClose={handleClosePopup} setFriends={setFriends} friends={friends} />}
 
             <button className="flex fixed justify-center items-center bottom-5 left-5 w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] text-3xl shadow-lg z-[999]" 
                 onClick={() => setState("map")}
@@ -114,6 +107,9 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
                 onTouchEnd={() => handleShrinkEnd("plusButton")}>
                 <FontAwesomeIcon icon={faMap} />
             </button>
+
+            {addFriendsPopupVisible && <AddFriendPopup onClose={handleClosePopup} setFriends={setFriends} friends={friends} />}
+                       
         </div>
     )
 }
