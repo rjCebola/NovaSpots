@@ -120,6 +120,13 @@ function CanteenPopUp({ setMapPopUps, currFoodCourt }) {
     }
   }
 
+  const handleButtonClick = (button) => {
+    handleShrinkStart(button);
+    setTimeout(() => {
+      handleShrinkEnd(button);
+    }, 75);
+  }
+
   const handleShrinkStart = (button) => {
     switch(button){
       case 'left-arrow': 
@@ -168,16 +175,16 @@ function CanteenPopUp({ setMapPopUps, currFoodCourt }) {
             >
               <FontAwesomeIcon icon={faChevronLeft} size="lg" 
                 style={{transform: leftArrowScale, transition: '0.1s' }}
-                onTouchStart={() => handleShrinkStart('left-arrow')}
-                onTouchEnd={() => handleShrinkEnd('left-arrow')}/>
+                onClick={() => handleButtonClick('left-arrow')}/>
             </button>
             {currentDate > today && currentDate.toDateString() !== today.toDateString() && (
               <div className="p-3 flex items-center space-x-2"
                   style={{transform: todayArrowScale, transition: '0.1s' }}
-                  onTouchStart={() => handleShrinkStart('today-arrow')}
-                  onTouchEnd={() => handleShrinkEnd('today-arrow')}>
+                  onClick={() => handleButtonClick('today-arrow')}>
                 <button
-                  onClick={() => {setCurrentDate(new Date()); setRChevVisible(true)}}
+                  onClick={() => setTimeout(() => {
+                    setCurrentDate(new Date()); setRChevVisible(true)
+                  }, 75)}
                   className={`${arrowGrey[2]} flex items-center`}
                 >
                   <FontAwesomeIcon icon={faAnglesLeft} size="sm" />
@@ -200,16 +207,16 @@ function CanteenPopUp({ setMapPopUps, currFoodCourt }) {
             >
               <FontAwesomeIcon icon={faChevronRight} size="lg" 
               style={{transform: rightArrowScale, transition: '0.1s' }}
-              onTouchStart={() => handleShrinkStart('right-arrow')}
-              onTouchEnd={() => handleShrinkEnd('right-arrow')}/>
+              onClick={() => handleButtonClick('right-arrow')}/>
             </button>
             {currentDate < today && currentDate.toDateString() !== today.toDateString() && (
               <div className="p-3 flex flex-col space-x-2"
                   style={{transform: todayArrowScale, transition: '0.1s' }}
-                  onTouchStart={() => handleShrinkStart('today-arrow')}
-                  onTouchEnd={() => handleShrinkEnd('today-arrow')}>
+                  onClick={() => handleButtonClick('today-arrow')}>
                 <button
-                  onClick={() => {setCurrentDate(new Date()); setLChevVisible(true)}}
+                  onClick={() => setTimeout(() => {
+                    setCurrentDate(new Date()); setLChevVisible(true)
+                  }, 75)}
                   className={`${arrowGrey[2]} p-2 flex items-center`}
                 >
                   <span className="mr-1 text-sm">Today</span>
