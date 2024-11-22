@@ -49,7 +49,7 @@ const transportPinLocations = [
   { x: 610, y: 1440, name: "Bus" }
 ]
 
-const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building, setMapPopUps, setRoomPop, selectedFriend, setSelectedFriend, layerSelected, setSelectedTransport }) => {
+const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building, setMapPopUps, setRoomPop, selectedFriend, setSelectedFriend, layerSelected, currFoodCourt, setFoodCourt, setSelectedTransport }) => {
   const bounds = [[0, 0], [1665, 1509]];
 
   const [friends, setFriends] = useState(
@@ -82,6 +82,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
 
   const handleFoodPinClick = (pin) => { // n deve precisar de pin
     setMapPopUps("canteen");
+    setFoodCourt(pin.name)
   };
 
   const handleFriendPinClick = (pin) => {
@@ -250,8 +251,8 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         </Marker>
       ))}
 
-      <MapComponentHelper selectedFriend={selectedFriend} state={state} layerSelected={layerSelected}/>
-      <AreasOfInterst state={state} setState={setState} building={building} setBuilding={setBuilding} setMapPopUps={setMapPopUps} setRoomPop={setRoomPop}/>
+      <MapComponentHelper selectedFriend={selectedFriend} state={state}/>
+      <AreasOfInterst state={state} setState={setState} building={building} setBuilding={setBuilding} setMapPopUps={setMapPopUps} setRoomPop={setRoomPop} setFoodCourt={setFoodCourt}/>
     </MapContainer>
   );
 };

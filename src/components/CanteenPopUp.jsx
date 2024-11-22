@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 import PreventPullToRefresh from './PreventPullToRefresh';
+import { getFoodChoices } from '../Foods';
 
 const today = new Date();
 const startLimit = new Date(today);
@@ -10,7 +11,7 @@ startLimit.setDate(today.getDate() - 7);
 const endLimit = new Date(today);
 endLimit.setDate(today.getDate() + 7);
 
-function CanteenPopUp({ setMapPopUps }) {
+function CanteenPopUp({ setMapPopUps, currFoodCourt }) {
   const [dragClosing, setDragClosing] = useState(false);
   const [dinnerOpen, setDinnerOpen] = useState(false);
   const [popupOffset, setPopupOffset] = useState('100%');
@@ -22,38 +23,19 @@ function CanteenPopUp({ setMapPopUps }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [menus, setMenus] = useState({});
 
-  const generateRandomMenu = () => {
-    const soups = ["Tomato Soup", "Green Bean Soup", "Chicken Broth"];
-    const meats = ["Grilled Chicken", "Beef Stew", "Pork Chops"];
-    const fishes = ["Fish Pasta", "Grilled Salmon", "Fried Cod"];
-    const veggies = ["Tofu Rolls", "Vegetable Stir Fry", "Grilled Veggies"];
-
-    return {
-      lunch: {
-        Soup: soups[Math.floor(Math.random() * soups.length)],
-        Meat: meats[Math.floor(Math.random() * meats.length)],
-        Fish: fishes[Math.floor(Math.random() * fishes.length)],
-        Veg: veggies[Math.floor(Math.random() * veggies.length)],
-      },
-      dinner: {
-        Soup: soups[Math.floor(Math.random() * soups.length)],
-        Meat: meats[Math.floor(Math.random() * meats.length)],
-        Fish: fishes[Math.floor(Math.random() * fishes.length)],
-        Veg: veggies[Math.floor(Math.random() * veggies.length)],
-      },
-    };
-  };
-
   useEffect(() => {
+
+    const foods = getFoodChoices(currFoodCourt)
+
     const tempMenus = {};
     for (let i = -7; i <= 7; i++) {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
-      tempMenus[date.toDateString()] = generateRandomMenu();
+      tempMenus[date.toDateString()] = foods[i + 7];
     }
     setMenus(tempMenus);
     setPopupOffset('47%');
-  }, []);
+  }, [currFoodCourt]);
 
   const nextDay = () => {
     const newDate = new Date(currentDate);

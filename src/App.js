@@ -26,6 +26,7 @@ function App() {
 
   const [studying, setStudying] = useState([0, 0, 0]);
 
+  const [currFoodCourt, setFoodCourt] = useState(null);
 
   const [building, setBuilding] = useState([0, 0])
 
@@ -46,6 +47,8 @@ function App() {
           setSelectedFriend={setSelectedFriend}
           layerSelected={layerSelected}
           setSelectedTransport={setSelectedTransport}
+          currFoodCourt={currFoodCourt}
+          setFoodCourt={setFoodCourt}
         />
       </div>}
       <div className='flex flex-col absolute top-0 w-full z-[500]'>
@@ -60,7 +63,7 @@ function App() {
       </div>
   
       
-      {state === "map" && mapPopUps === "canteen" && <CanteenPopUp setMapPopUps={setMapPopUps} />}
+      {state === "map" && mapPopUps === "canteen" && <CanteenPopUp setMapPopUps={setMapPopUps} currFoodCourt={currFoodCourt}/>}
       {state === "map" && mapPopUps === "map" && <LayersButton setMapPopUps={setMapPopUps} />}
       {state === "map" && mapPopUps === "layers" && <LayersPopUp setMapPopUps={setMapPopUps} setLayerSelected={setLayerSelected} layerSelected={layerSelected} setSelectedFriend={setSelectedFriend}/>}
       {state === "building" && roomPop !== 0 && <ClassroomPopUp building={building} roomPop={roomPop} setRoomPop={setRoomPop} studying={studying} setStudying={setStudying}/>}
