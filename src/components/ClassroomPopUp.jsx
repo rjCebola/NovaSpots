@@ -86,7 +86,7 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building, studying, setStudying }
     <>
       <PreventPullToRefresh>
         <div
-          className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black group"
+          className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black"
           style={{
             transform: dragClosing ? 'translateY(100%)' : dragging ? `translateY(max(calc(${currentY - startY}px + ${popupOffset}),0%))` : `translateY(${popupOffset})`,
             transition: !dragging ? 'transform 0.2s ease-out' : 'none',

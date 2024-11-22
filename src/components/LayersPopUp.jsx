@@ -80,7 +80,7 @@ const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected, setSelecte
   return (
     <PreventPullToRefresh>
     <div
-      className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black group"
+      className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black"
       style={{
         transform: dragClosing ? 'translateY(100%)' : dragging ? `translateY(${Math.max(0, currentY - startY)}px)` : `translateY(${popupOffset})`,
         transition: !dragging ? 'transform 0.3s ease-out' : 'none',

@@ -1,12 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUtensils, faTrain, faUserGroup, faTrainTram, faBus } from '@fortawesome/free-solid-svg-icons';
+import { faTrainTram, faBus } from '@fortawesome/free-solid-svg-icons';
 import React, { useState, useEffect } from 'react';
 import PreventPullToRefresh from './PreventPullToRefresh';
 import { getNext3Bus, getNext3Tram } from '../transports';
 
 const TransportsPopUp = ({ setMapPopUps, selectedTransport}) => {
 
-  const [closing, setClosing] = useState(false);
   const [dragClosing, setDragClosing] = useState(false);
   const [popupOffset, setPopupOffset] = useState('100%');
   const [startY, setStartY] = useState(0);
@@ -43,18 +42,10 @@ const TransportsPopUp = ({ setMapPopUps, selectedTransport}) => {
     setCurrentY(0);
   };
 
-  const handleClose = () => {
-    setTimeout(() => {
-      setMapPopUps("map");
-    }, 300);
-  };
-
-
-
 return (
     <PreventPullToRefresh>
         <div
-            className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black group"
+            className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black"
             style={{
                 transform: dragClosing ? 'translateY(100%)' : dragging ? `translateY(${Math.max(0, currentY - startY)}px)` : `translateY(${popupOffset})`,
                 transition: !dragging ? 'transform 0.3s ease-out' : 'none',
@@ -63,7 +54,7 @@ return (
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
         >
-            <div className="w-1/4 h-0.5 bg-gray-300 mb-2 group-active:bg-gray-600"></div>
+            <div className="w-1/4 h-0.5 bg-gray-300 mb-2"></div>
             <div className="overflow-y-auto max-h-96 w-full flex flex-col items-center space-y-4 p-3">
                     {selectedTransport === "Tram" ? (
                         <>
