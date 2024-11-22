@@ -74,8 +74,6 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
 
   const handleFriendPinClick = (pin) => {
     setSelectedFriend(getFriendByName(pin.name));
-    //setState("building");
-    //setBuilding([7, 1]); // o q fzr nos popup de friends q n estao no 7 ?
   };
 
   const filteredFriends = friends.filter(pin => {
@@ -172,7 +170,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         </Marker>
       ))}
 
-      {state === "building" && layerSelected === "friends" && filteredBuildingFriends.map((pin, index) => (
+      {state === "building" && layerSelected === "friends" && building[1] === 1 && filteredBuildingFriends.map((pin, index) => (
         <Marker
           key={index}
           position={[pin.building_x, pin.building_y]}
