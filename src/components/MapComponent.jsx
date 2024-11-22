@@ -2,14 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MapContainer, ImageOverlay, useMap, Marker, Tooltip } from 'react-leaflet';
-import { useMapEvents } from 'react-leaflet'
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import CampusMapAreasOfInterest from './AreasInterest/CampusMapAreasOfInterest';
 import AreasOfInterst from './AreasInterest/AreasOfInterest';
-import ReactDOMServer from 'react-dom/server';
 import { getFriendsWithLocation, getFriendByName } from "../users";
-import { faBus, faTrainTram, faTram, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faBus, faTrainTram, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 
 const MapComponentHelper = ({ selectedFriend, state, layerSelected }) => {
@@ -17,11 +14,9 @@ const MapComponentHelper = ({ selectedFriend, state, layerSelected }) => {
 
   useEffect(() => {
     if (state === "map") {
-      console.log("map");
       if (selectedFriend) {
         map.setView([selectedFriend.campus_x, selectedFriend.campus_y], 0);
       } else if (layerSelected === "transport") {
-        console.log("transport");
         map.setView([900, 900], -2);
       } else {
         map.setView([900, 900], -1); // Default map view

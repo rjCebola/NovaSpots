@@ -7,7 +7,6 @@ const buttonStyle = "flex flex-col items-center justify-center w-20 h-20 p-4 rou
 
 const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected, setSelectedFriend }) => {
 
-  const [closing, setClosing] = useState(false);
   const [dragClosing, setDragClosing] = useState(false);
   const [popupOffset, setPopupOffset] = useState('100%');
   const [startY, setStartY] = useState(0);
@@ -38,7 +37,7 @@ const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected, setSelecte
       setTimeout(() => {
         setMapPopUps("map");
         setDragClosing(false);
-      }, 200);
+      }, 250);
     }
     setStartY(0);
     setCurrentY(0);
@@ -50,7 +49,7 @@ const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected, setSelecte
     setTimeout(() => {
       setMapPopUps("map");
       setDragClosing(false);
-    }, 200);
+    }, 250);
 
   };
 
@@ -84,7 +83,7 @@ const LayersPopUp = ({ setMapPopUps, setLayerSelected, layerSelected, setSelecte
       className="fixed bottom-0 w-full z-[999] bg-white p-4 pt-2 rounded-t-3xl flex flex-col justify-between items-center shadow-2xl shadow-black group"
       style={{
         transform: dragClosing ? 'translateY(100%)' : dragging ? `translateY(${Math.max(0, currentY - startY)}px)` : `translateY(${popupOffset})`,
-        transition: !dragging ? 'transform 0.2s ease-out' : 'none',
+        transition: !dragging ? 'transform 0.25s ease-out' : 'none',
       }}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
