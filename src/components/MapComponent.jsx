@@ -10,20 +10,23 @@ import ReactDOMServer from 'react-dom/server';
 import { getFriendsWithLocation, getFriendByName } from "../users";
 
 
-function MapComponentHelper({ viewProfile, setViewProfile }) {
-/*    useMapEvents({
-    load: () =>{
-      console.log("loading");
-    },
-    click: (e) => {
-      console.log("click");
-    },
-    drag: () => {
-      if (viewProfile) setViewProfile(false)
+const MapComponentHelper = ({ selectedFriend }) => {
+  const map = useMap();
+
+  useEffect(() => {
+    if (selectedFriend) {
+      map.setView([selectedFriend.campus_x, selectedFriend.campus_y], 0);
     }
-  });   */
+  }, [selectedFriend]);
+
+  useEffect(() => {
+    if (!selectedFriend) {
+      map.setView([900, 900], -1);
+    }
+  }, [selectedFriend]);
+
   return null;
-}
+};
 
 const foodPinLocations = [
   { x: 1000, y: 990, name: "Canteen" },
@@ -172,7 +175,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         </Marker>
       ))}
 
-      <MapComponentHelper viewProfile={viewProfile} setViewProfile={setViewProfile} />
+      <MapComponentHelper selectedFriend={selectedFriend} />
       <AreasOfInterst state={state} setState={setState} building={building} setBuilding={setBuilding} setMapPopUps={setMapPopUps} setRoomPop={setRoomPop}/>
     </MapContainer>
   );
