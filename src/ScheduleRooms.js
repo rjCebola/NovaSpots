@@ -129,11 +129,11 @@ const ed7Rooms =
     firstFloor: {
         1: {
             ocupancy: 4,
-            "M": [true, false, true, true, true, true, false, false, false, true, true, false],
-            "T": [true, false, true, true, true, false, false, false, false, true, false, true],
-            "W": [false, true, true, false, true, true, false, false, true, false, false, true],
-            "Th": [true, false, true, false, false, false, true, false, true, true, true, false],
-            "F": [false, true, false, true, true, false, false, true, false, true, false, true]
+            "M": [false, false, false, false, false, false, false, false, false, false, false, false],
+            "T": [false, false, false, false, false, false, false, false, false, false, false, false],
+            "W": [false, false, false, false, false, false, false, false, false, false, false, false],
+            "Th": [false, false, false, false, false, false, false, false, false, false, false, false],
+            "F": [false, false, false, false, false, false, false, false, false, false, false, false]
         },
         2: {
             ocupancy: 3,
@@ -265,11 +265,11 @@ const ed7Rooms =
         },
         A: {
             ocupancy: 3,
-            "M": [true, true, false, true, false, true, false, true, false, true, true, false],
-            "T": [false, true, true, false, true, false, true, true, false, false, true, true],
-            "W": [true, false, false, false, true, false, true, false, true, true, true, true],
-            "Th": [false, true, false, true, false, true, false, true, true, true, true, true],
-            "F": [true, false, true, true, false, false, true, false, true, true, true, false]
+            "M": [false, false, false, false, false, false, false, false, false, false, false, false],
+            "T": [false, false, false, false, false, false, false, false, false, false, false, false],
+            "W": [false, false, false, false, false, false, false, false, false, false, false, false],
+            "Th": [false, false, false, false, false, false, false, false, false, false, false, false],
+            "F": [false, false, false, false, false, false, false, false, false, false, false, false]
         },
         B: {
             ocupancy: 2,

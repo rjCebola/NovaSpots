@@ -1,6 +1,6 @@
 var allUsers = 
 [
-    { name: "Alice Brown", clipId: "a.brown", location: "Ed7/1.06", campus_x: 640, campus_y: 870, building_x: 1420, building_y: 730 },
+    { name: "Alice Brown", clipId: "a.brown", location: "Ed7/1A", campus_x: 640, campus_y: 870, building_x: 875, building_y: 510 },
     { name: "Amanda Blue", clipId: "a.blue" },
     { name: "Bob White", clipId: "b.white" },
     { name: "Bill Black", clipId: "b.black" },

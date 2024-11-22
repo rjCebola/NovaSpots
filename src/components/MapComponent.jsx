@@ -178,18 +178,16 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
           position={[pin.building_x, pin.building_y]}
           icon={L.divIcon({
             className: 'custom-div-icon',
-            html: `<div style="background-color:transparent;width:25px;height:20px;"></div>`,
+            html: `<div style="background-color:transparent;width:0px;height:0px;pointer-events:none;"></div>`,
           })}
-          eventHandlers={{
-            click: () => {
-              handleFriendPinClick(pin);
-            },
-          }}
+          interactive={false}
         >
           <Tooltip
             direction="top"
             permanent
             className="bg-white border border-gray-300 rounded shadow-md text-sm p-1"
+            interactive={false}
+            style={{ pointerEvents: 'none' }}
           >
             {pin.name}
           </Tooltip>

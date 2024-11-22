@@ -7,6 +7,10 @@ function handleProfileClick(viewProfile, setViewProfile) {
     setViewProfile(!viewProfile);
 }
 
+function handleFriendsClick(setState, setViewProfile) {
+    setState("friends");
+    setViewProfile(false);
+}
 
 function handleLogoClick(setState, setLayerSelected, setBuilding, setRoomPop, setMapPopUps) {
     setState("map");
@@ -25,7 +29,7 @@ function Header({ viewProfile, setViewProfile, setState, setBuilding, setRoomPop
                 <h1 className="text-2xl font-bold font-poppins" style={{ color: '#0463ba' }}>NovaSpots</h1>
             </div>
             <div className="flex items-center">
-                <FontAwesomeIcon icon={faUserFriends} className="text-[#0462b9] h-5 mr-5" onClick={() => setState("friends")} />
+                <FontAwesomeIcon icon={faUserFriends} className="text-[#0462b9] h-5 mr-5" onClick={() => handleFriendsClick(setState, setViewProfile)} />
                 <FontAwesomeIcon icon={faUserCircle} className="text-[#0462b9] h-10 pr-2" onClick={() => handleProfileClick(viewProfile, setViewProfile)} />
             </div>
         </div>
