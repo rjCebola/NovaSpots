@@ -123,7 +123,7 @@ export function getCurrentAvailability(building, room) {
 
     let currOcupancy = false;
 
-    if (dayOfWeek < 0 && currHour > 8 && currHour < 20) {
+    if (dayOfWeek <= 4 && dayOfWeek >= 0 && currHour > 8 && currHour < 20) {
         const scheduleDay = roomSchedule[dayWeekString]
         currOcupancy = scheduleDay[currHour - 8];
     }
