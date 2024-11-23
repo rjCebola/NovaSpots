@@ -6,8 +6,13 @@ const daysOfWeek = ["M", "T", "W", "Th", "F"]
 export function getSchedule(building, room) {
 
     //missing all the building choice and soo on
+    let floor = "";
+    if (building[1] === 1) floor = "firstFloor"
+    if (building[1] === 2) floor = "secondFloor"
+    if (building[1] === 3) floor = "thirdFloor"
 
-    return ed7Rooms.firstFloor[room];
+
+    return ed7Rooms[floor][room];
 
 }
 
@@ -115,9 +120,11 @@ export function getCurrentAvailability(building, room) {
     const dayOfWeek = date.getDay() - 1;
     const dayWeekString = daysOfWeek[dayOfWeek]
 
+
     let currOcupancy = false;
-    const scheduleDay = roomSchedule[dayWeekString]
-    if (currHour > 8 && currHour < 20) {
+
+    if (dayOfWeek < 0 && currHour > 8 && currHour < 20) {
+        const scheduleDay = roomSchedule[dayWeekString]
         currOcupancy = scheduleDay[currHour - 8];
     }
     return currOcupancy
