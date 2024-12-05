@@ -22,7 +22,7 @@ function MapInformation({ state, building, setState, setRoomPop, setViewProfile,
 
 
     return (
-        <div className="flex gap-1 text-base">
+        <div className="flex gap-1 text-base select-none">
             {info[0] !== "" && <p onClick={() => handleCampusClick(setState,setRoomPop, setViewProfile, setMapPopUps)}> {info[0]}</p>}
             {info[0] !== "" && info[1] !== "" && <p> {"/"} </p>}
 

@@ -62,7 +62,7 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
     }
 
     return (
-        <div className="bg-white p-4 rounded flex flex-col items-center">
+        <div className="bg-white p-4 rounded flex flex-col items-center select-none">
             
             <h2 className="text-2xl font-bold mt-20 mb-7 rounded-2xl p-2 bg-[#d6ebff] text-[#0462b9] w-60 text-center">Friends</h2>
 

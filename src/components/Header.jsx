@@ -49,7 +49,7 @@ function Header({ viewProfile, setViewProfile, setState, setBuilding, setRoomPop
         }
     }
     return (
-        <div className="w-full flex items-center z-[999] justify-between p-2 bg-white shadow-md">
+        <div className="w-full flex items-center z-[999] justify-between p-2 bg-white shadow-md select-none">
             <div className="flex items-center">
                 <img onClick={() => {handleButtonClick('logo');handleLogoClick(setState,setLayerSelected, setBuilding, setRoomPop, setMapPopUps,setViewProfile)}} src="/NovaSpots_logo.jpg" alt="NovaSpots Logo" className="h-12 mr-2" 
                 style={{transform: logoScale, transition: '0.075s' }}

@@ -72,7 +72,7 @@ function ClassroomSchedule({ building, roomPop }) {
     const schedule = getSchedule(building, roomPop);
 
     return (
-        <div className="container px-4">
+        <div className="container px-4 select-none">
             <div
                 className="relative rounded-lg overflow-x-auto w-full"
                 onTouchStart={handleTouchStart}
