@@ -42,14 +42,14 @@ function SelectedLayerButton({ layerSelected, setLayerSelected }) {
     
     return (
         <button 
-        className="flex fixed justify-center items-center border border-[#0463ba] bottom-4 left-4 p-3 rounded-2xl bg-white text-2xl shadow-lg z-[999]" 
+        className="flex fixed justify-center items-center border border-red-200 bottom-4 left-4 p-3 rounded-2xl bg-white text-2xl shadow-lg z-[999]" 
         style={{transform: scale, transition: '0.1s'}}
         onClick={() => setLayerSelected("")}
         onTouchStart={handleShrinkStart}
         onTouchEnd={handleShrinkEnd}
         >
-            <FontAwesomeIcon icon={getIcon()} color="#0463ba" />
-            <span className="ml-2 text-sm text-[#0463ba]">{getIconText()}</span>
+            <FontAwesomeIcon icon={getIcon()} className="text-red-400" />
+            <span className="ml-2 text-sm text-red-400">Remove</span>
         </button>
     );
 }

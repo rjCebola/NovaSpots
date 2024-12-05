@@ -55,7 +55,7 @@ function SearchFriends( { selectedFriend, setSelectedFriend } ) {
     };
 
     return (
-        <div className="flex fixed justify-center items-center top-20 right-5 z-[998]">
+        <div className="flex fixed justify-center items-center top-20 right-3 z-[998]">
             <div className="relative">
                 <div className="flex items-center">
                     <FontAwesomeIcon
