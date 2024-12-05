@@ -1,7 +1,7 @@
 // MapComponent.js
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { MapContainer, ImageOverlay, useMap, Marker, Tooltip } from 'react-leaflet';
+import { MapContainer, ImageOverlay, useMap, Marker, Tooltip, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import AreasOfInterst from './AreasInterest/AreasOfInterest';
@@ -9,8 +9,17 @@ import { getFriendsWithLocation, getFriendByName } from "../users";
 import { faBus, faTrainTram, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 
-const MapComponentHelper = ({ selectedFriend, state, layerSelected }) => {
+const MapComponentHelper = ({ selectedFriend, state, layerSelected, setMapPopUps, setViewProfile, setRoomPop, roomPop, viewProfile, mapPopUps }) => {
   const map = useMap();
+
+  useMapEvents({
+    click: () => {
+      if(mapPopUps !== "map") setMapPopUps("map");
+      if(viewProfile) setViewProfile(false);
+      if(roomPop !== 0) setRoomPop(0);
+  }
+
+  })
 
   useEffect(() => {
     if (state === "map") {
@@ -43,7 +52,7 @@ const transportPinLocations = [
   { x: 610, y: 1440, name: "Bus" }
 ]
 
-const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building, setMapPopUps, setRoomPop, selectedFriend, setSelectedFriend, layerSelected, currFoodCourt, setFoodCourt, setSelectedTransport }) => {
+const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuilding, building, setMapPopUps, setRoomPop, selectedFriend, setSelectedFriend, layerSelected, currFoodCourt, setFoodCourt, setSelectedTransport, roomPop, mapPopUps }) => {
   const bounds = [[0, 0], [1665, 1509]];
 
   const [friends, setFriends] = useState(
@@ -252,7 +261,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
         )
       ))}
 
-      <MapComponentHelper selectedFriend={selectedFriend} state={state} layerSelected={layerSelected}/>
+      <MapComponentHelper selectedFriend={selectedFriend} state={state} layerSelected={layerSelected}  setMapPopUps={setMapPopUps} setViewProfile={setViewProfile} setRoomPop={setRoomPop} roomPop={roomPop} viewProfile={viewProfile} mapPopUps={mapPopUps}/>
       <AreasOfInterst state={state} setState={setState} building={building} setBuilding={setBuilding} setMapPopUps={setMapPopUps} setRoomPop={setRoomPop} setFoodCourt={setFoodCourt} viewProfile={viewProfile} setViewProfile={setViewProfile}/>
     </MapContainer>
   );

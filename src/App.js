@@ -35,6 +35,7 @@ function App() {
       {layerSelected === "friends" && state === "map" && <SearchFriends selectedFriend={selectedFriend} setSelectedFriend={setSelectedFriend} />}
       {state !== "friends" && <div className='relative'>
         <MapComponent
+          roomPop={roomPop}
           viewProfile={viewProfile}
           setViewProfile={setViewProfile}
           state={state}
@@ -42,6 +43,7 @@ function App() {
           building={building}
           setBuilding={setBuilding}
           setRoomPop={setRoomPop}
+          mapPopUps={mapPopUps}
           setMapPopUps={setMapPopUps}
           selectedFriend={selectedFriend}
           setSelectedFriend={setSelectedFriend}
