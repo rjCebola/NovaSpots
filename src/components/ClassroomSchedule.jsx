@@ -1,16 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { getSchedule } from '../ScheduleRooms';
 
-const emptyTimeSlot = "px-6 py-3 border-r border-dashed border-gray-400";
-const filledTimeSlot = "px-6 py-3 bg-gray-300 border-r border-dashed border-gray-400";
+const emptyTimeSlot = "px-6 py-3 border-r border-dashed border-gray-400 ";
+const filledTimeSlot = "px-6 py-3 bg-gray-300 border-r border-dashed border-gray-400 ";
 
 const daysOfWeek = ["M", "T", "W", "Th", "F"]
 
 
-function ClassroomSchedule({building, roomPop}) {
+function ClassroomSchedule({ building, roomPop }) {
 
     const tableRef = useRef(null);
     const [currX, setX] = useState(0);
+
+    const date = new Date();
+    const dayOfWeek = date.getDay() - 1; // Monday is 0
+
+    let dayOfWeekChar = null;
+    if(dayOfWeek >= 0 && dayOfWeek <= 4) {
+        dayOfWeekChar = daysOfWeek[dayOfWeek]
+    }
+
+    
+
 
     function handleTouchStart(e) {
         const currX = e.touches[0].clientX;
@@ -18,17 +29,17 @@ function ClassroomSchedule({building, roomPop}) {
     }
 
     function handleTouchMove(e) {
-        if(tableRef.current) {
+        if (tableRef.current) {
             const touchMoveX = e.touches[0].clientX;
             const diff = currX - touchMoveX;
             tableRef.current.scrollLeft += diff;
             setX(touchMoveX);
         }
     }
-    
+
     function handleTouchEnd() {
-        setX(0); 
-      };
+        setX(0);
+    };
 
 
     useEffect(() => {
@@ -48,7 +59,7 @@ function ClassroomSchedule({building, roomPop}) {
             const firstColumnWidth = table.querySelector('th').offsetWidth;
             const timeLine = document.getElementById('current-time-line');
             const position = firstColumnWidth + (totalMinutes / (12 * 60)) * (tableWidth - firstColumnWidth); // Adjust for 12-hour period
-            timeLine.style.left = `${position + 12}px`;
+            timeLine.style.left = `${position}px`;
             timeLine.style.zIndex = 0;
         };
 
@@ -62,12 +73,12 @@ function ClassroomSchedule({building, roomPop}) {
 
     return (
         <div className="container px-4">
-            <div 
-            className="relative rounded-lg overflow-x-auto w-full"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-            ref={tableRef}
+            <div
+                className="relative rounded-lg overflow-x-auto w-full"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                ref={tableRef}
             >
                 <div id="current-time-line" className="absolute h-full z-10" style={{ display: 'block', borderLeft: '2px dashed red', top: '0px' }}>
                     <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 bg-red-500 rounded-full"></div>
@@ -94,20 +105,20 @@ function ClassroomSchedule({building, roomPop}) {
                         {
                             daysOfWeek.map(element => {
                                 return (
-                                    <tr key={element} className="hover:bg-gray-50">
-                                        <th key={element + "day"} className="px-3 py-3 font-medium text-gray-900 bg-[#d6ebff] sticky left-0">{element}</th>
-                                        <td key={element + "8"} className={schedule[element][0] ? filledTimeSlot : emptyTimeSlot}></td>
-                                        <td key={element + "9"} className={schedule[element][1] ? filledTimeSlot : emptyTimeSlot}></td>
-                                        <td key={element + "10"} className={schedule[element][2] ? filledTimeSlot : emptyTimeSlot}></td>
-                                        <td key={element + "11"} className={schedule[element][3] ? filledTimeSlot : emptyTimeSlot}></td>
-                                        <td key={element + "12"} className={schedule[element][4] ? filledTimeSlot : emptyTimeSlot}></td>
-                                        <td key={element + "13"} className={schedule[element][5] ? filledTimeSlot : emptyTimeSlot}></td>
-                                        <td key={element + "14"} className={schedule[element][6] ? filledTimeSlot : emptyTimeSlot}></td>
-                                        <td key={element + "15"} className={schedule[element][7] ? filledTimeSlot : emptyTimeSlot}></td>
-                                        <td key={element + "16"} className={schedule[element][8] ? filledTimeSlot : emptyTimeSlot}></td>
-                                        <td key={element + "17"} className={schedule[element][9] ? filledTimeSlot : emptyTimeSlot}></td>
-                                        <td key={element + "18"} className={schedule[element][10] ? filledTimeSlot : emptyTimeSlot}></td>
-                                        <td key={element + "19"} className={schedule[element][11] ? filledTimeSlot : emptyTimeSlot + "px-6 py-3"}></td>
+                                    <tr key={element} className={"hover:bg-gray-50"}>
+                                        <th key={element + "day"} className={"px-3 py-3 font-medium bg-[#d6ebff] sticky left-0 " + ((dayOfWeekChar === element) ? "text-[#0462b9] font-bold bg-[#b3d4f2] border-y-2 border-l-2 border-red-500 border-dashed" : "text-gray-900")} >{element}</th>
+                                        <td key={element + "8"} className={(schedule[element][0] ? filledTimeSlot : emptyTimeSlot) + ((dayOfWeekChar === element) ? "border-y-2 border-y-red-500" : "") }></td>
+                                        <td key={element + "9"} className={(schedule[element][1] ? filledTimeSlot : emptyTimeSlot) + ((dayOfWeekChar === element) ? "border-y-2 border-y-red-500" : "")}></td>
+                                        <td key={element + "10"} className={(schedule[element][2] ? filledTimeSlot : emptyTimeSlot) + ((dayOfWeekChar === element) ? "border-y-2 border-y-red-500" : "")}></td>
+                                        <td key={element + "11"} className={(schedule[element][3] ? filledTimeSlot : emptyTimeSlot) + ((dayOfWeekChar === element) ? "border-y-2 border-y-red-500" : "")}></td>
+                                        <td key={element + "12"} className={(schedule[element][4] ? filledTimeSlot : emptyTimeSlot) + ((dayOfWeekChar === element) ? "border-y-2 border-y-red-500" : "")}></td>
+                                        <td key={element + "13"} className={(schedule[element][5] ? filledTimeSlot : emptyTimeSlot) + ((dayOfWeekChar === element) ? "border-y-2 border-y-red-500" : "")}></td>
+                                        <td key={element + "14"} className={(schedule[element][6] ? filledTimeSlot : emptyTimeSlot) + ((dayOfWeekChar === element) ? "border-y-2 border-y-red-500" : "")}></td>
+                                        <td key={element + "15"} className={(schedule[element][7] ? filledTimeSlot : emptyTimeSlot) + ((dayOfWeekChar === element) ? "border-y-2 border-y-red-500" : "")}></td>
+                                        <td key={element + "16"} className={(schedule[element][8] ? filledTimeSlot : emptyTimeSlot) + ((dayOfWeekChar === element) ? "border-y-2 border-y-red-500" : "")}></td>
+                                        <td key={element + "17"} className={(schedule[element][9] ? filledTimeSlot : emptyTimeSlot) + ((dayOfWeekChar === element) ? "border-y-2 border-y-red-500" : "")}></td>
+                                        <td key={element + "18"} className={(schedule[element][10] ? filledTimeSlot : emptyTimeSlot) + ((dayOfWeekChar === element) ? "border-y-2 border-y-red-500" : "")}></td>
+                                        <td key={element + "19"} className={(schedule[element][11] ? filledTimeSlot : emptyTimeSlot) + "px-6 py-3 " + ((dayOfWeekChar === element) ? "border-y-2 border-y-red-500" : "")}></td>
                                     </tr>)
                             })
                         }
