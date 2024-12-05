@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLayerGroup, faUtensils, faTrain, faUserGroup } from '@fortawesome/free-solid-svg-icons';
+import { faUtensils, faTrain, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 
-function SelectedLayerButton({ layerSelected, setLayerSelected, setMapPopUps }) {
+function SelectedLayerButton({ layerSelected, setLayerSelected }) {
     const [scale, setScale] = useState('scale(1)')
 
     const handleShrinkStart = () => {
