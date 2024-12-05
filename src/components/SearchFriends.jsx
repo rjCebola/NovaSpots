@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { getFriendsWithLocation } from "../users";
+import PreventPullToRefresh from './PreventPullToRefresh';
 
 function SearchFriends( { selectedFriend, setSelectedFriend } ) {
     const [inputValue, setInputValue] = useState('');
@@ -55,6 +56,7 @@ function SearchFriends( { selectedFriend, setSelectedFriend } ) {
     };
 
     return (
+        <PreventPullToRefresh>
         <div className="flex fixed justify-center items-center top-20 right-3 z-[998]">
             <div className="relative">
                 <div className="flex items-center">
@@ -95,6 +97,7 @@ function SearchFriends( { selectedFriend, setSelectedFriend } ) {
                 )}
             </div>
         </div>
+        </PreventPullToRefresh>
     );
 }
 

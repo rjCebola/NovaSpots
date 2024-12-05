@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUtensils, faTrain, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import PreventPullToRefresh from './PreventPullToRefresh';
 
 
 function SelectedLayerButton({ layerSelected, setLayerSelected }) {
@@ -26,21 +27,9 @@ function SelectedLayerButton({ layerSelected, setLayerSelected }) {
                 return null;
         }
     };
-
-    const getIconText = () => {
-        switch (layerSelected) {
-            case "food":
-                return "Food";
-            case "transport":
-                return "Transport";
-            case "friends":
-                return "Friends";
-            default:
-                return "";
-        }
-    };
     
     return (
+        <PreventPullToRefresh>
         <button 
         className="flex fixed justify-center items-center border border-red-200 bottom-4 left-4 p-3 rounded-2xl bg-white text-2xl shadow-lg z-[999]" 
         style={{transform: scale, transition: '0.1s'}}
@@ -51,6 +40,7 @@ function SelectedLayerButton({ layerSelected, setLayerSelected }) {
             <FontAwesomeIcon icon={getIcon()} className="text-red-400" />
             <span className="ml-2 text-sm text-red-400">Remove</span>
         </button>
+        </PreventPullToRefresh>
     );
 }
 

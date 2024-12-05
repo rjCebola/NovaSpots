@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faSearch, faPlus, faMapLocation, faMap } from '@fortawesome/free-solid-svg-icons'; 
 import AddFriendPopup from './AddFriendPopUp';
 import { getFriendsWithLocation } from "../users";
+import PreventPullToRefresh from './PreventPullToRefresh';
 
 
 const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
@@ -62,6 +63,7 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
     }
 
     return (
+        <PreventPullToRefresh>
         <div className="bg-white p-4 rounded flex flex-col items-center select-none">
             
             <h2 className="text-2xl font-bold mt-20 mb-7 rounded-2xl p-2 bg-[#d6ebff] text-[#0462b9] w-60 text-center">Friends</h2>
@@ -114,6 +116,7 @@ const FriendsPage = ( { setState, setSelectedFriend, setLayerSelected } ) => {
             {addFriendsPopupVisible && <AddFriendPopup onClose={handleClosePopup} setFriends={setFriends} friends={friends} />} 
 
         </div>
+        </PreventPullToRefresh>
     );
 };
 

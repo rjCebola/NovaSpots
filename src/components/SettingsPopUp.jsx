@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PreventPullToRefresh from './PreventPullToRefresh';
 
 
 function SettingsPopUp({ setState, setViewProfile }) {
@@ -32,6 +33,7 @@ function SettingsPopUp({ setState, setViewProfile }) {
   }, []);
   
   return (
+    <PreventPullToRefresh>
     <div className="absolute top-16 right-0 w-32 bg-white border border-gray-200 rounded-bl-lg shadow-lg p-2 z-[999]"
       style={{
         transform : scale,
@@ -50,6 +52,7 @@ function SettingsPopUp({ setState, setViewProfile }) {
       <hr className="border-gray-300" />
       <button className="block w-full text-left px-3 py-2 text-red-500 select-none">Log out</button>
     </div>
+    </PreventPullToRefresh>
   );
 }
 
