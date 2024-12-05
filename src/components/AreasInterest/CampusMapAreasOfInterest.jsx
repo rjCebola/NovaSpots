@@ -1,7 +1,7 @@
 import { Polygon } from "react-leaflet";
 
 
-function CampusMapAreasOfInterest({ setState, setBuilding, setMapPopUps, setFoodCourt }) {
+function CampusMapAreasOfInterest({ setState, setBuilding, setMapPopUps, setFoodCourt, viewProfile, setViewProfile }) {
 
     return (<>
         {
@@ -18,6 +18,7 @@ function CampusMapAreasOfInterest({ setState, setBuilding, setMapPopUps, setFood
                 click: () => {
                     setState("building");
                     setBuilding([7, 1]);
+                    if(viewProfile) setViewProfile(false)
                 },
             }}
         />
@@ -37,6 +38,7 @@ function CampusMapAreasOfInterest({ setState, setBuilding, setMapPopUps, setFood
                 click: () => {
                     setMapPopUps("canteen");
                     setFoodCourt("Canteen")
+                    if(viewProfile) setViewProfile(false)
                 },
             }}
         />

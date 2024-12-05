@@ -55,15 +55,15 @@ function App() {
         {state !== "friends" && 
           <div className='self-start'>
             <div className='p-2 bg-white rounded-br-xl text-lg z-[999] shadow-md relative mt-[-1px]'>
-              <MapInformation state={state} building={building} setState={setState} setRoomPop={setRoomPop} />
+              <MapInformation state={state} building={building} setState={setState} setRoomPop={setRoomPop} setViewProfile={setViewProfile} setMapPopUps={setMapPopUps}/>
             </div>
           </div>
         }
       </div>
   
       
-      {state === "map" && mapPopUps === "canteen" && <CanteenPopUp setMapPopUps={setMapPopUps} currFoodCourt={currFoodCourt}/>}
-      {state === "map" && mapPopUps === "map" && <LayersButton setMapPopUps={setMapPopUps} />}
+      {state === "map" && mapPopUps === "canteen" && <CanteenPopUp setMapPopUps={setMapPopUps} currFoodCourt={currFoodCourt} />}
+      {state === "map" && mapPopUps === "map" && <LayersButton setMapPopUps={setMapPopUps} setViewProfile={setViewProfile}/>}
       {state === "map" && mapPopUps === "layers" && <LayersPopUp setMapPopUps={setMapPopUps} setLayerSelected={setLayerSelected} layerSelected={layerSelected} setSelectedFriend={setSelectedFriend}/>}
       {state === "building" && roomPop !== 0 && <ClassroomPopUp building={building} roomPop={roomPop} setRoomPop={setRoomPop} studying={studying} setStudying={setStudying}/>}
 

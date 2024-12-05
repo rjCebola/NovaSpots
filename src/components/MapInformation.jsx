@@ -1,7 +1,9 @@
 
-function handleCampusClick(setState,setRoomPop) {
+function handleCampusClick(setState,setRoomPop, setViewProfile, setMapPopUps) {
     setState("map");
     setRoomPop(0);
+    setViewProfile(false)
+    setMapPopUps("map");
     return null
 }
 
@@ -9,7 +11,7 @@ function handleCampusClick(setState,setRoomPop) {
 
 
 
-function MapInformation({ state, building, setState, setRoomPop }) {
+function MapInformation({ state, building, setState, setRoomPop, setViewProfile, setMapPopUps }) {
 
     const info = ["Campus", "", ""]
 
@@ -21,7 +23,7 @@ function MapInformation({ state, building, setState, setRoomPop }) {
 
     return (
         <div className="flex gap-1 text-base">
-            {info[0] !== "" && <p onClick={() => handleCampusClick(setState,setRoomPop)}> {info[0]}</p>}
+            {info[0] !== "" && <p onClick={() => handleCampusClick(setState,setRoomPop, setViewProfile, setMapPopUps)}> {info[0]}</p>}
             {info[0] !== "" && info[1] !== "" && <p> {"/"} </p>}
 
             {info[1] !== "" && <p  >{"Building " + info[1]}</p>}

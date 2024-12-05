@@ -114,7 +114,7 @@ const ClassroomPopUp = ({ roomPop, setRoomPop, building, studying, setStudying }
           <div className="flex flex-col w-full p-3 pt-0 ">
 
             <div className="flex flex-row items-center justify-between w-full">
-              <h2 className="text-2xl text-[#0462b9] font-bold">{"Ed." + building[0] + " " + building[1] + "." + roomPop}</h2>
+              <h2 className="text-2xl text-[#0462b9] font-bold">{"Ed." + building[0] + " " + building[1] + "." + ((Number.isInteger(roomPop) && roomPop < 10) ? "0": "")  + roomPop}</h2>
               <button className="flex items-center justify-center w-12 h-12 rounded-full bg-[#d6ebff] text-[#0462b9] shadow-sm shadow-gray-400"
                 onClick={ () => {handleButtonClick(); setTimeout(() => {switchScheduleState()},75)}} 
                 style={{transform : calendarScale, transition:'0.075s'}}>

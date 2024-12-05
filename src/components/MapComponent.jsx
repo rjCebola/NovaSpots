@@ -76,16 +76,19 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
 
   const handleFoodPinClick = (pin) => { // n deve precisar de pin
     setMapPopUps("canteen");
+    if(viewProfile) setViewProfile(false)
     setFoodCourt(pin.name)
   };
 
   const handleFriendPinClick = (pin) => {
     setSelectedFriend(getFriendByName(pin.name));
+    if(viewProfile) setViewProfile(false)
   };
 
   const handleTransportPinClick = (pin) => {
     setMapPopUps("transport");
     setSelectedTransport(pin.name);
+    if(viewProfile) setViewProfile(false)
   };
 
   const filteredFriends = friends.filter(pin => {
@@ -250,7 +253,7 @@ const MapComponent = ({ viewProfile, setViewProfile, state, setState, setBuildin
       ))}
 
       <MapComponentHelper selectedFriend={selectedFriend} state={state} layerSelected={layerSelected}/>
-      <AreasOfInterst state={state} setState={setState} building={building} setBuilding={setBuilding} setMapPopUps={setMapPopUps} setRoomPop={setRoomPop} setFoodCourt={setFoodCourt}/>
+      <AreasOfInterst state={state} setState={setState} building={building} setBuilding={setBuilding} setMapPopUps={setMapPopUps} setRoomPop={setRoomPop} setFoodCourt={setFoodCourt} viewProfile={viewProfile} setViewProfile={setViewProfile}/>
     </MapContainer>
   );
 };

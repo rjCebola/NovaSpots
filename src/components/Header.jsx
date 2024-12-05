@@ -12,12 +12,13 @@ function handleFriendsClick(setState, setViewProfile) {
     setViewProfile(false);
 }
 
-function handleLogoClick(setState, setLayerSelected, setBuilding, setRoomPop, setMapPopUps) {
+function handleLogoClick(setState, setLayerSelected, setBuilding, setRoomPop, setMapPopUps, setViewProfile) {
     setState("map");
     setLayerSelected("");
     setBuilding([0,0]);
     setRoomPop(0);
     setMapPopUps("map");
+    setViewProfile(false)
 }
 
 
@@ -50,7 +51,7 @@ function Header({ viewProfile, setViewProfile, setState, setBuilding, setRoomPop
     return (
         <div className="w-full flex items-center z-[999] justify-between p-2 bg-white shadow-md">
             <div className="flex items-center">
-                <img onClick={() => {handleButtonClick('logo');handleLogoClick(setState,setLayerSelected, setBuilding, setRoomPop, setMapPopUps,)}} src="/NovaSpots_logo.jpg" alt="NovaSpots Logo" className="h-12 mr-2" 
+                <img onClick={() => {handleButtonClick('logo');handleLogoClick(setState,setLayerSelected, setBuilding, setRoomPop, setMapPopUps,setViewProfile)}} src="/NovaSpots_logo.jpg" alt="NovaSpots Logo" className="h-12 mr-2" 
                 style={{transform: logoScale, transition: '0.075s' }}
                 />
                 <h1 className="text-2xl font-bold font-poppins" style={{ color: '#0463ba' }}>NovaSpots</h1>

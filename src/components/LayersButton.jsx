@@ -3,7 +3,7 @@ import { faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 
-function LayersButton({ setMapPopUps }) {
+function LayersButton({ setMapPopUps, setViewProfile }) {
     const [scale, setScale] = useState('scale(1)')
 
     const handleShrinkStart = () => {
@@ -17,7 +17,7 @@ function LayersButton({ setMapPopUps }) {
         <button 
         className="flex fixed justify-center items-center bottom-5 right-5 w-12 h-12 rounded-full bg-white text-2xl shadow-lg z-[999]" 
         style={{transform: scale, transition: '0.1s'}}
-        onClick={() => setMapPopUps("layers")}
+        onClick={() => {setMapPopUps("layers"); setViewProfile(false)}}
         onTouchStart={handleShrinkStart}
         onTouchEnd={handleShrinkEnd}
         >

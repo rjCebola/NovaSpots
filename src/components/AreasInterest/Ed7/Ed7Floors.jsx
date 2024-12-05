@@ -2,7 +2,7 @@
 import { Polygon } from "react-leaflet";
 import { getOcupancy } from "../../../ScheduleRooms";
 
-function Ed7FirstFloor({ building, setRoomPop }) {
+function Ed7FirstFloor({ building, setRoomPop, viewProfile, setViewProfile }) {
 
     const currHour = (new Date()).getHours();
     var ocupancy;
@@ -23,6 +23,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [1350, 600],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(1);
                 },
             }}
@@ -36,6 +37,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [1350, 775],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(2);
                 },
             }}
@@ -49,6 +51,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [1350, 815],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(3);
                 },
             }}
@@ -62,6 +65,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [1350, 900],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(4);
                 },
             }}
@@ -75,6 +79,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [1350, 900],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(5);
                 },
             }}
@@ -88,6 +93,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [1350, 990],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(6);
                 },
             }}
@@ -101,6 +107,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [1350, 990],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(7);
 
                 },
@@ -115,6 +122,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [1350, 1075],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(8);
                 },
             }}
@@ -128,6 +136,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [1225, 600],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(15);
 
                 },
@@ -142,6 +151,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [1225, 775],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(14);
 
                 },
@@ -156,6 +166,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [1225, 815],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(13);
 
                 },
@@ -170,6 +181,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [1225, 900],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(12);
 
                 },
@@ -184,6 +196,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [1225, 900],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(11);
 
                 },
@@ -198,6 +211,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [1225, 990],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(10);
 
                 },
@@ -212,6 +226,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [1225, 990],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(9);
 
                 },
@@ -226,6 +241,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [730, 480],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop("A");
 
                 },
@@ -240,6 +256,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [510, 480],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop("B");
 
                 },
@@ -254,6 +271,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [670, 840],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop("C");
 
                 },
@@ -270,6 +288,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [760, 770],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop("D");
 
                 },
@@ -286,6 +305,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [510, 850],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(17);
 
                 },
@@ -300,6 +320,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
             [510, 850],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(16);
 
                 },
@@ -310,7 +331,7 @@ function Ed7FirstFloor({ building, setRoomPop }) {
 
 
 
-function Ed7SecondFloor({ building, setRoomPop }) {
+function Ed7SecondFloor({ building, setRoomPop, viewProfile, setViewProfile }) {
 
     const currHour = (new Date()).getHours();
     var ocupancy;
@@ -331,6 +352,7 @@ function Ed7SecondFloor({ building, setRoomPop }) {
             [605, 640],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(1);
                 },
             }}
@@ -344,6 +366,7 @@ function Ed7SecondFloor({ building, setRoomPop }) {
             [605, 748],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(2);
                 },
             }}
@@ -357,6 +380,7 @@ function Ed7SecondFloor({ building, setRoomPop }) {
             [605, 748],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(3);
                 },
             }}
@@ -370,6 +394,7 @@ function Ed7SecondFloor({ building, setRoomPop }) {
             [605, 856],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(4);
                 },
             }}
@@ -383,6 +408,7 @@ function Ed7SecondFloor({ building, setRoomPop }) {
             [605, 856],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(5);
                 },
             }}
@@ -396,6 +422,7 @@ function Ed7SecondFloor({ building, setRoomPop }) {
             [922, 482],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop("A");
                 },
             }}
@@ -409,6 +436,7 @@ function Ed7SecondFloor({ building, setRoomPop }) {
             [690, 482],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop("B");
                 },
             }}
@@ -419,7 +447,7 @@ function Ed7SecondFloor({ building, setRoomPop }) {
 
 
 
-function Ed7ThirdFloor({ building, setRoomPop }) {
+function Ed7ThirdFloor({ building, setRoomPop, viewProfile, setViewProfile }) {
 
     const currHour = (new Date()).getHours();
     var ocupancy;
@@ -440,6 +468,7 @@ function Ed7ThirdFloor({ building, setRoomPop }) {
             [595, 640],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(1);
                 },
             }}
@@ -453,6 +482,7 @@ function Ed7ThirdFloor({ building, setRoomPop }) {
             [595, 749],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(2);
                 },
             }}
@@ -466,6 +496,7 @@ function Ed7ThirdFloor({ building, setRoomPop }) {
             [595, 749],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(3);
                 },
             }}
@@ -479,6 +510,7 @@ function Ed7ThirdFloor({ building, setRoomPop }) {
             [595, 856],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(4);
                 },
             }}
@@ -492,6 +524,7 @@ function Ed7ThirdFloor({ building, setRoomPop }) {
             [595, 856],]}
             eventHandlers={{
                 click: () => {
+                    if (viewProfile) setViewProfile(false)
                     setRoomPop(5);
                 },
             }}
