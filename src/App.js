@@ -3,6 +3,7 @@ import Header from './components/Header';
 import LayersPopUp from './components/LayersPopUp';
 import SettingsPopUp from './components/SettingsPopUp';
 import LayersButton from './components/LayersButton';
+import SelectedLayerButton from './components/SelectedLayerButton';
 import MapInformation from './components/MapInformation';
 import React, { useState } from "react";
 import ClassroomPopUp from './components/ClassroomPopUp';
@@ -64,6 +65,7 @@ function App() {
       
       {state === "map" && mapPopUps === "canteen" && <CanteenPopUp setMapPopUps={setMapPopUps} currFoodCourt={currFoodCourt} />}
       {state === "map" && mapPopUps === "map" && <LayersButton setMapPopUps={setMapPopUps} setViewProfile={setViewProfile}/>}
+      {state === "map" && mapPopUps === "map" && layerSelected !== "" && <SelectedLayerButton layerSelected={layerSelected} setLayerSelected={setLayerSelected} />}
       {state === "map" && mapPopUps === "layers" && <LayersPopUp setMapPopUps={setMapPopUps} setLayerSelected={setLayerSelected} layerSelected={layerSelected} setSelectedFriend={setSelectedFriend}/>}
       {state === "building" && roomPop !== 0 && <ClassroomPopUp building={building} roomPop={roomPop} setRoomPop={setRoomPop} studying={studying} setStudying={setStudying}/>}
 
