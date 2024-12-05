@@ -60,7 +60,7 @@ function SearchFriends( { selectedFriend, setSelectedFriend } ) {
                 <div className="flex items-center">
                     <FontAwesomeIcon
                         icon={faSearch}
-                        size="md"
+                        size="sm"
                         className="absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400"
                     />
                     <input
